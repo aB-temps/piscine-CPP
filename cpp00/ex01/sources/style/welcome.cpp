@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
-#include "text_formatting.h"
+#include "style.hpp"
 
 void welcome(void)
 {

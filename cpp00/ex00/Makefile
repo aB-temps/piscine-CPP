@@ -50,11 +50,9 @@ all : $(NAME)
 
 # clean -------------------------------------------------------------------------------
 clean:
-	@make clean
 	@rm -rf $(DIR_BUILD)
 
 fclean: clean
-	@make fclean 
 	@rm -f $(NAME)
 	
 re: fclean all

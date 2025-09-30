@@ -6,7 +6,7 @@
 #    By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/25 19:29:03 by abetemps          #+#    #+#              #
-#    Updated: 2025/09/27 01:20:06 by abetemps         ###   ########.fr        #
+#    Updated: 2025/09/27 23:10:42 by abetemps         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,14 +48,18 @@ DEPS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.d,$(SRC_$(1)))
 endef
 
 # COMPONENTS ==========================================================================
-COMPONENTS :=	CLASSES \
-				STYLE	\
+COMPONENTS :=	CLASSES		\
+				STYLE		\
+
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
-F_CLASSES	:=	Contact.cpp \
+F_CLASSES	:=	Contact.cpp		\
+				PhoneBook.cpp	\
 
-F_STYLE		:=	welcome.cpp	\
+F_STYLE		:=	welcome.cpp		\
+
+
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources,$(comp))))

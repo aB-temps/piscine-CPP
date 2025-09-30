@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <string>
+#include "text_formatting.h"
 
 void	welcome(void);
 
