@@ -14,6 +14,11 @@
 
 Contact::Contact(void)
 {
+	this->contact_infos_keys[PHONE] = "Phone Number";
+	this->contact_infos_keys[FIRST_NAME] = "First Name";
+	this->contact_infos_keys[LAST_NAME] = "Last Name";
+	this->contact_infos_keys[NICK_NAME] = "Nick Name";
+	this->contact_infos_keys[DARK_SECRET] = "Darkest Secret";
 	std::cout << "Contact created !" << std::endl; 
 }
 
@@ -22,26 +27,27 @@ Contact::~Contact(void)
 	std::cout << "Contact destructed..." << std::endl; 
 }
 
-bool Contact::createContact(void)
+void Contact::createContact(void)
 {
-	std::cout << "Phone Number ?" << std::endl;
-	std::cin >> this->_phoneNumber;
-	std::cout << "First Name ?" << std::endl;
-	std::cin >> this->_firstName;
-	std::cout << "Last Name ?" << std::endl;
-	std::cin >> this->_lastName;
-	std::cout << "Nick Name ?" << std::endl;
-	std::cin >> this->_nickName;
-	std::cout << "Darkest Secret ?" << std::endl;
-	std::cin >> this->_darkestSecret;
-	return (true);
+	int	i;
+
+	for (i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
+	{
+		while (this->_contact_infos_values[i].empty())
+		{
+			std::cout << BOLD UNDL BLUE << this->contact_infos_keys[i] <<  " :" << RST << std::endl;
+			std::getline(std::cin, this->_contact_infos_values[i]);
+			std::cout << std::endl;
+		}
+	}
+	std::cout << GREEN << "Contact " << BOLD YELLOW
+		<< this->_contact_infos_values[FIRST_NAME] << DIM
+		<< " \"" << this->_contact_infos_values[NICK_NAME] << "\" " << R_DIM BOLD
+		<< this->_contact_infos_values[LAST_NAME] << RST
+		<< GREEN << " has been successfully created !" << RST << std::endl;
 }
 
-void Contact::displayContact(void)
+void Contact::displayContactInformations(void)
 {
-	std::cout << this->_phoneNumber << std::endl;
-	std::cout << this->_firstName << std::endl;
-	std::cout <<  this->_lastName<< std::endl;
-	std::cout << this->_nickName << std::endl;
-	std::cout << this->_darkestSecret << std::endl;
+
 }

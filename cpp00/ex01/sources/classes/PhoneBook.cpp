@@ -14,10 +14,10 @@
 
 PhoneBook::PhoneBook(void)
 {
-	this->contact_quantity = 0;
-	this->features[ADD] = &PhoneBook::addContact;
-	this->features[SEARCH] = &PhoneBook::searchContact;
-	this->features[EXIT] = &PhoneBook::exitPhoneBook;
+	this->_contact_quantity = 0;
+	this->_features[ADD] = &PhoneBook::_addContact;
+	this->_features[SEARCH] = &PhoneBook::_searchContact;
+	this->_features[EXIT] = &PhoneBook::_exitPhoneBook;
 	std::cout << "PhoneBook created !" << std::endl;
 }
 
@@ -26,24 +26,41 @@ PhoneBook::~PhoneBook(void)
 	std::cout << "PhoneBook destructed..." << std::endl; 
 }
 
-void PhoneBook::runFeature(e_Features feat)
+void	PhoneBook::runFeature(e_Features feat)
 {
-	(this->*features[feat])();
+	(this->*_features[feat])();
 }
 
-void PhoneBook::addContact(void)
+void	PhoneBook::_addContact(void)
 {
-	this->contact_quantity++;
-	std::cout << "AddContact" << std::endl;
+	if (this->_contact_quantity == MAX_CONTACTS)
+		std::cout << "To many contacts..." << std::endl;
+	else
+	{
+		this->_contacts[this->_contact_quantity].createContact();
+		this->_contact_quantity++;
+		std::cout << "AddContact" << std::endl;
+	}
 }
 
-void PhoneBook::searchContact(void)
+void	PhoneBook::_displayContacts(void)
+{
+	for (int i = 0; i < this->_contact_quantity; ++i)
+	{
+		std::cout << "Contact no " << i + 1 << std::endl;
+		this->_contacts[i].displayContactInformations();
+		std::cout << std::endl;
+	}
+}
+
+void	PhoneBook::_searchContact(void)
 {
 	std::cout << "SearchContact" << std::endl;
-	std::cout << this->contact_quantity << std::endl;
+	this->_displayContacts();
+	std::cout << this->_contact_quantity << " contacts registered" << std::endl;
 }
 
-void PhoneBook::exitPhoneBook(void)
+void	PhoneBook::_exitPhoneBook(void)
 {
-	std::cout << "hop" << std::endl;
+	std::cout << "ExitPhoneBook" << std::endl;
 }

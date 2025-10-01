@@ -12,6 +12,7 @@
 
 #include "PhoneBook.hpp"
 #include "style.hpp"
+#define SUCCESS 0
 
 int	main(void)
 {
@@ -21,9 +22,9 @@ int	main(void)
 	welcome();
 	while (true)
 	{
-		std::cin >> input;
+		std::getline(std::cin, input);
 		if (input.empty())
-			return (1);
+			return (SUCCESS);
 		if (input == "ADD")
 			phonebook.runFeature(PhoneBook::ADD);
 		else if (input == "SEARCH")	
@@ -31,7 +32,6 @@ int	main(void)
 		else if (input == "EXIT")	
 			phonebook.runFeature(PhoneBook::EXIT);
 		input.clear();
-
 	}
-	return (0);
+	return (SUCCESS);
 }

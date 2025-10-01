@@ -13,23 +13,32 @@
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
-# include <iostream>
-# include <string>
+# include <iomanip>
+# include "style.hpp"
+
+#define COL_WIDTH 10
 
 class Contact
 {
 	public :
 		Contact(void);
 		~Contact(void);
-		bool	createContact(void);
-		void	displayContact(void);
-
+		enum		e_ContactInfos
+		{
+			PHONE,
+			FIRST_NAME,
+			LAST_NAME,
+			NICK_NAME,
+			DARK_SECRET,
+			CONTACT_INFOS_QUANTITY,
+		};
+		const char *contact_infos_keys[CONTACT_INFOS_QUANTITY];
+		void		createContact(void);
+		void		displayContactInformations(void);
+		
 	private :
-		std::string _phoneNumber;
-		std::string _firstName;
-		std::string _lastName;
-		std::string _nickName;
-		std::string _darkestSecret;
+		typedef std::string _ContactInfosValuesArray[CONTACT_INFOS_QUANTITY];
+		_ContactInfosValuesArray _contact_infos_values;
 };
 
 #endif
