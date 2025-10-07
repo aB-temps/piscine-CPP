@@ -12,19 +12,21 @@
 
 #include "PhoneBook.hpp"
 #include "style.hpp"
+
 #define SUCCESS 0
 
 int	main(void)
 {
-	PhoneBook phonebook;
-	std::string input;
+	PhoneBook	phonebook;
+	std::string	input;
 
-	welcome();
 	while (true)
 	{
-		std::getline(std::cin, input);
-		if (input.empty())
+		welcome();
+		if (!std::getline(std::cin, input))
 			return (SUCCESS);
+		if (input.empty())
+			continue;
 		if (input == "ADD")
 			phonebook.runFeature(PhoneBook::ADD);
 		else if (input == "SEARCH")	

@@ -34,7 +34,7 @@ class Contact
 		};
 		const char *contact_infos_keys[CONTACT_INFOS_QUANTITY];
 		void		createContact(void);
-		void		displayContactInformations(void);
+		void		displayContactInformations(int index);
 		
 	private :
 		typedef std::string _ContactInfosValuesArray[CONTACT_INFOS_QUANTITY];

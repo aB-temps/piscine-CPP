@@ -34,23 +34,32 @@ void	PhoneBook::runFeature(e_Features feat)
 void	PhoneBook::_addContact(void)
 {
 	if (this->_contact_quantity == MAX_CONTACTS)
-		std::cout << "To many contacts..." << std::endl;
+		std::cout << "Too many contacts..." << std::endl;
 	else
 	{
 		this->_contacts[this->_contact_quantity].createContact();
 		this->_contact_quantity++;
-		std::cout << "AddContact" << std::endl;
 	}
 }
 
 void	PhoneBook::_displayContacts(void)
 {
+	std::cout << "╔";
+	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
+		std::cout << "═";
+	std::cout << "╗" << std::endl;
 	for (int i = 0; i < this->_contact_quantity; ++i)
 	{
-		std::cout << "Contact no " << i + 1 << std::endl;
-		this->_contacts[i].displayContactInformations();
-		std::cout << std::endl;
-	}
+		std::cout << "║ ";
+		this->_contacts[i].displayContactInformations(i + 1);
+		std::cout << " ║" << std::endl;
+
+	}	
+	std::cout << "╚";
+	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
+		std::cout << "═";
+	std::cout << "╝" << std::endl;
+
 }
 
 void	PhoneBook::_searchContact(void)

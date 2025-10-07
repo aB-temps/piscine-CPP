@@ -31,6 +31,7 @@ void Contact::createContact(void)
 {
 	int	i;
 
+	std::cout << std::endl; 
 	for (i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
 	{
 		while (this->_contact_infos_values[i].empty())
@@ -47,7 +48,24 @@ void Contact::createContact(void)
 		<< GREEN << " has been successfully created !" << RST << std::endl;
 }
 
-void Contact::displayContactInformations(void)
+void Contact::displayContactInformations(int index)
 {
 
+	std::cout << std::setfill('.') << std::setw(COL_WIDTH);
+	std::cout << index << " | ";
+	for (int i = 1; i < 4; ++i)
+	{
+		if (this->_contact_infos_values[i].length() > 10)
+		{
+			std::cout << std::setfill('.') << std::right;
+			std::cout << this->_contact_infos_values[i].substr(0, 9) << ".";
+		}
+		else
+		{
+			std::cout << std::setfill('.') << std::right<< std::setw(COL_WIDTH);
+			std::cout << this->_contact_infos_values[i];
+		}
+		if (i != 3)
+			std::cout << " | ";
+	}
 }
