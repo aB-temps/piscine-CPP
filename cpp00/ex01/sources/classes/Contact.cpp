@@ -51,7 +51,6 @@ void Contact::eraseContact(void)
 {
 	int	i;
 
-	std::cout << std::endl; 
 	for (i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
 		this->_contact_infos_values[i].clear();
 }

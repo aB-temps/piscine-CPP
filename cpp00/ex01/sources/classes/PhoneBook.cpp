@@ -31,16 +31,17 @@ void	PhoneBook::runFeature(e_Features feat)
 
 void	PhoneBook::_addContact(void)
 {
-	static int oldest;
+	static int oldest_contact_index;
 
 	if (this->_contact_quantity == MAX_CONTACTS)
 	{
-		std::cout 
-			<< CLR_WARN << "You have reached the contact limit.\n" << RST << std::endl;
+		std::cout << CLR_ERROR 
+			<< "You have reached the contact limit." 
+			<< RST << std::endl;
 		if (ask_confirmation("Would you like to replace the oldest contact ?"))
 		{
-			this->_contacts[oldest].eraseContact();
-			this->_contacts[oldest++].createContact();
+			this->_contacts[oldest_contact_index % 8].eraseContact();
+			this->_contacts[oldest_contact_index++ % 8].createContact();
 		}
 	}
 	else
