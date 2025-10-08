@@ -25,11 +25,9 @@
 # define FLOOR					"═"
 
 # define CLR_MAIN				BLUE
-# define CLR_SCND				YELLOW
+# define CLR_SCND				MAGENTA
 # define CLR_SUCCESS			GREEN
-# define CLR_ERROR				GREEN
-
-
-void	welcome(void);
+# define CLR_WARN				YELLOW
+# define CLR_ERROR				RED
 
 #endif

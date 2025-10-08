@@ -16,7 +16,7 @@
 # include <iomanip>
 # include "style.hpp"
 
-#define COL_WIDTH 10
+# define COL_WIDTH	10
 
 class Contact
 {
@@ -32,13 +32,14 @@ class Contact
 			DARK_SECRET,
 			CONTACT_INFOS_QUANTITY,
 		};
-		const char *contact_infos_keys[CONTACT_INFOS_QUANTITY];
+		const char	*contact_infos_keys[CONTACT_INFOS_QUANTITY];
 		void		createContact(void);
+		void		eraseContact(void);
 		void		displayContactInformations(int index);
 		
 	private :
-		typedef std::string _ContactInfosValuesArray[CONTACT_INFOS_QUANTITY];
-		_ContactInfosValuesArray _contact_infos_values;
+		typedef std::string 		_ContactInfosValuesArray[CONTACT_INFOS_QUANTITY];
+		_ContactInfosValuesArray	_contact_infos_values;
 };
 
 #endif

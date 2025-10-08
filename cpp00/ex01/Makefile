@@ -49,16 +49,15 @@ endef
 
 # COMPONENTS ==========================================================================
 COMPONENTS :=	CLASSES		\
-				STYLE		\
+				UTILS		\
 
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
-F_CLASSES	:=	Contact.cpp		\
-				PhoneBook.cpp	\
+F_CLASSES	:=	Contact.cpp				\
+				PhoneBook.cpp			\
 
-F_STYLE		:=	welcome.cpp		\
-
+F_UTILS		:=	ask_confirmation.cpp	\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

@@ -13,31 +13,33 @@
 #include "PhoneBook.hpp"
 #include "style.hpp"
 
-#define SUCCESS 0
+#define SUCCESS	0
+#define ERROR	2
 
-int	main(void)
+int	main(int ac, char **av)
 {
+	(void) av;
 	PhoneBook	phonebook;
 	std::string	input;
 
-	while (true)
+	if (ac != 1)
 	{
-		welcome();
-		if (!std::getline(std::cin, input))
-			return (SUCCESS);
-		if (input.empty())
-			continue;
+		std::cerr << CLR_ERROR << "PhoneBook do not any take arguments." << RST << std::endl;
+		return (ERROR);
+	}
+	std::cout << CLR_MAIN << "Welcome to PhoneBook !" << RST << std::endl;
+	while (!std::cin.eof())
+	{
+		std::cout << CLR_SCND << "What you want to do now ?" << RST << std::endl;
+		std::getline(std::cin, input);
 		if (input == "ADD")
 			phonebook.runFeature(PhoneBook::ADD);
 		else if (input == "SEARCH")	
 			phonebook.runFeature(PhoneBook::SEARCH);
-		else if (input == "EXIT")	
+		else if (input == "EXIT" && ask_confirmation("Are you sure to exit ? All your contacts will be lost forever."))	
 		{
-			if (!phonebook.runFeature(PhoneBook::EXIT))
-			{
-				input.clear();
-				return (SUCCESS);
-			}
+			input.clear();
+			return (SUCCESS);
 		}
 		input.clear();
 	}

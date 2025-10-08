@@ -15,6 +15,7 @@
 
 # include <cctype>
 # include "Contact.hpp"
+# include "utils.hpp"
 
 # define MAX_CONTACTS 8
 
@@ -27,20 +28,18 @@ class PhoneBook
 	{
 		ADD,
 		SEARCH,
-		EXIT,
 		FEATURES_QUANTITY
 	};
 	void runFeature(e_Features feat);
 
 	private :
-		typedef void (PhoneBook::*FeaturesArray)(void);
+		typedef void	(PhoneBook::*FeaturesArray)(void);
 		Contact			_contacts[MAX_CONTACTS];
 		FeaturesArray	_features[FEATURES_QUANTITY];
 		int				_contact_quantity;
 		void			_addContact(void);
 		void			_displayContacts(void);
 		void			_searchContact(void);
-		void			_exitPhoneBook(void);
 };
 
 #endif

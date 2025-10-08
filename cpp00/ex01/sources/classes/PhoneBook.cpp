@@ -17,13 +17,11 @@ PhoneBook::PhoneBook(void)
 	this->_contact_quantity = 0;
 	this->_features[ADD] = &PhoneBook::_addContact;
 	this->_features[SEARCH] = &PhoneBook::_searchContact;
-	this->_features[EXIT] = &PhoneBook::_exitPhoneBook;
-	std::cout << "PhoneBook created !" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)
 {
-	std::cout << "PhoneBook destructed..." << std::endl; 
+	//std::cout << "PhoneBook destructed..." << std::endl; 
 }
 
 void	PhoneBook::runFeature(e_Features feat)
@@ -33,52 +31,54 @@ void	PhoneBook::runFeature(e_Features feat)
 
 void	PhoneBook::_addContact(void)
 {
+	static int oldest;
+
 	if (this->_contact_quantity == MAX_CONTACTS)
-		std::cout << "Too many contacts..." << std::endl;
+	{
+		std::cout 
+			<< CLR_WARN << "You have reached the contact limit.\n" << RST << std::endl;
+		if (ask_confirmation("Would you like to replace the oldest contact ?"))
+		{
+			this->_contacts[oldest].eraseContact();
+			this->_contacts[oldest++].createContact();
+		}
+	}
 	else
 	{
 		this->_contacts[this->_contact_quantity].createContact();
-		this->_contact_quantity++;
-	}
+		++this->_contact_quantity;
+
+		}
 }
 
 void	PhoneBook::_displayContacts(void)
 {
-	std::cout << CORNER_TOP_LEFT;
+	std::cout << CLR_SCND << CORNER_TOP_LEFT;
 	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
 		std::cout << FLOOR;
-	std::cout << CORNER_TOP_RIGHT << std::endl;
+	std::cout << CORNER_TOP_RIGHT << RST << std::endl;
 	for (int i = 0; i < this->_contact_quantity; ++i)
 	{
-		std::cout << WALL << " ";
+		std::cout << CLR_SCND << WALL << " " << RST;
 		this->_contacts[i].displayContactInformations(i + 1);
-		std::cout << " " << WALL << std::endl;
+		std::cout << CLR_SCND << " " << WALL << std::endl;
 
 	}	
-	std::cout << CORNER_BOTTOM_LEFT;
+	std::cout << CLR_SCND << CORNER_BOTTOM_LEFT;
 	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
 		std::cout << FLOOR;
-	std::cout << CORNER_BOTTOM_RIGHT << std::endl;
+	std::cout << CORNER_BOTTOM_RIGHT << RST << std::endl;
 
 }
 
 void	PhoneBook::_searchContact(void)
 {
-	std::cout << "SearchContact" << std::endl;
-	this->_displayContacts();
-	std::cout << this->_contact_quantity << " contacts registered" << std::endl;
-}
-
-void	PhoneBook::_exitPhoneBook(void)
-{
-	std::string input;
-	std::cout << RED << "If you exit, your contacts will be lost forever. Confirm [Y/N]" << RST << std::endl;
-	while (input.empty() && !std::cin.eof())
+	if (!this->_contact_quantity)
 	{
-		if (input == "Y" || input == "y")
-			std::cout << "ExitPhoneBook" << std::endl;
-		else if (input == "N" || input == "n")
-			return ((void *)0);			
+		std::cout << CLR_WARN << "No contact registered.\n" << RST << std::endl;
+		return;
 	}
-	return ((void *)1);
+	this->_displayContacts();
+	std::cout << this->_contact_quantity << "/" << MAX_CONTACTS << " contacts registered" << std::endl;
+	
 }
