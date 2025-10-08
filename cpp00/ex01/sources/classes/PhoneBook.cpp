@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 16:01:47 by abetemps          #+#    #+#             */
-/*   Updated: 2025/09/28 01:52:25 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/10/07 23:10:27 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ void	PhoneBook::_addContact(void)
 
 void	PhoneBook::_displayContacts(void)
 {
-	std::cout << "╔";
+	std::cout << CORNER_TOP_LEFT;
 	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
-		std::cout << "═";
-	std::cout << "╗" << std::endl;
+		std::cout << FLOOR;
+	std::cout << CORNER_TOP_RIGHT << std::endl;
 	for (int i = 0; i < this->_contact_quantity; ++i)
 	{
-		std::cout << "║ ";
+		std::cout << WALL << " ";
 		this->_contacts[i].displayContactInformations(i + 1);
-		std::cout << " ║" << std::endl;
+		std::cout << " " << WALL << std::endl;
 
 	}	
-	std::cout << "╚";
+	std::cout << CORNER_BOTTOM_LEFT;
 	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
-		std::cout << "═";
-	std::cout << "╝" << std::endl;
+		std::cout << FLOOR;
+	std::cout << CORNER_BOTTOM_RIGHT << std::endl;
 
 }
 
@@ -71,5 +71,14 @@ void	PhoneBook::_searchContact(void)
 
 void	PhoneBook::_exitPhoneBook(void)
 {
-	std::cout << "ExitPhoneBook" << std::endl;
+	std::string input;
+	std::cout << RED << "If you exit, your contacts will be lost forever. Confirm [Y/N]" << RST << std::endl;
+	while (input.empty() && !std::cin.eof())
+	{
+		if (input == "Y" || input == "y")
+			std::cout << "ExitPhoneBook" << std::endl;
+		else if (input == "N" || input == "n")
+			return ((void *)0);			
+	}
+	return ((void *)1);
 }

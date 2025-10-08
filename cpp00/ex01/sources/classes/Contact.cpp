@@ -41,10 +41,10 @@ void Contact::createContact(void)
 			std::cout << std::endl;
 		}
 	}
-	std::cout << GREEN << "Contact " << BOLD YELLOW
-		<< this->_contact_infos_values[FIRST_NAME] << DIM
-		<< " \"" << this->_contact_infos_values[NICK_NAME] << "\" " << R_DIM BOLD
-		<< this->_contact_infos_values[LAST_NAME] << RST
+	std::cout << GREEN << "Contact " << BOLD BLUE
+		<< this->_contact_infos_values[FIRST_NAME]
+		<< " " << this->_contact_infos_values[LAST_NAME] << DIM
+		<< " \"" << this->_contact_infos_values[NICK_NAME] << "\"" << RST
 		<< GREEN << " has been successfully created !" << RST << std::endl;
 }
 
@@ -55,7 +55,7 @@ void Contact::displayContactInformations(int index)
 	std::cout << index << " | ";
 	for (int i = 1; i < 4; ++i)
 	{
-		if (this->_contact_infos_values[i].length() > 10)
+		if (this->_contact_infos_values[i].length() > COL_WIDTH)
 		{
 			std::cout << std::setfill('_') << std::right;
 			std::cout << this->_contact_infos_values[i].substr(0, 9) << ".";

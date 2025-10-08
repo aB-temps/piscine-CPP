@@ -32,7 +32,13 @@ int	main(void)
 		else if (input == "SEARCH")	
 			phonebook.runFeature(PhoneBook::SEARCH);
 		else if (input == "EXIT")	
-			phonebook.runFeature(PhoneBook::EXIT);
+		{
+			if (!phonebook.runFeature(PhoneBook::EXIT))
+			{
+				input.clear();
+				return (SUCCESS);
+			}
+		}
 		input.clear();
 	}
 	return (SUCCESS);

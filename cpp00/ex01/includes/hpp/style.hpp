@@ -13,9 +13,22 @@
 #ifndef STYLE_HPP
 # define STYLE_HPP
 
-#include <iostream>
-#include <string>
-#include "text_formatting.h"
+# include <iostream>
+# include <string>
+# include "text_formatting.h"
+
+# define CORNER_TOP_LEFT		"╔"
+# define CORNER_TOP_RIGHT		"╗"
+# define CORNER_BOTTOM_LEFT 	"╚"
+# define CORNER_BOTTOM_RIGHT	"╝"
+# define WALL					"║"
+# define FLOOR					"═"
+
+# define CLR_MAIN				BLUE
+# define CLR_SCND				YELLOW
+# define CLR_SUCCESS			GREEN
+# define CLR_ERROR				GREEN
+
 
 void	welcome(void);
 

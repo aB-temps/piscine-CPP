@@ -14,5 +14,5 @@
 
 void welcome(void)
 {
-	std::cout << BLUE << "Welcome to PhoneBook !" << std::endl << GREEN << "What you want to do now ?" << RST << std::endl;
+	std::cout << BLUE << "\nWelcome to PhoneBook !" << std::endl << GREEN << "What you want to do now ?" << RST << std::endl;
  }
