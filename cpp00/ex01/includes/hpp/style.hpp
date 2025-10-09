@@ -24,8 +24,13 @@
 # define WALL					"║"
 # define FLOOR					"═"
 
+# define FILLER					'_'
+# define SEPARATOR				"|"
+
+
 # define CLR_MAIN				BLUE
-# define CLR_SCND				MAGENTA
+# define CLR_SCND				CYAN
+# define CLR_ALT				MAGENTA
 # define CLR_SUCCESS			GREEN
 # define CLR_WARN				YELLOW
 # define CLR_ERROR				RED

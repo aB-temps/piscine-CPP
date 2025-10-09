@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sstream>
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook(void)
@@ -40,8 +41,8 @@ void	PhoneBook::_addContact(void)
 			<< RST << std::endl;
 		if (ask_confirmation("Would you like to replace the oldest contact ?"))
 		{
-			this->_contacts[oldest_contact_index % 8].eraseContact();
-			this->_contacts[oldest_contact_index++ % 8].createContact();
+			this->_contacts[oldest_contact_index % MAX_CONTACTS].eraseContact();
+			this->_contacts[oldest_contact_index++ % MAX_CONTACTS].createContact();
 		}
 	}
 	else
@@ -54,18 +55,18 @@ void	PhoneBook::_addContact(void)
 
 void	PhoneBook::_displayContacts(void)
 {
-	std::cout << CLR_SCND << CORNER_TOP_LEFT;
+	std::cout << CLR_ALT << CORNER_TOP_LEFT;
 	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
 		std::cout << FLOOR;
 	std::cout << CORNER_TOP_RIGHT << RST << std::endl;
 	for (int i = 0; i < this->_contact_quantity; ++i)
 	{
-		std::cout << CLR_SCND << WALL << " " << RST;
-		this->_contacts[i].displayContactInformations(i + 1);
-		std::cout << CLR_SCND << " " << WALL << std::endl;
+		std::cout << CLR_ALT << WALL << " " << RST;
+		this->_contacts[i].displayContactShort(i + 1);
+		std::cout << CLR_ALT << " " << WALL << std::endl;
 
 	}	
-	std::cout << CLR_SCND << CORNER_BOTTOM_LEFT;
+	std::cout << CLR_ALT << CORNER_BOTTOM_LEFT;
 	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
 		std::cout << FLOOR;
 	std::cout << CORNER_BOTTOM_RIGHT << RST << std::endl;
@@ -74,12 +75,39 @@ void	PhoneBook::_displayContacts(void)
 
 void	PhoneBook::_searchContact(void)
 {
+	std::string			input;
+	std::stringstream	ss_input;
+	int					index;
+
 	if (!this->_contact_quantity)
 	{
 		std::cout << CLR_WARN << "No contact registered.\n" << RST << std::endl;
 		return;
 	}
 	this->_displayContacts();
-	std::cout << this->_contact_quantity << "/" << MAX_CONTACTS << " contacts registered" << std::endl;
-	
+	std::cout << BOLD CLR_MAIN << this->_contact_quantity << RST << "/" << MAX_CONTACTS << " contacts registered\n" << std::endl;
+	while (!std::cin.eof())
+	{
+		std::cout << CLR_SCND << "Enter a contact index to see full informations or " << BOLD << "HOME" << RST CLR_SCND << " to go back to main menu." << RST << std::endl;
+		std::getline(std::cin, input);
+		if (!input.empty() && is_strnum(input))
+		{
+			ss_input << input;
+			ss_input >> index;
+			if (index >= 1 && index <= this->_contact_quantity)
+				this->_contacts[index - 1].displayContactFull();
+			else
+				std::cerr << CLR_ERROR << "Not in range.\n" << RST << std::endl;
+		}
+		else if (input == "HOME")
+		{
+			input.clear();
+			return;
+		}
+		else
+			std::cerr << CLR_ERROR << "Invalid command.\n" << RST << std::endl;
+		input.clear();
+		ss_input.clear();
+	}
+
 }

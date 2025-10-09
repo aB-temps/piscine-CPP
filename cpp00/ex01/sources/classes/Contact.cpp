@@ -49,29 +49,38 @@ void Contact::createContact(void)
 
 void Contact::eraseContact(void)
 {
-	int	i;
-
-	for (i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
+	for (int i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
 		this->_contact_infos_values[i].clear();
 }
 
-void Contact::displayContactInformations(int index)
+void Contact::displayContactShort(int index)
 {
-	std::cout << std::setfill('_') << std::setw(COL_WIDTH);
-	std::cout << index << " | ";
+	std::cout << std::setfill(FILLER) << std::setw(COL_WIDTH);
+	std::cout << index << " " << SEPARATOR << " ";
 	for (int i = 1; i < 4; ++i)
 	{
 		if (this->_contact_infos_values[i].length() > COL_WIDTH)
 		{
-			std::cout << std::setfill('_') << std::right;
+			std::cout << std::setfill(FILLER) << std::right;
 			std::cout << this->_contact_infos_values[i].substr(0, COL_WIDTH - 1) << ".";
 		}
 		else
 		{
-			std::cout << std::setfill('_') << std::right<< std::setw(COL_WIDTH);
+			std::cout << std::setfill(FILLER) << std::right<< std::setw(COL_WIDTH);
 			std::cout << this->_contact_infos_values[i];
 		}
 		if (i != 3)
-			std::cout << " | ";
+			std::cout << " " << SEPARATOR << " ";
 	}
+}
+
+void Contact::displayContactFull(void)
+{
+	for (int i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
+	{
+		std::cout << UNDL CLR_MAIN << this->contact_infos_keys[i]
+			<< RST << ": " << BOLD CLR_ALT
+			<< this->_contact_infos_values[i] << std::endl;
+	}
+	std::cout << std::endl;
 }
