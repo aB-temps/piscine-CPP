@@ -29,16 +29,19 @@ Contact::~Contact(void)
 
 void Contact::createContact(void)
 {
+	std::string input;
 	int	i;
 
 	std::cout << std::endl; 
 	for (i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
 	{
-		while (this->_contact_infos_values[i].empty() && !std::cin.eof())
+		while (this->_contact_infos_values[i].empty())
 		{
 			std::cout << BOLD UNDL CLR_MAIN << this->contact_infos_keys[i] <<  " :" << RST << std::endl;
 			std::getline(std::cin, this->_contact_infos_values[i]);
 			std::cout << std::endl;
+			if (std::cin.eof())
+				return;
 		}
 	}
 	std::cout << CLR_SUCCESS << "Contact " << BOLD CLR_MAIN
@@ -80,7 +83,7 @@ void Contact::displayContactFull(void)
 	{
 		std::cout << UNDL CLR_MAIN << this->contact_infos_keys[i]
 			<< RST << ": " << BOLD CLR_ALT
-			<< this->_contact_infos_values[i] << std::endl;
+			<< this->_contact_infos_values[i] << RST << std::endl;
 	}
 	std::cout << std::endl;
 }

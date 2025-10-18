@@ -41,16 +41,16 @@ void	PhoneBook::_addContact(void)
 			<< RST << std::endl;
 		if (ask_confirmation("Would you like to replace the oldest contact ?"))
 		{
-			this->_contacts[oldest_contact_index % MAX_CONTACTS].eraseContact();
-			this->_contacts[oldest_contact_index++ % MAX_CONTACTS].createContact();
+			this->_contacts[oldest_contact_index].eraseContact();
+			this->_contacts[oldest_contact_index++].createContact(); // oldest_contact_index peut overflow zebi
+			oldest_contact_index %= MAX_CONTACTS;
 		}
 	}
 	else
 	{
 		this->_contacts[this->_contact_quantity].createContact();
 		++this->_contact_quantity;
-
-		}
+	}
 }
 
 void	PhoneBook::_displayContacts(void)
@@ -70,7 +70,6 @@ void	PhoneBook::_displayContacts(void)
 	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
 		std::cout << FLOOR;
 	std::cout << CORNER_BOTTOM_RIGHT << RST << std::endl;
-
 }
 
 void	PhoneBook::_searchContact(void)
@@ -88,23 +87,25 @@ void	PhoneBook::_searchContact(void)
 	std::cout << BOLD CLR_MAIN << this->_contact_quantity << RST << "/" << MAX_CONTACTS << " contacts registered\n" << std::endl;
 	while (!std::cin.eof())
 	{
-		std::cout << CLR_SCND << "Enter a contact index to see full informations or " << BOLD << "HOME" << RST CLR_SCND << " to go back to main menu." << RST << std::endl;
+		std::cout << CLR_SCND << "Enter a " << BOLD << "contact index" << RST CLR_SCND
+			<< " to see full informations or " << BOLD << "HOME" << RST CLR_SCND
+			<< " to go back to main menu." << RST << std::endl;
 		std::getline(std::cin, input);
-		if (!input.empty() && is_strnum(input))
+		if (!input.empty() && str_is(input, isdigit))
 		{
 			ss_input << input;
 			ss_input >> index;
 			if (index >= 1 && index <= this->_contact_quantity)
 				this->_contacts[index - 1].displayContactFull();
-			else
-				std::cerr << CLR_ERROR << "Not in range.\n" << RST << std::endl;
+			else if (index > 0 && ask_confirmation("Not in range. Would you like to add a new contact ?"))
+				this->_addContact();
 		}
 		else if (input == "HOME")
 		{
 			input.clear();
 			return;
 		}
-		else
+		else if (!input.empty())
 			std::cerr << CLR_ERROR << "Invalid command.\n" << RST << std::endl;
 		input.clear();
 		ss_input.clear();

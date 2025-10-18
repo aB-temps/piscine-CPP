@@ -15,9 +15,8 @@
 
 # include <cctype>
 # include "Contact.hpp"
-# include "utils.hpp"
 
-# define MAX_CONTACTS 8
+# define MAX_CONTACTS 4
 
 class PhoneBook
 {

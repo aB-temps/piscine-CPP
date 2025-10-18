@@ -14,6 +14,6 @@
 # define UTILS_HPP
 
 bool	ask_confirmation(std::string message);
-bool	is_strnum(std::string str);
+bool	str_is(std::string str, int (*check)(int));
 
 #endif

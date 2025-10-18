@@ -58,7 +58,7 @@ F_CLASSES	:=	Contact.cpp				\
 				PhoneBook.cpp			\
 
 F_UTILS		:=	ask_confirmation.cpp	\
-				is_strnum.cpp			\
+				str_is.cpp				\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

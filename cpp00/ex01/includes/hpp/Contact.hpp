@@ -15,6 +15,7 @@
 
 # include <iomanip>
 # include "style.hpp"
+# include "utils.hpp"
 
 # define COL_WIDTH	10
 
