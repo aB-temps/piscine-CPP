@@ -14,7 +14,8 @@
 #include "style.hpp"
 
 #define SUCCESS	0
-#define ERROR	2
+#define I_ERROR	1
+#define U_ERROR	2
 
 int	main(int ac, char **av)
 {
@@ -24,24 +25,34 @@ int	main(int ac, char **av)
 
 	if (ac != 1)
 	{
-		std::cerr << CLR_ERROR << "PhoneBook do not any take arguments." << RST << std::endl;
-		return (ERROR);
+		std::cout << CLR_ERROR << "PhoneBook do not any take arguments." << RST << std::endl;
+		return (U_ERROR);
 	}
 	std::cout << CLR_MAIN << "Welcome to PhoneBook !" << RST << std::endl;
 	while (!std::cin.eof())
 	{
-		std::cout << CLR_SCND << "What you want to do now ?" << RST << std::endl;
+		std::cout << CLR_SCND << "What you want to do now ?" << std::endl;
+		std::cout << DIM << "ADD, SEARCH or EXIT\n" << RST << std::endl << "> ";
 		std::getline(std::cin, input);
+		if (std::cin.bad())
+		{
+			std::cout << CLR_ERROR << "Error occured while getting your input. Leaving.\n" << RST << std::endl;
+			return (I_ERROR);
+		}
+		else if (std::cin.fail())
+		{
+			std::cout << CLR_ERROR << "Format error or conversion failure your input. Leaving.\n" << RST << std::endl;
+			return (U_ERROR);
+		}
 		if (input == "ADD")
 			phonebook.runFeature(PhoneBook::ADD);
 		else if (input == "SEARCH")	
 			phonebook.runFeature(PhoneBook::SEARCH);
 		else if (input == "EXIT" && ask_confirmation("Are you sure to exit ? All your contacts will be lost forever."))	
-		{
-			input.clear();
 			return (SUCCESS);
-		}
-		input.clear();
+		else
+			std::cout << CLR_ERROR << "Invalid command.\n" << RST << std::endl;
+		std::cout << std::endl;
 	}
 	return (SUCCESS);
 }

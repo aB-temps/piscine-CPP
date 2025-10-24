@@ -106,7 +106,7 @@ void	PhoneBook::_searchContact(void)
 			return;
 		}
 		else if (!input.empty())
-			std::cerr << CLR_ERROR << "Invalid command.\n" << RST << std::endl;
+			std::cout << CLR_ERROR << "Invalid command.\n" << RST << std::endl;
 		input.clear();
 		ss_input.clear();
 	}
