@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:25:21 by abetemps          #+#    #+#             */
-/*   Updated: 2025/09/25 19:25:23 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:40:31 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CONTACT_HPP
 
 # include <iomanip>
-# include "style.hpp"
+# include "errors.hpp"
 # include "utils.hpp"
 
 # define COL_WIDTH	10
@@ -23,7 +23,6 @@ class Contact
 {
 	public :
 		Contact(void);
-		~Contact(void);
 		enum		e_ContactInfos
 		{
 			PHONE,

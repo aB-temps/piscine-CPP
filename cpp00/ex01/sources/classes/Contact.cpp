@@ -12,6 +12,10 @@
 
 #include "Contact.hpp"
 
+using std::cin;
+using std::cout;
+using std::endl;
+
 Contact::Contact(void)
 {
 	this->contact_infos_keys[PHONE] = "Phone Number";
@@ -19,12 +23,6 @@ Contact::Contact(void)
 	this->contact_infos_keys[LAST_NAME] = "Last Name";
 	this->contact_infos_keys[NICK_NAME] = "Nick Name";
 	this->contact_infos_keys[DARK_SECRET] = "Darkest Secret";
-	//std::cout << "Contact created !" << std::endl; 
-}
-
-Contact::~Contact(void)
-{
-	// std::cout << "Contact destructed..." << std::endl; 
 }
 
 void Contact::createContact(void)
@@ -32,22 +30,22 @@ void Contact::createContact(void)
 	std::string input;
 	int	i;
 
-	std::cout << std::endl; 
+	cout << endl; 
 	for (i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
 	{
 		while (this->_contact_infos_values[i].empty())
 		{
-			std::cout << BOLD UNDL CLR_MAIN << this->contact_infos_keys[i] <<  " :" << RST << std::endl;
-			std::getline(std::cin, this->_contact_infos_values[i]);
-			std::cout << std::endl;
-			if (std::cin.eof())
+			cout << BOLD UNDL CLR_MAIN << this->contact_infos_keys[i] <<  " :" << RST << endl;
+			std::getline(cin, this->_contact_infos_values[i]);
+			cout << endl;
+			if (cin.eof())
 				return;
 		}
 	}
-	std::cout << CLR_SUCCESS << "Contact " << BOLD CLR_MAIN
+	cout << CLR_SUCCESS << "Contact " << BOLD CLR_MAIN
 		<< this->_contact_infos_values[FIRST_NAME]
 		<< " " << this->_contact_infos_values[LAST_NAME]
-		<< CLR_SUCCESS << " has been successfully created !\n" << RST << std::endl;
+		<< CLR_SUCCESS << " has been successfully created !\n" << RST << endl;
 }
 
 void Contact::eraseContact(void)
@@ -58,22 +56,22 @@ void Contact::eraseContact(void)
 
 void Contact::displayContactShort(int index)
 {
-	std::cout << std::setfill(FILLER) << std::setw(COL_WIDTH);
-	std::cout << index << " " << SEPARATOR << " ";
+	cout << std::setfill(FILLER) << std::setw(COL_WIDTH);
+	cout << index << " " << SEPARATOR << " ";
 	for (int i = 1; i < 4; ++i)
 	{
 		if (this->_contact_infos_values[i].length() > COL_WIDTH)
 		{
-			std::cout << std::setfill(FILLER) << std::right;
-			std::cout << this->_contact_infos_values[i].substr(0, COL_WIDTH - 1) << ".";
+			cout << std::setfill(FILLER) << std::right;
+			cout << this->_contact_infos_values[i].substr(0, COL_WIDTH - 1) << ".";
 		}
 		else
 		{
-			std::cout << std::setfill(FILLER) << std::right<< std::setw(COL_WIDTH);
-			std::cout << this->_contact_infos_values[i];
+			cout << std::setfill(FILLER) << std::right<< std::setw(COL_WIDTH);
+			cout << this->_contact_infos_values[i];
 		}
 		if (i != 3)
-			std::cout << " " << SEPARATOR << " ";
+			cout << " " << SEPARATOR << " ";
 	}
 }
 
@@ -81,9 +79,9 @@ void Contact::displayContactFull(void)
 {
 	for (int i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
 	{
-		std::cout << UNDL CLR_MAIN << this->contact_infos_keys[i]
+		cout << UNDL CLR_MAIN << this->contact_infos_keys[i]
 			<< RST << ": " << BOLD CLR_ALT
-			<< this->_contact_infos_values[i] << RST << std::endl;
+			<< this->_contact_infos_values[i] << RST << endl;
 	}
-	std::cout << std::endl;
+	cout << endl;
 }

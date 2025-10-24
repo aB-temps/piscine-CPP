@@ -13,7 +13,12 @@
 #ifndef UTILS_HPP
 # define UTILS_HPP
 
+# define CONF_EXIT			"Are you sure to exit ? All your contacts will be lost forever."
+# define CONF_REP_CONTACT	"Would you like to replace the oldest contact ?"
+# define CONF_NOT_IN_RANGE	"Not in range. Would you like to add a new contact ?"
+
 bool	ask_confirmation(std::string message);
 bool	str_is(std::string str, int (*check)(int));
+int		put_stream_error(int state, const char *func, const char *calling_func);
 
 #endif

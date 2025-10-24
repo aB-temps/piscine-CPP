@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   put_error.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/25 18:42:44 by abetemps          #+#    #+#             */
-/*   Updated: 2025/09/27 20:22:23 by abetemps         ###   ########.fr       */
+/*   Created: 2025/10/24 13:28:06 by abetemps          #+#    #+#             */
+/*   Updated: 2025/10/24 15:20:12 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include "errors.hpp"
 
 using std::cout;
 using std::endl;
 
-int	main(int ac, char **av)
+int	put_stream_error(int state, const char *func, const char *calling_func)
 {
-	(void) av;
-	PhoneBook	phonebook;
+	cout << CLR_ERROR BOLD << "Error in function " << RST
+		<< func << CLR_ERROR << ": " << RST
+		<< calling_func << RST << endl;
+	
+	cout << CLR_ERROR BOLD
+		<< (state < std::ios::failbit ? ERR_M_BADBIT : ERR_M_FAILBIT)
+		<< RST << endl;
 
-	if (ac != 1)
-	{
-		cout << CLR_ERROR << ERR_INV_ARG << RST << endl;
-		return (U_ERROR);
-	}
-	try
-	{
-		phonebook.startPhoneBook();
-	}
-	catch (int error)
-	{
-		return (error)
-	}
-	return (SUCCESS);
+	return (state < std::ios::failbit ?  I_ERROR :  U_ERROR);
 }
