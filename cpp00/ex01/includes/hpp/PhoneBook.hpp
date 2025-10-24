@@ -22,21 +22,21 @@ class PhoneBook
 {
 	public :
 		PhoneBook(void);
-		int				startPhonebook(void)
-		enum			e_Features
+		int				startPhoneBook(void);
+	
+	private :
+		enum			_e_Features
 		{
 			ADD,
 			SEARCH,
 			EXIT,
-			FEATURES_QUANTITY
+			FEATURE_QUANTITY
 		};
-	
-	private :
 		typedef int		(PhoneBook::*FeaturesArray)(void);
 		Contact			_contacts[MAX_CONTACTS];
-		FeaturesArray	_features[FEATURES_QUANTITY];
+		FeaturesArray	_features[FEATURE_QUANTITY];
 		int				_contact_quantity;
-		int				_runFeature(e_Features feat);
+		int				_runFeature(_e_Features feat);
 		int				_addContact(void);
 		int				_searchContact(void);
 		void			_displayContacts(void);

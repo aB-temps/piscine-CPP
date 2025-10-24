@@ -25,13 +25,7 @@ int	main(int ac, char **av)
 		cout << CLR_ERROR << ERR_INV_ARG << RST << endl;
 		return (U_ERROR);
 	}
-	try
-	{
-		phonebook.startPhoneBook();
-	}
-	catch (int error)
-	{
-		return (error)
-	}
+	if (phonebook.startPhoneBook() == I_ERROR)
+		return (I_ERROR);
 	return (SUCCESS);
 }

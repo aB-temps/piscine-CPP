@@ -30,19 +30,35 @@ int	PhoneBook::startPhoneBook(void)
 {
 	std::string	input;
 
+	cout << CLR_MAIN << "Welcome to PhoneBook!" << RST << endl;
 	try 
 	{
-		std::getline(cin, input);
+		cin.exceptions(std::ios::badbit);
+		while (!cin.eof())
+		{
+			prompt_user(FEATURE_QUANTITY);
+			std::getline(cin, input);
+			if (input == "ADD")
+				this->_runFeature(ADD);
+			else if (input == "SEARCH")
+				this->_runFeature(SEARCH);
+			else if (input == "EXIT" || cin.eof())
+				if (!this->_runFeature(EXIT))
+					return (SUCCESS);
+		}
 		
-
 	}
-	catch (....)
-
+	catch (const std::ios_base::failure& error)
+	{
+		cout << error.what() << endl;
+		if (put_stream_error(cin.rdstate(), __func__, "getline") == I_ERROR)
+			return (I_ERROR);
+			
+	}
+	return (SUCCESS);
 }
 
-
-
-int	PhoneBook::_runFeature(e_Features feat)
+int	PhoneBook::_runFeature(_e_Features feat)
 {
 	return (this->*_features[feat])();
 }
@@ -108,19 +124,7 @@ int	PhoneBook::_searchContact(void)
 		cout	<< CLR_SCND << "Enter a " << BOLD << "contact index" << RST CLR_SCND
 				<< " to see full informations or " << BOLD << "HOME" << RST CLR_SCND
 				<< " to go back to main menu." << RST << endl;
-		try 
-		{
-		//	cin.exceptions(std::ios::failbit | std::ios::badbit);
-			std::getline(cin, input);
-			cin.setstate(std::ios::badbit);
-		}
-		catch (const std::ios_base::failure& fail)
-		{
-			if (put_stream_error(cin.rdstate(), __func__, "getline") == I_ERROR)
-				return (I_ERROR);
-			cin.clear();
-			continue;
-		}
+		std::getline(cin, input);
 		if (!input.empty() && str_is(input, isdigit))
 		{
 			ss_input << input;
@@ -151,4 +155,5 @@ int	PhoneBook::_exitPhoneBook(void)
 		return (SUCCESS);
 	}
 	cout << CLR_MAIN << "Aborting." << RST << endl;
+	return (1);
 }
