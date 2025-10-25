@@ -12,7 +12,6 @@
 
 # GENERAL SETTINGS ====================================================================
 NAME = phonebook
-.SILENT:
 
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
@@ -99,7 +98,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	
+
 re: fclean all
 
 .DEFAULT_GOAL = all

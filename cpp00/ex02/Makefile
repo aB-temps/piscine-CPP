@@ -1,10 +1,21 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/10/25 23:01:45 by abetemps          #+#    #+#              #
+#    Updated: 2025/10/25 23:19:04 by abetemps         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # GENERAL SETTINGS ====================================================================
-# NAME = <NAME OF YOUR PROGRAM>
-.SILENT:
+NAME = log_gbu
 
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
-DIR_INC 	:= includes/
+DIR_INC 	:= include/
 DIR_BUILD	:= .build/
 
 # FLAGS & COMPILATOR SETTINGS =========================================================
@@ -12,11 +23,11 @@ CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra 
 CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
-INC_FLAGS 	:= -I$(DIR_INC) 
+INC_FLAGS 	:= -I$(DIR_INC)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
 
-ANTI_RELINK	:= Makefile $(DIR_INC) 
+ANTI_RELINK	:= Makefile $(DIR_INC)
 
 # FUNCTIONS ===========================================================================
 define generate_var_sources_dir
@@ -36,10 +47,12 @@ DEPS_$(1) = $(patsubst $(DIR_SRC)%.c,$(DIR_BUILD)%.d,$(SRC_$(1)))
 endef
 
 # COMPONENTS ==========================================================================
-# COMPONENTS :=	XXXXXXX\
+COMPONENTS :=	CLASS
 
 # FILES ===============================================================================
-F_MAIN :=		main.cpp
+F_MAIN	:=		tests.cpp
+
+F_CLASS	:=		Account.cpp
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
@@ -48,10 +61,10 @@ $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_objects,$(comp))))
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_deps,$(comp))))
 
 OBJS := $(foreach comp, $(COMPONENTS), $(OBJS_$(comp))) \
-		$(DIR_BUILD)main.o
+		$(DIR_BUILD)tests.o
 
 DEPS := $(foreach comp, $(COMPONENTS), $(DEPS_$(comp))) \
-		$(DIR_BUILD)main.d
+		$(DIR_BUILD)tests.d
 
 # COMPILATION =========================================================================
 $(NAME) : $(OBJS)
@@ -74,13 +87,11 @@ all : $(NAME)
 
 # clean -------------------------------------------------------------------------------
 clean:
-	@make -s clean -C
 	@rm -rf $(DIR_BUILD)
 
 fclean: clean
-	@make -s fclean -C 
 	@rm -f $(NAME)
-	
+
 re: fclean all
 
 .DEFAULT_GOAL = all
