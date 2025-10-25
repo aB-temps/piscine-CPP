@@ -12,8 +12,8 @@
 
 #pragma once
 
-#ifndef CONTACT_HPP
-# define CONTACT_HPP
+#ifndef		__CONTACT_HPP__
+# define	__CONTACT_HPP__
 
 # include <iomanip>
 # include "errors.hpp"

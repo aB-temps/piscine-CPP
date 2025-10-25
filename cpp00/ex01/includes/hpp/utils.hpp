@@ -12,8 +12,8 @@
 
 #pragma once
 
-#ifndef UTILS_HPP
-# define UTILS_HPP
+#ifndef		__UTILS_HPP__
+# define	__UTILS_HPP__
 
 #include <string>
 #include "errors.hpp"

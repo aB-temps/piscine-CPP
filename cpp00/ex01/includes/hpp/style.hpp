@@ -12,8 +12,8 @@
 
 #pragma once
 
-#ifndef STYLE_HPP
-# define STYLE_HPP
+#ifndef		__STYLE_HPP__
+# define	__STYLE_HPP__
 
 # include <iostream>
 # include <string>

@@ -12,8 +12,8 @@
 
 #pragma once
 
-#ifndef		ERRORS_H
-# define	ERRORS_H 
+#ifndef		__ERRORS_H__
+# define	__ERRORS_H__
 
 # include "style.hpp"
 
