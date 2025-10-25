@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "utils.hpp"
-#include <cstdio>
 
 using	std::cin;
 using	std::cout;
@@ -20,11 +19,13 @@ using	std::endl;
 int	prompt_user(std::string &input, const char *prompt, const char *detail)
 {
 	cin.exceptions(std::ios::eofbit | std::ios::failbit | std::ios::badbit);
-	while (input.empty())
+	while (input.empty() || str_is(input, std::isspace))
 	{
 		try
 		{
-			cout << prompt << detail << endl << CLR_ALT << "> " << RST;
+			cout 	<< CLR_MAIN BOLD << prompt 
+					<< CLR_SCND << (detail ? detail : "" ) << RST << endl 
+					<< CLR_ALT << "> " << RST;
 			getline(cin, input);
 			cout << endl;
 		}

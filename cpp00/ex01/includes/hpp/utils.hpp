@@ -26,7 +26,7 @@
 # define LEAVING_M			CLR_MAIN "Leaving.\n\nSee you later on " BOLD "PhoneBook !\n" RST
 
 // PROMPTS
-# define PRM				CLR_MAIN "What do you want to do ?\n" RST					
+# define PRM				CLR_MAIN BOLD "What do you want to do ?\n" RST					
 # define PRM_HOME			CLR_SCND "You can " BOLD "ADD" RST CLR_SCND " contact, " BOLD "SEARCH" RST CLR_SCND " for contacts, or " BOLD "EXIT" RST CLR_SCND " PhoneBook.\n"
 # define PRM_SEARCH			CLR_SCND "Enter a " BOLD "contact index" RST CLR_SCND " to see full informations or " BOLD "HOME" RST CLR_SCND " to go back to main menu." RST
 

@@ -29,7 +29,7 @@
 # define WARN_NO_CONTACT	CLR_WARN "No contact registered.\n" RST
 
 // STREAM ERROR
-# define ERR_M_FAILBIT 		CLR_ERROR "Format error or conversion failure.\n" RST
-# define ERR_M_BADBIT		CLR_ERROR "Hardware failure or corrupted stream.\n" RST
+# define ERR_M_FAILBIT 		CLR_ERROR "Format error or conversion failure.\nPlease retry.\n" RST
+# define ERR_M_BADBIT		CLR_ERROR "Hardware failure or corrupted stream.\nLeaving.\n" RST
 
 #endif

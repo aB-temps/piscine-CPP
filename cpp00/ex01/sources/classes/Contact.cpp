@@ -27,20 +27,11 @@ Contact::Contact(void)
 
 void Contact::createContact(void)
 {
-	std::string input;
 	int	i;
 
-	cout << endl; 
 	for (i = 0; i < CONTACT_INFOS_QUANTITY; ++i)
 	{
-		while (this->_contact_infos_values[i].empty())
-		{
-			cout << BOLD UNDL CLR_MAIN << this->contact_infos_keys[i] <<  " :" << RST << endl;
-			std::getline(cin, this->_contact_infos_values[i]);
-			cout << endl;
-			if (cin.eof())
-				return;
-		}
+		prompt_user(this->_contact_infos_values[i], this->contact_infos_keys[i], NULL);
 	}
 	cout << CLR_SUCCESS << "Contact " << BOLD CLR_MAIN
 		<< this->_contact_infos_values[FIRST_NAME]
