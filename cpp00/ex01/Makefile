@@ -60,6 +60,7 @@ F_CLASSES	:=	Contact.cpp				\
 F_UTILS		:=	ask_confirmation.cpp	\
 				str_is.cpp				\
 				put_error.cpp			\
+				prompt_user.cpp			\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

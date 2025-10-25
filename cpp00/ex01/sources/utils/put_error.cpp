@@ -12,8 +12,8 @@
 
 #include "errors.hpp"
 
-using std::cout;
-using std::endl;
+using	std::cout;
+using	std::endl;
 
 int	put_stream_error(int state, const char *func, const char *calling_func)
 {

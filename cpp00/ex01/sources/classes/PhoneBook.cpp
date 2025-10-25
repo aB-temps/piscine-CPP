@@ -13,9 +13,9 @@
 #include <sstream>
 #include "PhoneBook.hpp"
 
-using std::cin;
-using std::cout;
-using std::endl;
+using	std::cin;
+using	std::cout;
+using	std::endl;
 
 PhoneBook::PhoneBook(void)
 {
@@ -30,30 +30,32 @@ int	PhoneBook::startPhoneBook(void)
 {
 	std::string	input;
 
-	cout << CLR_MAIN << "Welcome to PhoneBook!" << RST << endl;
-	try 
+	cout << WELCOME_M << endl;
+	while (true)
 	{
-		cin.exceptions(std::ios::badbit);
-		while (!cin.eof())
+		try 
 		{
-			prompt_user(FEATURE_QUANTITY);
-			std::getline(cin, input);
+			prompt_user(input, PRM, PRM_HOME);
 			if (input == "ADD")
 				this->_runFeature(ADD);
 			else if (input == "SEARCH")
 				this->_runFeature(SEARCH);
-			else if (input == "EXIT" || cin.eof())
+			else if (input == "EXIT")
+			{
 				if (!this->_runFeature(EXIT))
 					return (SUCCESS);
+			}
+			else
+				cout << ERR_INV_CMD << endl;
+			input.clear();
 		}
-		
-	}
-	catch (const std::ios_base::failure& error)
-	{
-		cout << error.what() << endl;
-		if (put_stream_error(cin.rdstate(), __func__, "getline") == I_ERROR)
-			return (I_ERROR);
-			
+		catch (const std::ios_base::failure& error)
+		{
+			if (cin.bad())
+				return (I_ERROR);
+			else if (cin.eof())
+				break;
+		}
 	}
 	return (SUCCESS);
 }
@@ -69,9 +71,7 @@ int	PhoneBook::_addContact(void)
 
 	if (this->_contact_quantity == MAX_CONTACTS)
 	{
-		cout	<< CLR_ERROR 
-				<< "You have reached the contact limit." 
-				<< RST << endl;
+		cout << ERR_MAX_CONTACT << endl;
 		if (ask_confirmation(CONF_REP_CONTACT))
 		{
 			this->_contacts[oldest_contact_index].eraseContact();
@@ -114,18 +114,15 @@ int	PhoneBook::_searchContact(void)
 
 	if (!this->_contact_quantity)
 	{
-		cout << CLR_WARN << "No contact registered.\n" << RST << endl;
-		return (0);
+		cout << WARN_NO_CONTACT << endl;
+		return (U_ERROR);
 	}
 	this->_displayContacts();
 	cout << BOLD CLR_MAIN << this->_contact_quantity << RST << "/" << MAX_CONTACTS << " contacts registered\n" << endl;
-	while (!cin.eof())
+	while (true)
 	{
-		cout	<< CLR_SCND << "Enter a " << BOLD << "contact index" << RST CLR_SCND
-				<< " to see full informations or " << BOLD << "HOME" << RST CLR_SCND
-				<< " to go back to main menu." << RST << endl;
-		std::getline(cin, input);
-		if (!input.empty() && str_is(input, isdigit))
+		prompt_user(input, PRM, PRM_SEARCH);
+		if (str_is(input, isdigit))
 		{
 			ss_input << input;
 			ss_input >> index;
@@ -135,24 +132,21 @@ int	PhoneBook::_searchContact(void)
 				this->_addContact();
 		}
 		else if (input == "HOME")
-		{
-			input.clear();
-			return (0);
-		}
-		else if (!input.empty())
-			cout << CLR_ERROR << "Invalid command.\n" << RST << endl;
+			return (SUCCESS);
+		else
+			cout << ERR_INV_CMD << endl;
 		input.clear();
 		ss_input.clear();
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 int	PhoneBook::_exitPhoneBook(void)
 {
 	if (ask_confirmation(CONF_EXIT))
 	{
-		cout << CLR_MAIN << "Leaving." << RST << endl;
-		return (SUCCESS);
+		cout << LEAVING_M << endl;
+		return (0);
 	}
 	cout << CLR_MAIN << "Aborting." << RST << endl;
 	return (1);

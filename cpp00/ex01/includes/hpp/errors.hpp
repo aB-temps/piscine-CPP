@@ -21,11 +21,15 @@
 # define U_ERROR		2
 
 // PHONEBOOK ERROR MESSAGES
-# define ERR_INV_ARG	"PhoneBook do not any take argument. Leaving.\n"
-# define ERR_INV_CMD	"Invalid command.\n"
+# define ERR_INV_ARG		CLR_ERROR "PhoneBook do not any take argument. Leaving.\n" RST
+# define ERR_INV_CMD		CLR_ERROR "Invalid command.\n" RST
+# define ERR_MAX_CONTACT	CLR_ERROR "You have reached the contact limit.\n" RST
+
+// PHONEBOOK WARN MESSAGES
+# define WARN_NO_CONTACT	CLR_WARN "No contact registered.\n" RST
 
 // STREAM ERROR
-# define ERR_M_FAILBIT 	"Format error or conversion failure.\n"
-# define ERR_M_BADBIT	"Hardware failure or corrupted stream.\n"
+# define ERR_M_FAILBIT 		CLR_ERROR "Format error or conversion failure.\n" RST
+# define ERR_M_BADBIT		CLR_ERROR "Hardware failure or corrupted stream.\n" RST
 
 #endif
