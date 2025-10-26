@@ -6,12 +6,13 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 23:10:31 by abetemps          #+#    #+#             */
-/*   Updated: 2025/10/25 23:28:36 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/10/25 23:36:35 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "Account.hpp"
 
 using	std::cout;
@@ -24,6 +25,11 @@ int Account::_totalNbWithdrawals = 0;
 
 Account::Account(void)
 {
+	this->_accountIndex = _nbAccounts;
+	this->_amount = 0;
+	this->_nbDeposits = 0;
+	this->_nbWithdrawals = 0;
+
 	++_nbAccounts;
 
 	_displayTimestamp();
@@ -34,8 +40,10 @@ Account::Account(void)
 
 Account::Account( int initial_deposit )
 {
+	this->_accountIndex = _nbAccounts;
 	this->_amount = initial_deposit;
-	++this->_nbDeposits;
+	this->_nbDeposits = 1;
+	this->_nbWithdrawals = 0;
 
 	++_nbAccounts;
 	++_totalNbDeposits;
@@ -45,7 +53,6 @@ Account::Account( int initial_deposit )
 	cout	<< " index:"	<< this->_accountIndex
 			<< ";amount:"	<< this->_amount
 			<< ";created"	<< endl;
-
 }
 
 Account::~Account(void)
@@ -89,7 +96,12 @@ void	Account::displayStatus( void ) const
 
 void	Account::_displayTimestamp( void )
 {
-	cout << "[000...000...000]";
+	char		now_formatted[18];
+	time_t		now_ts;
+	
+	std::time(&now_ts);
+	std::strftime(now_formatted, sizeof(now_formatted), "[%Y%m%d_%H%M%S]", localtime(&now_ts));
+	cout <<	now_formatted;
 }
 
 void	Account::displayAccountsInfos( void )

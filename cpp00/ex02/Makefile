@@ -22,7 +22,7 @@ DIR_BUILD	:= .build/
 CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra 
-CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
+CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98 -g3
 INC_FLAGS 	:= -I$(DIR_INC)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
@@ -39,11 +39,11 @@ SRC_$(1) = $(addprefix $(DIR_$(1)),$(F_$(1)))
 endef
 
 define generate_var_objects
-OBJS_$(1) = $(patsubst $(DIR_SRC)%.c,$(DIR_BUILD)%.o,$(SRC_$(1)))
+OBJS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.o,$(SRC_$(1)))
 endef
 
 define generate_var_deps
-DEPS_$(1) = $(patsubst $(DIR_SRC)%.c,$(DIR_BUILD)%.d,$(SRC_$(1)))
+DEPS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.d,$(SRC_$(1)))
 endef
 
 # COMPONENTS ==========================================================================
