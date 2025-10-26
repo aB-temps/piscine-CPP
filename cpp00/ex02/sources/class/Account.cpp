@@ -97,8 +97,7 @@ void	Account::_displayTimestamp( void )
 	
 	std::time(&now_ts);
 	std::strftime(now_formatted, sizeof(now_formatted), "[%Y%m%d_%H%M%S]", localtime(&now_ts));
-	//cout <<	now_formatted;
-	cout <<	"";
+	cout <<	now_formatted;
 }
 
 void	Account::displayAccountsInfos( void )
