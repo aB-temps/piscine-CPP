@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <sstream>
+#include <iomanip>
 #include <iostream>
 #include "PhoneBook.hpp"
 
@@ -92,7 +93,21 @@ void	PhoneBook::_displayContacts(void)
 	cout << CLR_ALT << CORNER_TOP_LEFT;
 	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
 		cout << FLOOR;
-	cout << CORNER_TOP_RIGHT << RST << endl;
+	cout 	<< CORNER_TOP_RIGHT << RST << endl
+			<< CLR_ALT <<  WALL << " " << RST 
+			<< std::right << BOLD CLR_WARN << std::setw(COL_WIDTH) << "Index";
+	cout << RST << " " << SEPARATOR << " ";
+	for (int i = 1; i < 4; ++i)
+	{
+		cout 	<< std::right << BOLD CLR_WARN << std::setw(COL_WIDTH)
+				<< this->_contacts[0].contact_infos_keys[i];
+		if (i != 3)
+			cout << RST << " " << SEPARATOR << " ";
+	}
+	cout << CLR_ALT << " " << WALL << endl << JOINTER_LEFT;
+	for (int i = 0; i < ((COL_WIDTH + 2) * 4) + 3; ++i)
+		cout << FLOOR;
+	cout << JOINTER_RIGHT << RST << endl;
 	for (int i = 0; i < this->_contact_quantity; ++i)
 	{
 		cout << CLR_ALT << WALL << " " << RST;

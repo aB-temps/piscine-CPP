@@ -17,16 +17,15 @@
 
 # include "text_formatting.hpp"
 
+# define JOINTER_LEFT			"╠"
+# define JOINTER_RIGHT			"╣"
 # define CORNER_TOP_LEFT		"╔"
 # define CORNER_TOP_RIGHT		"╗"
 # define CORNER_BOTTOM_LEFT 	"╚"
 # define CORNER_BOTTOM_RIGHT	"╝"
 # define WALL					"║"
 # define FLOOR					"═"
-
-# define FILLER					'_'
 # define SEPARATOR				"|"
-
 
 # define CLR_MAIN				BLUE
 # define CLR_SCND				CYAN

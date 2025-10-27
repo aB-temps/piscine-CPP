@@ -33,8 +33,8 @@ class Contact
 			DARK_SECRET,
 			CONTACT_INFOS_QUANTITY,
 		};
-		typedef const char				*ContactInfosKeysArray[CONTACT_INFOS_QUANTITY];
-		ContactInfosKeysArray contact_infos_keys;
+		typedef const char			*ContactInfosKeysArray[CONTACT_INFOS_QUANTITY];
+		ContactInfosKeysArray 		contact_infos_keys;
 		void						createContact(void);
 		void						eraseContact(void);
 		void						displayContactShort(int index);

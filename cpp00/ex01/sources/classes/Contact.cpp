@@ -34,10 +34,10 @@ void Contact::createContact(void)
 	{
 		prompt_user(this->_contact_infos_values[i], this->contact_infos_keys[i], NULL);
 	}
-	cout << CLR_SUCCESS << "Contact " << BOLD CLR_MAIN
-		<< this->_contact_infos_values[FIRST_NAME]
-		<< " " << this->_contact_infos_values[LAST_NAME]
-		<< CLR_SUCCESS << " has been successfully created !\n" << RST << endl;
+	cout	<< CLR_SUCCESS << "Contact " << BOLD CLR_MAIN
+			<< this->_contact_infos_values[FIRST_NAME]
+			<< " " << this->_contact_infos_values[LAST_NAME]
+			<< CLR_SUCCESS << " has been successfully created !\n" << RST << endl;
 }
 
 void Contact::eraseContact(void)
@@ -48,19 +48,16 @@ void Contact::eraseContact(void)
 
 void Contact::displayContactShort(int index)
 {
-	cout << std::setfill(FILLER) << std::setw(COL_WIDTH);
+	cout << std::setw(COL_WIDTH);
 	cout << index << " " << SEPARATOR << " ";
 	for (int i = 1; i < 4; ++i)
 	{
 		if (this->_contact_infos_values[i].length() > COL_WIDTH)
-		{
-			cout << std::setfill(FILLER) << std::right;
-			cout << this->_contact_infos_values[i].substr(0, COL_WIDTH - 1) << ".";
-		}
+			cout << std::right << this->_contact_infos_values[i].substr(0, COL_WIDTH - 1) << ".";
 		else
 		{
-			cout << std::setfill(FILLER) << std::right<< std::setw(COL_WIDTH);
-			cout << this->_contact_infos_values[i];
+			cout	<< std::right << std::setw(COL_WIDTH)
+					<< this->_contact_infos_values[i];
 		}
 		if (i != 3)
 			cout << " " << SEPARATOR << " ";
