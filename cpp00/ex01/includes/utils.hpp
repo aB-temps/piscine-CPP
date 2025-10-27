@@ -35,7 +35,7 @@
 
 bool	ask_confirmation(const char *message);
 bool	str_is(std::string str, int (*check)(int));
-int		put_stream_error(int state, const char *func, const char *calling_func);
+void	put_stream_error(int state, const char *func, const char *calling_func);
 int		prompt_user(std::string &input, const char *prompt, const char *detail);
 
 #endif

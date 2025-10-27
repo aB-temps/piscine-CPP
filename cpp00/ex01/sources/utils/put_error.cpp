@@ -16,15 +16,13 @@
 using	std::cout;
 using	std::endl;
 
-int	put_stream_error(int state, const char *func, const char *calling_func)
+void	put_stream_error(int state, const char *func, const char *calling_func)
 {
-	cout << CLR_ERROR BOLD << "Error in function " << RST
-		<< func << CLR_ERROR << ": " << RST
-		<< calling_func << RST << endl;
+	cout	<< CLR_ERROR BOLD << "Error in function " << RST
+			<< func << CLR_ERROR << ": " << RST
+			<< calling_func << RST << endl;
 	
-	cout << CLR_ERROR BOLD
-		<< (state < std::ios::failbit ? ERR_M_BADBIT : ERR_M_FAILBIT)
-		<< RST << endl;
-
-	return (state < std::ios::failbit ?  I_ERROR :  U_ERROR);
+	cout	<< CLR_ERROR BOLD
+			<< (state < std::ios::failbit ? ERR_M_BADBIT : ERR_M_FAILBIT)
+			<< RST << endl;
 }

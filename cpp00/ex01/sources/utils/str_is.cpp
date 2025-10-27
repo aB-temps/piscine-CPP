@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
 
 bool	str_is(std::string str, int (*check)(int))
 {
