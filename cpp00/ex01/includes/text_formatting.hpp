@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   text_formatting.h                                  :+:      :+:    :+:   */
+/*   text_formatting.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 01:16:29 by abetemps          #+#    #+#             */
-/*   Updated: 2025/09/27 01:16:32 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/10/27 11:22:46 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXT_FORMATTING_H
-# define TEXT_FORMATTING_H
+#pragma once
+
+#ifndef		__TEXT_FORMATTING_HPP__
+# define	__TEXT_FORMATTING_HPP__
 
 // FOREGROUND COLORS
 # define BLACK "\001\033[30m\002"

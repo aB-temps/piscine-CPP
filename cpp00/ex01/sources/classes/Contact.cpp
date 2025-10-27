@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iomanip>
+#include <iostream>
 #include "Contact.hpp"
 
-using	std::cin;
 using	std::cout;
 using	std::endl;
 

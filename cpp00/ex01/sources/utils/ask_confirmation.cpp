@@ -10,20 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include "utils.hpp"
 #include "style.hpp"
 
-bool	ask_confirmation(std::string message)
+bool	ask_confirmation(const char* message)
 {
 	std::string input;
 
-	while (input.empty() && !std::cin.eof())
+	while (input.empty())
 	{
-		std::cout << std::endl << CLR_WARN << message << RST << "\nConfirm [Y/N]" << std::endl;
-		std::getline(std::cin, input);
+		prompt_user(input, message, PROMPT_CONF);
 		if (input == "Y" || input == "y")
 			return (true);
 		else if (input == "N" || input == "n")
 			return (false);
+		else
+			input.clear();
 	}
 	return (false);
 }

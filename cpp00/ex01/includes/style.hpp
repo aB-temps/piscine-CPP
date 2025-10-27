@@ -15,9 +15,7 @@
 #ifndef		__STYLE_HPP__
 # define	__STYLE_HPP__
 
-# include <iostream>
-# include <string>
-# include "text_formatting.h"
+# include "text_formatting.hpp"
 
 # define CORNER_TOP_LEFT		"╔"
 # define CORNER_TOP_RIGHT		"╗"

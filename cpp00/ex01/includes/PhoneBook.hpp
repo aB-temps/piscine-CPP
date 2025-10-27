@@ -15,7 +15,6 @@
 #ifndef		__PHONEBOOK_H__
 # define	__PHONEBOOK_H__
 
-# include <cctype>
 # include "Contact.hpp"
 
 # define MAX_CONTACTS 8

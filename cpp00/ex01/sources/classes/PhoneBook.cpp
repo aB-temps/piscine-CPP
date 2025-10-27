@@ -6,11 +6,12 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 16:01:47 by abetemps          #+#    #+#             */
-/*   Updated: 2025/10/24 17:12:59 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/10/27 11:29:57 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sstream>
+#include <iostream>
 #include "PhoneBook.hpp"
 
 using	std::cin;
@@ -25,7 +26,6 @@ PhoneBook::PhoneBook(void)
 	this->_features[EXIT] = &PhoneBook::_exitPhoneBook;
 }
 
-
 int	PhoneBook::startPhoneBook(void)
 {
 	std::string	input;
@@ -35,7 +35,7 @@ int	PhoneBook::startPhoneBook(void)
 	{
 		try 
 		{
-			prompt_user(input, PRM, PRM_HOME);
+			prompt_user(input, PROMPT, PROMPT_HOME);
 			if (input == "ADD")
 				this->_runFeature(ADD);
 			else if (input == "SEARCH")
@@ -121,7 +121,7 @@ int	PhoneBook::_searchContact(void)
 	cout << BOLD CLR_MAIN << this->_contact_quantity << RST << "/" << MAX_CONTACTS << " contacts registered\n" << endl;
 	while (true)
 	{
-		prompt_user(input, PRM, PRM_SEARCH);
+		prompt_user(input, PROMPT, PROMPT_SEARCH);
 		if (str_is(input, isdigit))
 		{
 			ss_input << input;

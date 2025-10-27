@@ -15,7 +15,6 @@
 #ifndef		__CONTACT_HPP__
 # define	__CONTACT_HPP__
 
-# include <iomanip>
 # include "errors.hpp"
 # include "utils.hpp"
 
@@ -25,7 +24,7 @@ class Contact
 {
 	public :
 		Contact(void);
-		enum		e_ContactInfos
+		enum						e_ContactInfos
 		{
 			PHONE,
 			FIRST_NAME,
@@ -34,11 +33,12 @@ class Contact
 			DARK_SECRET,
 			CONTACT_INFOS_QUANTITY,
 		};
-		const char	*contact_infos_keys[CONTACT_INFOS_QUANTITY];
-		void		createContact(void);
-		void		eraseContact(void);
-		void		displayContactShort(int index);
-		void		displayContactFull(void);
+		typedef const char				*ContactInfosKeysArray[CONTACT_INFOS_QUANTITY];
+		ContactInfosKeysArray contact_infos_keys;
+		void						createContact(void);
+		void						eraseContact(void);
+		void						displayContactShort(int index);
+		void						displayContactFull(void);
 		
 	private :
 		typedef std::string 		_ContactInfosValuesArray[CONTACT_INFOS_QUANTITY];
