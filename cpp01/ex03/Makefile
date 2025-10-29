@@ -5,13 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/10/29 10:32:15 by abetemps          #+#    #+#              #
-#    Updated: 2025/10/29 10:32:16 by abetemps         ###   ########.fr        #
+#    Created: 2025/10/29 10:31:00 by abetemps          #+#    #+#              #
+#    Updated: 2025/10/29 11:04:46 by abetemps         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # GENERAL SETTINGS ====================================================================
-NAME = moarBrainz
+NAME = unnecessaryViolence
 
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
@@ -48,16 +48,13 @@ endef
 
 # COMPONENTS ==========================================================================
 COMPONENTS 	:=	CLASSES				\
-				UTILS				\
 
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
-F_CLASSES	:=	Zombie.cpp			\
-
-F_UTILS		:=	zombieHorde.cpp		\
-				string_to_int.cpp	\
-
+F_CLASSES	:=	Weapon.cpp			\
+				HumanA.cpp			\
+				HumanB.cpp			\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
