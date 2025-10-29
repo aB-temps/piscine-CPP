@@ -14,5 +14,21 @@
 
 #ifndef		__HUMANB_HPP__
 # define	__HUMANB_HPP__
+
+# include "Weapon.hpp"
+
+class	HumanB
+{
+	public:
+		HumanB(std::string name);
+		void			setWeapon(Weapon &weapon);
+		void			attack(void) const;
+
+	private:
+		std::string		_name;
+		Weapon			*_weapon;
+};
+
+
 #endif
 

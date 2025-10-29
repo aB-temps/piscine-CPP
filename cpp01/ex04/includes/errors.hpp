@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   errors.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 10:28:06 by abetemps          #+#    #+#             */
-/*   Updated: 2025/10/29 10:35:39 by abetemps         ###   ########.fr       */
+/*   Created: 2025/10/29 15:59:02 by abetemps          #+#    #+#             */
+/*   Updated: 2025/10/29 16:43:30 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "HumanA.hpp"
+#pragma once
 
-using	std::cout;
-using	std::endl;
+#ifndef		__ERRORS_HPP__
+# define	__ERRORS_HPP__
 
-HumanA::HumanA(std::string name, Weapon &weapon): _name(name), _weapon(weapon) {}
+# include "text_formatting.hpp"
 
-void	HumanA::attack(void) const
-{
-	cout 	<< this->_name
-			<< " attacks with their weapon "
-			<< this->_weapon.getType() <<
-	endl;
-}
+# define BAD_ARG 		RED"Bad arguments."RST
+# define NO_FILE 		RED"File is inaccessible."RST
+# define NO_OCC			RED"No occurence in file."RST
+
+#endif

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   Sed.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 10:28:06 by abetemps          #+#    #+#             */
-/*   Updated: 2025/10/29 10:35:39 by abetemps         ###   ########.fr       */
+/*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
+/*   Updated: 2025/10/29 17:00:40 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "HumanA.hpp"
+#pragma once
 
-using	std::cout;
-using	std::endl;
+#ifndef		__ERRORS_HPP__
+# define	__ERRORS_HPP__
 
-HumanA::HumanA(std::string name, Weapon &weapon): _name(name), _weapon(weapon) {}
+#include <fstream>
 
-void	HumanA::attack(void) const
+class	Sed
 {
-	cout 	<< this->_name
-			<< " attacks with their weapon "
-			<< this->_weapon.getType() <<
-	endl;
-}
+	public:
+
+	private:
+		ifstream	_infile;
+		ofstream	_outfile;
+
+};
+
+#endif

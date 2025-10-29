@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # GENERAL SETTINGS ====================================================================
-NAME = unnecessaryViolence
+NAME = sed
 
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
@@ -48,13 +48,15 @@ endef
 
 # COMPONENTS ==========================================================================
 COMPONENTS 	:=	CLASSES				\
-
+				UTILS				\
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
 F_CLASSES	:=	Weapon.cpp			\
 				HumanA.cpp			\
-				HumanB.cpp			\
+
+F_UTILS		:=	Weapon.cpp			\
+				HumanA.cpp			\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

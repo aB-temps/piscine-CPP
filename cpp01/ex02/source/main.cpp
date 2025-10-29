@@ -24,7 +24,7 @@ int	main(void)
 	std::string	&stringREF(str);
 
 	cout 	<< "&str: "		<< &str << endl
-			<< "strPTR: "	<< &stringPTR << endl
+			<< "strPTR: "	<< stringPTR << endl
 			<< "strREF: "	<< &stringREF << endl;
 
 	cout 	<< "\nstr: "	<< str << endl
