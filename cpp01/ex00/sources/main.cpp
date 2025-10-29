@@ -16,13 +16,18 @@
 int	main(void)
 {
 	Zombie z1;
-	Zombie z2("Guigui");
+	Zombie z2("Caro");
 
-	randomChump("Kiki");	
+	randomChump("Kunfandi");	
 
 	Zombie *z3;
 
-	z3 = newZombie("Wedwhool");
+	z3 = newZombie("Pillo");
+	if (!z3)
+	{
+		std::cout << "New encountered an error" << std::endl;
+		return (1);
+	}
 	z3->announce();
 
 	delete z3;

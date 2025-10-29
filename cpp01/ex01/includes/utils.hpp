@@ -15,14 +15,14 @@
 #ifndef		__UTILS_HPP__
 # define	__UTILS_HPP__
 
-# include <string>
+# include <iostream>
 # include "Zombie.hpp"
 
-# define DEFAULT_ZOMBIE_NAME		"Kunfandi"	
-# define DEFAULT_ZOMBIE_QUANTITY	9
+# define DEFAULT_ZOMBIE_NAME	"Coco"
+# define DEFAULT_HORDE_SIZE		9
+# define MIN_HORDE_SIZE			2
 
-int		string_to_int(int value&, std::string str);
-
+void	string_to_int(int &value, std::string str);
 Zombie	*zombieHorde(int N, std::string name);
 
 #endif

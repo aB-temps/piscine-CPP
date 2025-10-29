@@ -10,19 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "utils.hpp"
+
+using	std::cout;
+using	std::endl;
 
 Zombie	*zombieHorde(int N, std::string name)
 {
 	Zombie	*zh;
-
-	zh = new Zombie[N];
-
-
-	for (int i = 0; i < N; ++i)
+	
+	if (N < MIN_HORDE_SIZE)
 	{
-		zh[i] = Zombie(name);
+		cout	<< RED << "Cannot build a Zombie Horde with less than " << RST BOLD
+				<< MIN_HORDE_SIZE << RST RED << " zombies." << RST << endl;
+		return (NULL);
 	}
 
+	zh = new Zombie[N];
+		
+	for (int i = 0; i < N; ++i)
+		zh[i].setName(name);
 	return (zh);
 }

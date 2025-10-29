@@ -10,18 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include <iostream>
 #include <sstream>
 
-int		string_to_int(int value&, std::string str)
+void	string_to_int(int &value, std::string str)
 {
-	std::stringstream ss;
-
-	ss << str;
-	str >> value;
-
-	std::cout << value << std::endl;
-
-	return (0);
+	std::stringstream ss(str);
+	ss >> value;
 }

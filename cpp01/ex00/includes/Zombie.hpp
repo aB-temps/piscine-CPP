@@ -15,7 +15,7 @@
 #ifndef		__ZOMBIE_HPP__
 # define	__ZOMBIE_HPP__
 
-# include <string>
+# include <iostream>
 
 class	Zombie
 {

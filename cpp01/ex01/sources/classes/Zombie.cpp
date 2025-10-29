@@ -13,6 +13,12 @@
 #include <iostream>
 #include "Zombie.hpp"
 
+# define BOLD	"\001\033[1m\002"
+# define RED	"\001\033[31m\002"
+# define GREEN	"\001\033[32m\002"
+# define YELLOW	"\001\033[33m\002"
+# define RST	"\001\033[0m\002"
+
 using	std::endl;
 using	std::cout;
 
@@ -21,18 +27,17 @@ Zombie::Zombie(void)
 	this->_name = "Anonymous";
 }
 
-Zombie::Zombie(std::string name)
-{
-	this->_name = name;
-	cout << "Hello my name is: " << this->_name << endl;
-}
-
 Zombie::~Zombie(void)
 {
-	cout << this->_name << " is dead." << endl;
+	cout << YELLOW "💀 " << BOLD << this->_name << RST YELLOW << " is dead." RST << endl;
+}
+
+void	Zombie::setName(std::string name)
+{
+	this->_name = name;
 }
 
 void	Zombie::announce(void) const
 {
-	cout << this->_name << ": BraiiiiiiinnnzzzZ..." << endl;
+	cout << GREEN "🧟 " << BOLD << this->_name << RST GREEN << ": BraiiiiiiinnnzzzZ..." RST << endl;
 }
