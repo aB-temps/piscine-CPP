@@ -16,7 +16,10 @@
 # define	__SED_HPP__
 
 #include <iostream>
+#include <sstream>
 #include <fstream>
+
+std::string	str_replace(std::string str, std::string sq1, std::string sq2);
 
 class	Sed
 {

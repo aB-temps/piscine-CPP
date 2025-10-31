@@ -54,27 +54,19 @@ const std::string	&Sed::getSeq(int mode) const
 
 void				Sed::replaceOccurences(void)
 {
-	std::string	tmp;
+	std::ostringstream	oss_tmp;
 
 	this->_infile.exceptions(std::ios::badbit | std::ios::eofbit | std::ios::failbit);
 	try
 	{
-		while (true)
-		{
-			getline(this->_infile, tmp);
-			this->_outfile << tmp;	
-		}
+		oss_tmp << this->_infile.rdbuf();
+		this->_outfile << str_replace(oss_tmp.str(), this->_seq_from, this->_seq_to);
 	}
 	catch (const std::ios::failure &error)
 	{
 		if (this->_infile.bad())
 		{
 			cout << "BAD" << endl;
-			throw;
-		}
-		else if (this->_infile.eof())
-		{
-			cout << "EOF" << endl;
 			throw;
 		}
 	}

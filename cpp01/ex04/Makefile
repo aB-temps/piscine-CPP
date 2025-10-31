@@ -48,13 +48,13 @@ endef
 
 # COMPONENTS ==========================================================================
 COMPONENTS 	:=	CLASSES				\
-				#UTILS				\
+				UTILS				\
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
 F_CLASSES	:=	Sed.cpp				\
-				#.cpp				\
 
+F_UTILS		:=	str_replace.cpp		\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
