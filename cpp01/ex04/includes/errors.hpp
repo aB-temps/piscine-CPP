@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 15:59:02 by abetemps          #+#    #+#             */
-/*   Updated: 2025/10/29 16:43:30 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/10/29 17:28:13 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include "text_formatting.hpp"
 
 # define BAD_ARG 		RED"Bad arguments."RST
-# define NO_FILE 		RED"File is inaccessible."RST
+# define FAIL_OPEN		RED"Infile cannot be opened."RST
+# define FAIL_CREATE	RED"Outfile cannot be created."RST
+
 # define NO_OCC			RED"No occurence in file."RST
 
 #endif
