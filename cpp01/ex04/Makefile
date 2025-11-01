@@ -6,7 +6,7 @@
 #    By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 10:31:00 by abetemps          #+#    #+#              #
-#    Updated: 2025/10/29 11:06:15 by abetemps         ###   ########.fr        #
+#    Updated: 2025/11/01 11:50:52 by abetemps         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME = sed
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
 DIR_INC 	:= includes/
+DIR_TEMP 	:= templates/
 DIR_BUILD	:= .build/
 
 # FLAGS & COMPILATOR SETTINGS =========================================================
@@ -23,7 +24,7 @@ CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra 
 CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
-INC_FLAGS 	:= -I$(DIR_INC) 
+INC_FLAGS 	:= -I$(DIR_INC) -I$(DIR_TEMP)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
 
@@ -55,6 +56,7 @@ F_MAIN		:=	main.cpp
 F_CLASSES	:=	Sed.cpp				\
 
 F_UTILS		:=	str_replace.cpp		\
+				
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

@@ -30,14 +30,20 @@ int main(int ac, char *av[])
 		if (!sed.openInfile(av[1]))
 			return (1);
 		if (!sed.createOutfile(av[1]))
+		{
+			sed.closeIOFiles();
 			return (1);
+		}
 		sed.setSeq(av[2], Sed::FROM);
 		sed.setSeq(av[3], Sed::TO);
 		sed.replaceOccurences();
+		sed.closeIOFiles();
 	}
 	catch (const std::ios::failure &error)
 	{
 		cout << RED << error.what() << RST << endl;
+		sed.closeIOFiles();
+		return (1);
 	}
 	return (0);
 }

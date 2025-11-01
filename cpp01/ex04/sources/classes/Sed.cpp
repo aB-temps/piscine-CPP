@@ -11,10 +11,17 @@
 /* ************************************************************************** */
 
 #include "Sed.hpp"
+#include "close_file.tpp"
 #include "errors.hpp"
 
 using	std::cout;
 using	std::endl;
+
+void				Sed::closeIOFiles(void)
+{
+	close_file<std::ifstream>(this->_infile);
+	close_file<std::ofstream>(this->_outfile);
+}
 
 bool				Sed::openInfile(const char *infile)
 {

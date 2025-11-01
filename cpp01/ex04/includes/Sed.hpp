@@ -29,6 +29,7 @@ class	Sed
 			FROM,
 			TO,
 		};
+		void				closeIOFiles(void);
 		bool				openInfile(const char *filename);
 		bool				createOutfile(const char *filename);
 		void				setSeq(const char *seq, int mode);

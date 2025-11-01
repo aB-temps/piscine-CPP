@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_replace.cpp                                    :+:      :+:    :+:   */
+/*   close_file.tpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/31 15:22:43 by abetemps          #+#    #+#             */
-/*   Updated: 2025/10/31 15:24:42 by abetemps         ###   ########.fr       */
+/*   Created: 2025/11/01 11:49:07 by abetemps          #+#    #+#             */
+/*   Updated: 2025/11/01 11:53:37 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
+#include <fstream>
 
-std::string	str_replace(std::string str, std::string sq1, std::string sq2)
+template <typename T>
+void	close_file(T &file)
 {
-	unsigned long	pos = str.find(sq1);
-
-	while (pos != str.npos)
-	{
-		str.erase(pos, sq1.length()).insert(pos, sq2);
-		pos = str.find(sq1, pos + sq2.length());
-	}
-	return (str);
+	if (file.is_open())
+		file.close();
 }
