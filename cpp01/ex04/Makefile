@@ -22,7 +22,7 @@ DIR_BUILD	:= .build/
 # FLAGS & COMPILATOR SETTINGS =========================================================
 CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
-WARN_FLAGS	:= -Wall -Werror -Wextra 
+WARN_FLAGS	:= -Wall -Werror -Wextra -g3
 CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
 INC_FLAGS 	:= -I$(DIR_INC) -I$(DIR_TEMP)
 
@@ -49,14 +49,11 @@ endef
 
 # COMPONENTS ==========================================================================
 COMPONENTS 	:=	CLASSES				\
-				UTILS				\
+
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
 F_CLASSES	:=	Sed.cpp				\
-
-F_UTILS		:=	str_replace.cpp		\
-				
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

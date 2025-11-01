@@ -10,8 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <fstream>
+#pragma		once
+#ifndef		__CLOSE_FILE_TPP__
+# define	__CLOSE_FILE_TPP__
+
+# include <iostream>
+# include <fstream>
 
 template <typename T>
 void	close_file(T &file)
@@ -19,3 +23,5 @@ void	close_file(T &file)
 	if (file.is_open())
 		file.close();
 }
+
+#endif

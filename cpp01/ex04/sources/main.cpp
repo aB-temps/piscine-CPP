@@ -20,11 +20,8 @@ int main(int ac, char *av[])
 {
 	Sed	sed;
 
-	if (ac != 4)
-	{
-		cout << BAD_ARG << endl;
+	if (!sed.parseArguments(ac, av))
 		return (1);
-	}
 	try
 	{
 		if (!sed.openInfile(av[1]))
@@ -34,14 +31,10 @@ int main(int ac, char *av[])
 			sed.closeIOFiles();
 			return (1);
 		}
-		sed.setSeq(av[2], Sed::FROM);
-		sed.setSeq(av[3], Sed::TO);
 		sed.replaceOccurences();
-		sed.closeIOFiles();
 	}
 	catch (const std::ios::failure &error)
 	{
-		cout << RED << error.what() << RST << endl;
 		sed.closeIOFiles();
 		return (1);
 	}
