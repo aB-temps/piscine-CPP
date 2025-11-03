@@ -168,7 +168,9 @@ void				Sed::_incrementStats(void)
 
 std::string			Sed::_strReplace(std::string str, std::string sq1, std::string sq2)
 {
-	unsigned long	pos = str.find(sq1);
+	const int			seq_from_len = this->_seq_from.length();
+	const int			seq_to_len = this->_seq_to.length();
+	unsigned long		pos = str.find(sq1);
 
 	if (pos == str.npos)
 	{
@@ -177,8 +179,8 @@ std::string			Sed::_strReplace(std::string str, std::string sq1, std::string sq2
 	}
 	while (pos != str.npos)
 	{
-		str.erase(pos, sq1.length()).insert(pos, sq2);
-		pos = str.find(sq1, pos + sq2.length());
+		str.erase(pos, seq_from_len).insert(pos, sq2);
+		pos = str.find(sq1, pos + seq_to_len);
 		this->_incrementStats();
 		if (this->_limit > 0 && this->_occurences_count == this->_limit)
 			break;
