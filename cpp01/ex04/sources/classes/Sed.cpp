@@ -17,12 +17,7 @@
 using	std::cout;
 using	std::endl;
 
-Sed::Sed(void): _limit(0), _occurences_count(0), _removed_bytes(0), _added_bytes(0)
-{
-	this->_mode.flag = 0;
-	this->_mode.v = 0;
-	this->_mode.l = 0;
-}
+Sed::Sed(void): _mode(0), _limit(0), _occurences_count(0), _removed_bytes(0), _added_bytes(0) {}
 
 bool				Sed::parseArguments(int ac, char *av[])
 {
@@ -47,7 +42,7 @@ bool				Sed::parseArguments(int ac, char *av[])
 						cout << BAD_ARGS << endl;
 						return (false);
 					}
-					this->_mode.l = 1;
+					this->_mode |= (1 << RANK_L);
 					++i;
 				}
 				else
@@ -57,7 +52,7 @@ bool				Sed::parseArguments(int ac, char *av[])
 				}
 			}
 			else if (param == "-v")
-				this->_mode.v = 1;
+				this->_mode |= (1 << RANK_V);
 			else
 			{
 				cout << BAD_ARGS << endl;
@@ -65,10 +60,6 @@ bool				Sed::parseArguments(int ac, char *av[])
 			}
 		}
 	}
-	cout << "FLAG:" << this->_mode.flag << endl;
-	cout << "VERBOSE:" << this->_mode.v << endl;
-	cout << "LIMIT:" << this->_mode.l << endl;
-	cout << "limit:" << this->_limit << endl;
 	setSeq(av[2], FROM);
 	setSeq(av[3], TO);
 	return (true);
@@ -152,7 +143,7 @@ void				Sed::replaceOccurences(void)
 			throw;
 		}
 	}
-	if (this->_mode.flag != 0 && this->_mode.flag % 2 != 0)
+	if (this->_mode % 2 == 0 || (this->_mode & 0b0001) != 0)
 		this->_displayStats();
 }
 

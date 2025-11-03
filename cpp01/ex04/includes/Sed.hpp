@@ -37,19 +37,15 @@ class	Sed
 		void				replaceOccurences(void);
 
 	private:
-		union				_u_modeFlags
+		enum				_e_flags
 		{
-			__int16_t	flag;
-			struct
-			{
-				__int8_t v;
-				__int8_t l;
-			};
+			RANK_V = 0,
+			RANK_L = 1,
 		};
 		std::string			_strReplace(std::string str, std::string sq1, std::string sq2);
 		void				_incrementStats(void);
 		void				_displayStats(void);
-		union _u_modeFlags	_mode;
+		int					_mode;
 		int					_limit;
 		int					_occurences_count;
 		int					_removed_bytes;
