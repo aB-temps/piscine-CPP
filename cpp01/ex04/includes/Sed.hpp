@@ -15,6 +15,9 @@
 #ifndef		__SED_HPP__
 # define	__SED_HPP__
 
+# define EOFBIT			GREEN"Reached EOF."RST
+# define BUFFER_SIZE 	4
+
 # include <iostream>
 # include <sstream>
 # include <fstream>
@@ -42,7 +45,7 @@ class	Sed
 			RANK_V = 0,
 			RANK_L = 1,
 		};
-		std::string			_strReplace(std::string str, std::string sq1, std::string sq2);
+		std::string			_strReplace(std::string str, int &overlap);
 		void				_incrementStats(void);
 		void				_displayStats(void);
 		int					_mode;

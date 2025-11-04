@@ -125,28 +125,6 @@ void				Sed::_displayStats(void)
 		cout << GREEN BOLD << "+" << this->_added_bytes << " byte" << RST << endl;
 }
 
-void				Sed::replaceOccurences(void)
-{
-	std::ostringstream	oss_tmp;
-
-	this->_infile.exceptions(std::ios::badbit | std::ios::eofbit | std::ios::failbit);
-	try
-	{
-		oss_tmp << this->_infile.rdbuf();
-		this->_outfile << this->_strReplace(oss_tmp.str(), this->_seq_from, this->_seq_to);
-	}
-	catch (const std::ios::failure &error)
-	{
-		if (this->_infile.bad())
-		{
-			cout << BADBIT << endl;
-			throw;
-		}
-	}
-	if (this->_mode % 2 == 0 || (this->_mode & 0b0001) != 0)
-		this->_displayStats();
-}
-
 void				Sed::_incrementStats(void)
 {
 	const int	seq_from_len = this->_seq_from.length();
@@ -157,24 +135,67 @@ void				Sed::_incrementStats(void)
 	this->_added_bytes += seq_to_len;
 }
 
-std::string			Sed::_strReplace(std::string str, std::string sq1, std::string sq2)
+void				Sed::replaceOccurences(void)
 {
+	std::string	buffer(BUFFER_SIZE, '\0');
+	int			overlap = 0;
+
+	this->_infile.exceptions(std::ios::badbit);
+	try
+	{
+		while (this->_infile.read(&buffer[overlap], BUFFER_SIZE - overlap))
+		{
+			cout << "buffer: \"" << buffer << "\"" << endl;
+			this->_outfile << this->_strReplace(buffer, overlap);
+		}
+	}
+	catch (const std::ios::failure &error)
+	{
+		cout << error.what() << endl;
+		if (this->_infile.bad())
+		{
+			cout << BADBIT << endl;
+			throw;
+		}
+		if (this->_infile.eof())
+		{
+			cout << EOFBIT << endl;
+			throw;
+		}
+
+	}
+	if ((this->_mode & 0b0001) != 0)
+		this->_displayStats();
+}
+
+std::string				Sed::_strReplace(std::string str, int &overlap)
+{
+	std::string			new_str = str;
 	const int			seq_from_len = this->_seq_from.length();
 	const int			seq_to_len = this->_seq_to.length();
-	unsigned long		pos = str.find(sq1);
+	unsigned long		pos = new_str.find(this->_seq_from);
 
-	if (pos == str.npos)
+	cout << "pos: " << pos << endl;
+	cout << "npos: " << new_str.npos << endl;
+	while (pos != new_str.npos)
 	{
-		cout << NO_OCC << endl;
-		return (str);
-	}
-	while (pos != str.npos)
-	{
-		str.erase(pos, seq_from_len).insert(pos, sq2);
-		pos = str.find(sq1, pos + seq_to_len);
+		cout << "pos: " << pos << endl;
+		new_str.erase(pos, seq_from_len).insert(pos, _seq_to);
+		if (pos + seq_from_len >= str.npos)
+		{
+			if (!new_str.compare(pos, seq_from_len - pos, this->_seq_from))
+			{
+				cout << "\n\n\nIT IS!!!!\n\n" << endl;
+				overlap = pos - seq_from_len;
+				return (new_str);
+			}
+			else
+				break;
+		}
+		pos = str.find(_seq_from, pos + seq_to_len);
 		this->_incrementStats();
 		if (this->_limit > 0 && this->_occurences_count == this->_limit)
 			break;
 	}
-	return (str);
+	return (new_str);
 }
