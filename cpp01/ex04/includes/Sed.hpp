@@ -16,7 +16,7 @@
 # define	__SED_HPP__
 
 # define EOFBIT			GREEN"Reached EOF."RST
-# define BUFFER_SIZE 	4
+# define BUFFER_SIZE 	4096
 
 # include <iostream>
 # include <sstream>
