@@ -45,7 +45,8 @@ class	Sed
 			RANK_V = 0,
 			RANK_L = 1,
 		};
-		std::string			_strReplace(std::string str, int &overlap);
+		void				_processAndWriteBuff(std::string s);
+		std::string			_strReplace(std::string str);
 		void				_incrementStats(void);
 		void				_displayStats(void);
 		int					_mode;

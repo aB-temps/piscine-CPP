@@ -137,17 +137,42 @@ void				Sed::_incrementStats(void)
 
 void				Sed::replaceOccurences(void)
 {
-	std::string	buffer(BUFFER_SIZE, '\0');
-	int			overlap = 0;
+	const unsigned long overlap_size = this->_seq_from.length() - 1;
+	char				rbuff[BUFFER_SIZE + 1];
+	unsigned long		bytes_read;
+	std::string 		obuff;
+	std::string 		tbuff;
+	std::string 		pbuff;
+	unsigned long		plen;
 
 	this->_infile.exceptions(std::ios::badbit);
 	try
 	{
-		while (this->_infile.read(&buffer[overlap], BUFFER_SIZE - overlap))
+		while (1)
 		{
-			cout << "buffer: \"" << buffer << "\"" << endl;
-			this->_outfile << this->_strReplace(buffer, overlap);
+			this->_infile.read(rbuff, BUFFER_SIZE);
+			bytes_read = this->_infile.gcount();
+			if (bytes_read <= 0)
+			{
+				cout << RED"finished"RST << endl;
+				break;
+			}
+			rbuff[bytes_read] = '\0';
+			cout << "rbuff= \'" << rbuff << "\'" << endl;
+			tbuff = obuff.append(rbuff);
+			cout << "tbuff= \'" << tbuff << "\'" << endl;
+			if (tbuff.length() <= overlap_size)
+			{
+				obuff = rbuff;
+				cout << "obuff= \'" << obuff << "\'\n\n" << endl;
+				continue;
+			}
+			plen = tbuff.length() - overlap_size;
+			pbuff = tbuff.substr(0, plen);
+			obuff = tbuff.substr(plen);
+			_processAndWriteBuff(pbuff);
 		}
+		_processAndWriteBuff(obuff);
 	}
 	catch (const std::ios::failure &error)
 	{
@@ -168,34 +193,15 @@ void				Sed::replaceOccurences(void)
 		this->_displayStats();
 }
 
-std::string				Sed::_strReplace(std::string str, int &overlap)
+void					Sed::_processAndWriteBuff(std::string s)
 {
-	std::string			new_str = str;
-	const int			seq_from_len = this->_seq_from.length();
-	const int			seq_to_len = this->_seq_to.length();
-	unsigned long		pos = new_str.find(this->_seq_from);
 
-	cout << "pos: " << pos << endl;
-	cout << "npos: " << new_str.npos << endl;
-	while (pos != new_str.npos)
-	{
-		cout << "pos: " << pos << endl;
-		new_str.erase(pos, seq_from_len).insert(pos, _seq_to);
-		if (pos + seq_from_len >= str.npos)
-		{
-			if (!new_str.compare(pos, seq_from_len - pos, this->_seq_from))
-			{
-				cout << "\n\n\nIT IS!!!!\n\n" << endl;
-				overlap = pos - seq_from_len;
-				return (new_str);
-			}
-			else
-				break;
-		}
-		pos = str.find(_seq_from, pos + seq_to_len);
-		this->_incrementStats();
-		if (this->_limit > 0 && this->_occurences_count == this->_limit)
-			break;
-	}
-	return (new_str);
+	this->_outfile << s;
+
+}
+
+std::string				Sed::_strReplace(std::string str)
+{
+	return (str);
+
 }
