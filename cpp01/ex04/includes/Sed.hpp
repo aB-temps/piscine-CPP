@@ -16,11 +16,12 @@
 # define	__SED_HPP__
 
 # define EOFBIT			GREEN"Reached EOF."RST
-# define BUFFER_SIZE 	4096
+# define BUFFER_SIZE 	2048
 
 # include <iostream>
 # include <sstream>
 # include <fstream>
+# include <filesystem>
 
 class	Sed
 {

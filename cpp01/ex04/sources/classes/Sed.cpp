@@ -152,10 +152,10 @@ void				Sed::replaceOccurences(void)
 		{
 			this->_infile.read(rbuff, BUFFER_SIZE);
 			bytes_read = this->_infile.gcount();
-			if (bytes_read <= 0)
+			if (bytes_read == 0)
 			{
 				cout << RED"finished"RST << endl;
-				obuff = pbuff.substr(pbuff.length() - overlap_size) + obuff;
+				//obuff = pbuff.substr(pbuff.length() - overlap_size) + obuff;
 				break;
 			}
 			rbuff[bytes_read] = '\0';
@@ -166,20 +166,20 @@ void				Sed::replaceOccurences(void)
 			if (tbuff.length() <= overlap_size)
 			{
 				obuff = tbuff;
-				cout << "obuff(ctn)= \'" << obuff << "\'" << endl;
+			cout << "obuff(ctn)= \'" << obuff << "\'" << endl;
 				continue;
 			}
 			else
 				cout << GREEN"LEN OK!"RST << endl;
 			plen = tbuff.length() - overlap_size;
 			pbuff = tbuff.substr(0, plen);
-			cout << "pbuff= \'" << pbuff << "\'" << endl;
+			//cout << "pbuff= \'" << pbuff << "\'" << endl;
 
 			_processAndWriteBuff(pbuff);
 			obuff = tbuff.substr(plen);
 			cout << "obuff= \'" << obuff << "\'" << endl;
 		}
-		_processAndWriteBuff(obuff);
+		_processAndWriteBuff(obuff + rbuff);
 	}
 	catch (const std::ios::failure &error)
 	{
@@ -194,7 +194,6 @@ void				Sed::replaceOccurences(void)
 			cout << EOFBIT << endl;
 			throw;
 		}
-
 	}
 	if ((this->_mode & 0b0001) != 0)
 		this->_displayStats();
@@ -206,16 +205,20 @@ void					Sed::_processAndWriteBuff(std::string s)
 	unsigned long		match_pos = 0;
 	unsigned long		last_pos = 0;
 
-	cout << "processing....: \'" << s << "\'\n" << endl;
+	//cout << "processing....: \'" << s << "\'\n" << endl;
 	while (true)
 	{
 		match_pos = s.find(this->_seq_from, last_pos);
+		cout << "seq: \'" << this->_seq_from << "\'" << endl;
+		cout << "s: \'" << s.substr(last_pos) << "\'" << endl;
+		cout << match_pos << endl;
 		if (match_pos == s.npos)
 		{
 			this->_outfile << s.substr(last_pos);
 			break;
 		}
 		this->_outfile << s.substr(last_pos, match_pos - last_pos) << this->_seq_to;
+		this->_incrementStats();
 		last_pos = match_pos + seq_len;
 	}
 }
