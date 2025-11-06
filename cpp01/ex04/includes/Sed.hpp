@@ -46,7 +46,6 @@ class	Sed
 			RANK_L = 1,
 		};
 		void				_processAndWriteBuff(std::string s);
-		std::string			_strReplace(std::string str);
 		void				_incrementStats(void);
 		void				_displayStats(void);
 		int					_mode;

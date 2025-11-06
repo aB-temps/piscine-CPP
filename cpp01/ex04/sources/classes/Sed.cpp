@@ -138,11 +138,11 @@ void				Sed::_incrementStats(void)
 void				Sed::replaceOccurences(void)
 {
 	const unsigned long overlap_size = this->_seq_from.length() - 1;
-	char				rbuff[BUFFER_SIZE + 1];
-	unsigned long		bytes_read;
 	std::string 		obuff;
 	std::string 		tbuff;
 	std::string 		pbuff;
+	char				rbuff[BUFFER_SIZE + 1];
+	unsigned long		bytes_read;
 	unsigned long		plen;
 
 	this->_infile.exceptions(std::ios::badbit);
@@ -158,18 +158,19 @@ void				Sed::replaceOccurences(void)
 				break;
 			}
 			rbuff[bytes_read] = '\0';
-			cout << "rbuff= \'" << rbuff << "\'" << endl;
 			tbuff = obuff.append(rbuff);
 			cout << "tbuff= \'" << tbuff << "\'" << endl;
 			if (tbuff.length() <= overlap_size)
 			{
-				obuff = rbuff;
-				cout << "obuff= \'" << obuff << "\'\n\n" << endl;
+				obuff = tbuff;
+				cout << "obuff= \'" << obuff << "\'" << endl;
 				continue;
 			}
 			plen = tbuff.length() - overlap_size;
 			pbuff = tbuff.substr(0, plen);
+			cout << "pbuff= \'" << pbuff << "\'" << endl;
 			obuff = tbuff.substr(plen);
+
 			_processAndWriteBuff(pbuff);
 		}
 		_processAndWriteBuff(obuff);
@@ -195,13 +196,22 @@ void				Sed::replaceOccurences(void)
 
 void					Sed::_processAndWriteBuff(std::string s)
 {
+	const unsigned long seq_len = this->_seq_from.length();
+	unsigned long		match_pos = 0;
+	unsigned long		last_pos = 0;
 
-	this->_outfile << s;
-
+	(void)seq_len;
+	cout << "processing....: \'" << s << "\'\n" << endl;
+	while (true)
+	{
+		match_pos = s.find(this->_seq_from, last_pos);
+		if (match_pos == s.npos)
+		{
+			this->_outfile << s.substr(last_pos);
+			break;
+		}
+		this->_outfile << s.substr(last_pos, match_pos) << this->_seq_to;
+		last_pos = match_pos + seq_len;
+	}
 }
 
-std::string				Sed::_strReplace(std::string str)
-{
-	return (str);
-
-}
