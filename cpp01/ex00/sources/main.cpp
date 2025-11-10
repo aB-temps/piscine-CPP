@@ -25,7 +25,7 @@ int	main(void)
 	z3 = newZombie("Pillo");
 	if (!z3)
 	{
-		std::cout << "New encountered an error" << std::endl;
+		std::cout << "Allocation failed." << std::endl;
 		return (1);
 	}
 	z3->announce();

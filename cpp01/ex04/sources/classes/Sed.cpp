@@ -137,61 +137,25 @@ void				Sed::_incrementStats(void)
 
 void				Sed::replaceOccurences(void)
 {
-	const unsigned long overlap_size = this->_seq_from.length() - 1;
-	std::string 		obuff;
-	std::string 		tbuff;
-	std::string 		pbuff;
-	char				rbuff[BUFFER_SIZE + 1];
-	unsigned long		bytes_read;
-	unsigned long		plen;
+	std::stringstream ss;
 
 	this->_infile.exceptions(std::ios::badbit);
+	this->_outfile.exceptions(std::ios::badbit);
 	try
 	{
-		while (1)
-		{
-			this->_infile.read(rbuff, BUFFER_SIZE);
-			bytes_read = this->_infile.gcount();
-			if (bytes_read == 0)
-			{
-				cout << RED"finished"RST << endl;
-				//obuff = pbuff.substr(pbuff.length() - overlap_size) + obuff;
-				break;
-			}
-			rbuff[bytes_read] = '\0';
-			cout << "prev_obuff= \'" << obuff << "\'" << endl;
-			cout << "rbuff= \'" << rbuff << "\'" << endl;
-			tbuff = obuff + std::string(rbuff, bytes_read);
-			cout << "tbuff= \'" << tbuff << "\'" << endl;
-			if (tbuff.length() <= overlap_size)
-			{
-				obuff = tbuff;
-			cout << "obuff(ctn)= \'" << obuff << "\'" << endl;
-				continue;
-			}
-			else
-				cout << GREEN"LEN OK!"RST << endl;
-			plen = tbuff.length() - overlap_size;
-			pbuff = tbuff.substr(0, plen);
-			//cout << "pbuff= \'" << pbuff << "\'" << endl;
-
-			_processAndWriteBuff(pbuff);
-			obuff = tbuff.substr(plen);
-			cout << "obuff= \'" << obuff << "\'" << endl;
-		}
-		_processAndWriteBuff(obuff + rbuff);
+		ss << this->_infile.rdbuf();
+		_processAndWrite(ss.str());
 	}
 	catch (const std::ios::failure &error)
 	{
-		cout << error.what() << endl;
 		if (this->_infile.bad())
 		{
-			cout << BADBIT << endl;
+			cout << "infile: " << BADBIT << endl;
 			throw;
 		}
-		if (this->_infile.eof())
+		if (this->_outfile.bad())
 		{
-			cout << EOFBIT << endl;
+			cout << "outfile: " << BADBIT << endl;
 			throw;
 		}
 	}
@@ -199,22 +163,18 @@ void				Sed::replaceOccurences(void)
 		this->_displayStats();
 }
 
-void					Sed::_processAndWriteBuff(std::string s)
+void					Sed::_processAndWrite(std::string s)
 {
 	const unsigned long seq_len = this->_seq_from.length();
 	unsigned long		match_pos = 0;
 	unsigned long		last_pos = 0;
 
-	//cout << "processing....: \'" << s << "\'\n" << endl;
 	while (true)
 	{
 		match_pos = s.find(this->_seq_from, last_pos);
-		cout << "seq: \'" << this->_seq_from << "\'" << endl;
-		cout << "s: \'" << s.substr(last_pos) << "\'" << endl;
-		cout << match_pos << endl;
-		if (match_pos == s.npos)
+		if (match_pos == s.npos || (this->_limit > 0 && this->_occurences_count == this->_limit))
 		{
-			this->_outfile << s.substr(last_pos);
+			this->_outfile << &s[last_pos];
 			break;
 		}
 		this->_outfile << s.substr(last_pos, match_pos - last_pos) << this->_seq_to;

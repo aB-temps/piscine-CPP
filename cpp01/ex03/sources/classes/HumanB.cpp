@@ -18,9 +18,9 @@ using	std::endl;
 
 HumanB::HumanB(std::string name): _name(name), _weapon(NULL) {}
 
-void	HumanB::setWeapon(Weapon &weapon)
+void	HumanB::setWeapon(Weapon *weapon)
 {
-	this->_weapon = &weapon;
+	this->_weapon = weapon;
 }
 
 void	HumanB::attack(void) const
@@ -33,6 +33,5 @@ void	HumanB::attack(void) const
 
 	cout 	<< this->_name
 			<< " attacks with their weapon "
-			<< this->_weapon->getType() <<
-	endl;
+			<< this->_weapon->getType() << endl;
 }

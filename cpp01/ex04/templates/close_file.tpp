@@ -14,7 +14,6 @@
 #ifndef		__CLOSE_FILE_TPP__
 # define	__CLOSE_FILE_TPP__
 
-# include <iostream>
 # include <fstream>
 
 template <typename T>

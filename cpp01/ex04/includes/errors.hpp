@@ -17,11 +17,11 @@
 
 # include "text_formatting.hpp"
 
-# define BAD_ARGS 		RED"Bad arguments."RST
-# define NO_OCC			RED"No occurence has been found."RST
-# define FAIL_OPEN		RED"Infile cannot be opened."RST
-# define FAIL_CREATE	RED"Outfile cannot be created."RST
-# define BADBIT 		RED"Fatal error occured."RST
+# define BAD_ARGS 		BOLD""RED"Bad arguments."RST
+# define NO_OCC			BOLD""RED"No occurence has been found."RST
+# define FAIL_OPEN		BOLD""RED"Infile cannot be opened."RST
+# define FAIL_CREATE	BOLD""RED"Outfile cannot be created."RST
+# define BADBIT 		BOLD""RED"Fatal error occured."RST
 
 
 #endif

@@ -21,13 +21,17 @@ Zombie	*zombieHorde(int N, std::string name)
 	
 	if (N < MIN_HORDE_SIZE)
 	{
-		cout	<< RED << "Cannot build a Zombie Horde with less than " << RST BOLD
-				<< MIN_HORDE_SIZE << RST RED << " zombies." << RST << endl;
+		cout	<< RED "Cannot build a Zombie Horde with less than "RST BOLD
+				<< MIN_HORDE_SIZE << RST RED << " zombies." RST << endl;
 		return (NULL);
 	}
 
-	zh = new Zombie[N];
-		
+	try { zh = new Zombie[N]; }
+	catch (const std::bad_alloc& error)
+	{
+		cout << RED "Allocation failed." RST << endl;
+		return (NULL);
+	}
 	for (int i = 0; i < N; ++i)
 		zh[i].setName(name);
 	return (zh);

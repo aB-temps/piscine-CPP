@@ -22,6 +22,5 @@ void	HumanA::attack(void) const
 {
 	cout 	<< this->_name
 			<< " attacks with their weapon "
-			<< this->_weapon.getType() <<
-	endl;
+			<< this->_weapon.getType() << endl;
 }

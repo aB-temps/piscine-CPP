@@ -20,15 +20,15 @@ using	std::endl;
 int	main(void)
 {
 	std::string str(DEFAULT_STRING);
-	std::string	*stringPTR = &str;
+	std::string	*stringPTR(&str);
 	std::string	&stringREF(str);
 
-	cout 	<< "&str: "		<< &str << endl
-			<< "strPTR: "	<< stringPTR << endl
+	cout 	<< "&str: "		<< &str << "\n"
+			<< "strPTR: "	<< stringPTR << "\n"
 			<< "strREF: "	<< &stringREF << endl;
 
-	cout 	<< "\nstr: "	<< str << endl
-			<< "strPTR: "	<< *stringPTR << endl
+	cout 	<< "\nstr: "	<< str << "\n"
+			<< "strPTR: "	<< *stringPTR << "\n"
 			<< "strREF: "	<< stringREF << endl;
 
 	return (0);

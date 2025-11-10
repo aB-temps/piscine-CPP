@@ -13,14 +13,8 @@
 #include <iostream>
 #include "Zombie.hpp"
 
-# define BOLD	"\001\033[1m\002"
-# define RED	"\001\033[31m\002"
-# define GREEN	"\001\033[32m\002"
-# define YELLOW	"\001\033[33m\002"
-# define RST	"\001\033[0m\002"
-
-using	std::endl;
 using	std::cout;
+using	std::endl;
 
 Zombie::Zombie(void)
 {

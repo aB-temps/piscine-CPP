@@ -12,6 +12,9 @@
 
 #include "utils.hpp"
 
+using	std::cout;
+using	std::endl;
+
 int	main(int ac, char *av[])
 {
 	Zombie		*zh;
@@ -25,6 +28,11 @@ int	main(int ac, char *av[])
 	}
 	else
 	{
+		if (av[1][0] == '\0')
+		{
+			cout << RED "Zombie name cannot be empty."RST << endl;
+			return (1);
+		}
 		name = av[1];
 		zombie_quantity = 0;
 		string_to_int(zombie_quantity, av[2]);

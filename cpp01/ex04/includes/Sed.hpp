@@ -15,13 +15,9 @@
 #ifndef		__SED_HPP__
 # define	__SED_HPP__
 
-# define EOFBIT			GREEN"Reached EOF."RST
-# define BUFFER_SIZE 	2048
-
 # include <iostream>
 # include <sstream>
 # include <fstream>
-# include <filesystem>
 
 class	Sed
 {
@@ -46,7 +42,7 @@ class	Sed
 			RANK_V = 0,
 			RANK_L = 1,
 		};
-		void				_processAndWriteBuff(std::string s);
+		void				_processAndWrite(std::string s);
 		void				_incrementStats(void);
 		void				_displayStats(void);
 		int					_mode;
