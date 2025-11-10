@@ -22,7 +22,6 @@ class	Harl
 		Harl(void);
 		void			complain(std::string level) ;
 
-
 	private:
 		enum			_e_Features
 		{
