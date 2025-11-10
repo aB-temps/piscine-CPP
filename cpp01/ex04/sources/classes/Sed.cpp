@@ -61,6 +61,11 @@ bool				Sed::parseArguments(int ac, char *av[])
 		}
 	}
 	setSeq(av[2], FROM);
+	if (getSeq(FROM).empty())
+	{
+		cout << BAD_ARGS << endl;
+		return (false);
+	}
 	setSeq(av[3], TO);
 	return (true);
 }
@@ -167,7 +172,7 @@ void					Sed::_processAndWrite(std::string s)
 {
 	const unsigned long seq_len = this->_seq_from.length();
 	unsigned long		match_pos = 0;
-	unsigned long		last_pos = 0;
+
 
 	while (true)
 	{
