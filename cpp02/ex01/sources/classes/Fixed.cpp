@@ -35,7 +35,7 @@ Fixed::Fixed(const int v): _value(v << Fixed::_fract)
 	cout << "Int constructor called." << endl;
 }
 
-Fixed::Fixed(const float v): _value(v * (1 << Fixed::_fract))
+Fixed::Fixed(const float v): _value(roundf(v * (1 << Fixed::_fract)))
 {
 	cout << "Float constructor called." << endl;
 }
