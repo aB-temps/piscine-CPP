@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cmath>
 #include "Fixed.hpp"
 
 using	std::cout;
@@ -18,19 +19,25 @@ using	std::endl;
 
 const int Fixed::_fract = 8;
 
+std::ostream	&operator<<(std::ostream &outstream, const Fixed &insert)
+{
+	outstream << insert.toFloat();
+	return (outstream);
+}
+
 Fixed::Fixed(void): _value(0)
 {
 	cout << "Default constructor called." << endl;
 }
 
-Fixed::Fixed(const int v): _value(v)
+Fixed::Fixed(const int v): _value(v << Fixed::_fract)
 {
-	cout << "Value constructor called." << endl;
+	cout << "Int constructor called." << endl;
 }
 
-Fixed::Fixed(const float v): _value(v)
+Fixed::Fixed(const float v): _value(v * (1 << Fixed::_fract))
 {
-	cout << "Value constructor called." << endl;
+	cout << "Float constructor called." << endl;
 }
 
 Fixed::Fixed(const Fixed &copy)
@@ -54,29 +61,24 @@ Fixed	&Fixed::operator=(const Fixed &assign)
 	return (*this);
 }
 
-float	Fixed::operator<<(const Fixed &insert)
-{
-
-}
-
-int		Fixed::getRawBits(void) const
+int				Fixed::getRawBits(void) const
 {
 	cout << "getRawBits member function called." << endl;
 	return (this->_value);
 }
 
-void	Fixed::setRawBits(int const raw)
+void			Fixed::setRawBits(int const raw)
 {
 	cout << "setRawBits member function called." << endl;
 	this->_value = raw;
 }
 
-float	Fixed::toFloat(void) const
+float			Fixed::toFloat(void) const
 {
-
+	return (static_cast<float>(this->_value) / static_cast<float>(1 << Fixed::_fract));
 }
 
-int		Fixed::toInt(void) const
+int				Fixed::toInt(void) const
 {
-
+	return (this->_value >> Fixed::_fract);
 }

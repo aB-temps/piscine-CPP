@@ -16,17 +16,24 @@
 using	std::cout;
 using	std::endl;
 
-int main(void)
+int main( void )
 {
 	Fixed a;
-	Fixed b(a);
-	Fixed c;
+	Fixed const b( 10 );
+	Fixed const c( 42.42f );
+	Fixed const d( b );
 
-	c = b;
+	a = Fixed( 1234.4321f );
 
-	cout << a.getRawBits() << endl;
-	cout << b.getRawBits() << endl;
-	cout << c.getRawBits() << endl;
+	cout << "a is " << a << "\n"
+ 		 << "b is " << b << "\n"
+ 		 << "c is " << c << "\n"
+		 << "d is " << d << endl;
+
+	cout << "a is " << a.toInt() << " as integer" << "\n"
+	 	 << "b is " << b.toInt() << " as integer" << "\n"
+	 	 << "c is " << c.toInt() << " as integer" << "\n"
+	 	 << "d is " << d.toInt() << " as integer" << endl;
 
 	return (0);
 }

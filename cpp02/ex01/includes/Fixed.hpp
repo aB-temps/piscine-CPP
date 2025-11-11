@@ -13,6 +13,8 @@
 #ifndef		__FIXED_HPP__
 # define	__FIXED_HPP__
 
+#include <iostream>
+
 class		Fixed
 {
 	public:
@@ -22,18 +24,19 @@ class		Fixed
 		Fixed(const	Fixed &copy);
 		~Fixed(void);
 
-		Fixed	&operator=(const Fixed &assign);
-		float	operator<<(const Fixed &insert);
+		Fixed			&operator=(const Fixed &assign);
                 			
-		int		getRawBits(void) const;
-		void	setRawBits(int const raw);
-		float	toFloat(void) const;
-		int		toInt(void) const;
+		int				getRawBits(void) const;
+		void			setRawBits(int const raw);
+		float			toFloat(void) const;
+		int				toInt(void) const;
 
 	private:
 		int					_value;
 		static const int	_fract;
 
 };
+
+std::ostream	&operator<<(std::ostream &outstream, const Fixed &insert);
 
 #endif
