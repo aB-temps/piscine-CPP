@@ -22,43 +22,27 @@ const int Fixed::_fract = 8;
 std::ostream	&operator<<(std::ostream &outstream, const Fixed &insert)
 {
 	outstream << insert.toFloat();
+
 	return (outstream);
 }
 
 // Constructors/Destructors ===========================================================
-Fixed::Fixed(void): _value(0)
-{
-	cout << "Default constructor called." << endl;
-}
+Fixed::Fixed(void): _value(0) {}
 
-Fixed::Fixed(const int v): _value(v << Fixed::_fract)
-{
-	cout << "Int constructor called." << endl;
-}
+Fixed::Fixed(const int v): _value(v << Fixed::_fract) {}
 
-Fixed::Fixed(const float v): _value(roundf(v * (1 << Fixed::_fract)))
-{
-	cout << "Float constructor called." << endl;
-}
+Fixed::Fixed(const float v): _value(roundf(v * (1 << Fixed::_fract))) {}
 
-Fixed::Fixed(const Fixed &copy)
-{
-	cout << "Copy constructor called." << endl;
-	*this = copy;
-}
+Fixed::Fixed(const Fixed &copy): _value(copy._value) {}
 
-Fixed::~Fixed(void)
-{
-	cout << "Destructor called." << endl;
-}
+Fixed::~Fixed(void) {}
 
 // Operators ==========================================================================
 Fixed	&Fixed::operator=(const Fixed &assign)
 {
-	cout << "Copy assignment operator called." << endl;
 	if (this != &assign)
 	{
-		this->_value = assign.getRawBits();
+		this->_value = assign._value;
 	}
 	return (*this);
 }
@@ -67,120 +51,161 @@ Fixed	&Fixed::operator=(const Fixed &assign)
 
 Fixed	&Fixed::operator++(void)
 {
-	cout << "Pre-increment operator called." << endl;
-	++this->_value;
+	++this->_value; //= (1 << Fixed::_fract);
+
 	return(*this);
 }
 
-Fixed	Fixed::operator++(char)
+Fixed	Fixed::operator++(int)
 {
 	Fixed x(*this);
 
-	cout << "Post-increment operator called." << endl;
+	this->operator++();
 
-	++this->_value;
 	return (x);
 }
 
 Fixed	Fixed::operator+(const Fixed &other)
 {
-	cout << "Add operator called." << endl;
+	Fixed res;
+
+	res._value = this->_value + other._value;
+
+	return(res);
 }
 
 Fixed	Fixed::operator+=(const Fixed &other)
 {
-	cout << "Add-to operator called." << endl;
+	this->_value += other._value;
+
+	return(*this);
 }
 
 Fixed	&Fixed::operator--(void)
 {
-	cout << "Pre-decrement operator called." << endl;
-	--this->_value;
+	--this->_value;// -= (1 << Fixed::_fract);
+
 	return(*this);
 }
 
-Fixed	Fixed::operator--(char)
+Fixed	Fixed::operator--(int)
 {
 	Fixed x(*this);
-	cout << "Post-decrement operator called." << endl;
 
-	--this->_value;
+	this->operator--();
+
 	return (x);
 }
 
 Fixed	Fixed::operator-(const Fixed &other)
 {
-	cout << "Sub operator called." << endl;
+	Fixed res;
+
+	res._value = this->_value - other._value;
+
+	return(res);
 }
 
 Fixed	Fixed::operator-=(const Fixed &other)
 {
-	cout << "Sub-to operator called." << endl;
+	this->_value -= other._value;
+
+	return(*this);
 }
 
 // Arithmetic operators ===============================================================
 Fixed	Fixed::operator*(const Fixed &other)
 {
-	cout << "Product operator called." << endl;
+	Fixed res;
+
+	res._value = this->_value * other._value >> Fixed::_fract;
+
+	return (res);
 }
 
 Fixed	Fixed::operator*=(const Fixed &other)
 {
-	cout << "Product-to operator called." << endl;
-}
+	*this = *this * other;
 
+	return(*this);
+}
 
 Fixed	Fixed::operator/(const Fixed &other)
 {
-	cout << "Divide operator called." << endl;
+	Fixed res;
+
+	res._value = this->_value / other._value << Fixed::_fract;
+
+	return(res);
 }
 
 Fixed	Fixed::operator/=(const Fixed &other)
 {
-	cout << "Divide-to operator called." << endl;
+	*this = *this / other;
+
+	return(*this);
 }
 
 // Comparaison operators ==============================================================
-bool	&Fixed::operator>(const Fixed &other)
+bool	Fixed::operator>(const Fixed &other)
 {
-	cout << "Superior operator called." << endl;
+	return (this->_value > other._value);
 }
 
-bool	&Fixed::operator<(const Fixed &other)
+bool	Fixed::operator<(const Fixed &other)
 {
-	cout << "Inferior operator called." << endl;
+	return (this->_value < other._value);
 }
 
-bool	&Fixed::operator>=(const Fixed &other)
+bool	Fixed::operator>=(const Fixed &other)
 {
-	cout << "Superior or equal operator called." << endl;
+	return (this->_value >= other._value);
 }
 
-bool	&Fixed::operator<=(const Fixed &other)
+bool	Fixed::operator<=(const Fixed &other)
 {
-	cout << "Inferior or equal operator called." << endl;
+	return (this->_value <= other._value);
 }
 
-bool	&Fixed::operator==(const Fixed &other)
+bool	Fixed::operator==(const Fixed &other)
 {
-	cout << "Equal operator called." << endl;
+	return (this->_value == other._value);
 }
 
-bool	&Fixed::operator!=(const Fixed &other)
+bool	Fixed::operator!=(const Fixed &other)
 {
-	cout << "Different operator called." << endl;
+	return (this->_value != other._value);
 }
 
 // Member functions ===================================================================
+Fixed			&Fixed::min(const Fixed &f1, const Fixed &f2)
+{
+	return (f1.getRawBits() <= f2.getRawBits() ? const_cast<Fixed&>(f1) : const_cast<Fixed&>(f2));
+}
+
+Fixed			&Fixed::min(Fixed &f1, Fixed &f2)
+{
+	return (f1.getRawBits() <= f2.getRawBits() ? f1 : f2);
+}
+
+Fixed			&Fixed::max(const Fixed &f1, const Fixed &f2)
+{
+	return (f1.getRawBits() >= f2.getRawBits() ? const_cast<Fixed&>(f1) : const_cast<Fixed&>(f2));
+}
+
+Fixed			&Fixed::max(Fixed &f1, Fixed &f2)
+{
+	return (f1.getRawBits() >= f2.getRawBits() ? f1 : f2);
+}
+
+
 int				Fixed::getRawBits(void) const
 {
-	cout << "getRawBits member function called." << endl;
 	return (this->_value);
 }
 
 void			Fixed::setRawBits(int const raw)
 {
-	cout << "setRawBits member function called." << endl;
 	this->_value = raw;
 }
 

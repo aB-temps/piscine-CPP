@@ -20,7 +20,7 @@ int main( void )
 {
 	Fixed a;
 	Fixed const b( 10 );
-	Fixed const c( 42.42f );
+	Fixed const c( 42.51f );
 	Fixed const d( b );
 
 	a = Fixed( 1234.4321f );
@@ -33,6 +33,7 @@ int main( void )
 	cout << "a is " << a.toInt() << " as integer" << "\n"
 	 	 << "b is " << b.toInt() << " as integer" << "\n"
 	 	 << "c is " << c.toInt() << " as integer" << "\n"
+	 	 << "c is " << c.toFloat() << " as float" << "\n"
 	 	 << "d is " << d.toInt() << " as integer" << endl;
 
 	return (0);
