@@ -41,7 +41,8 @@ bool			bsp(Point const a, Point const b, Point const c, Point const point)
 	Fixed xproductBC = cross_product(b,c,point);
 	Fixed xproductCA = cross_product(c,a,point);
 
-	if ((xproductAB > 0 && xproductBC > 0 && xproductCA > 0) || (xproductAB < 0 && xproductBC < 0 && xproductCA < 0))
+	if ((xproductAB > 0 && xproductBC > 0 && xproductCA > 0)
+			|| (xproductAB < 0 && xproductBC < 0 && xproductCA < 0))
 		return (true);
 	else
 		return (false);

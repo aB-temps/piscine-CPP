@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "Fixed.hpp"
+#include 	<iostream>
+#include 	"Fixed.hpp"
 
-using	std::cout;
-using	std::endl;
+using		std::cout;
+using		std::endl;
 
 const int Fixed::_fract = 8;
 
