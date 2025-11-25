@@ -20,6 +20,9 @@
 # define	DEFAULT_EP		10
 # define	DEFAULT_DAMAGE	0
 
+# define	ATTACK_COST		1
+# define	REPAIR_COST		1
+
 class		ClapTrap
 {
 

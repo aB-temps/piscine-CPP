@@ -51,7 +51,12 @@ int main( void )
 	cout << "a * b: " << a * b << endl;
 	cout << "a / b: " << a / b << endl;
 	cout << "a: " << a << " b: " << b <<endl << endl;
-	//
+
+	cout << "c: " << c << " d: " << d <<endl;
+	cout << "c * d: " << c * d << endl;
+	cout << "c / d: " << c / d << endl;
+	cout << "c: " << c << " d: " << d <<endl << endl;
+	
 	// cout << "a: " << a << " b: " << b <<endl;
 	// a *= b;
 	// cout << "a *= b: " << a << endl << endl;

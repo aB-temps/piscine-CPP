@@ -10,7 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int ac, char *av[])
+#include "ClapTrap.hpp"
+
+int main(void)
 {
+	ClapTrap c1;
+	ClapTrap c2("Fred");
+	ClapTrap c3(c2);
+
+
+	c1.takeDamage(9);
+	c1.beRepaired(9);
+
+	c2.takeDamage(10);
+	c2.takeDamage(10);
+	c2.beRepaired(10);
+	c2.attack("John");
+	c1.takeDamage(10);
+
 	return (0);
 }
