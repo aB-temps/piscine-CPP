@@ -18,8 +18,8 @@ using		std::endl;
 
 int main( void )
 {
-	// Fixed a(5.5f);
-	// Fixed b(10.5f);
+	Fixed a(5.5f);
+	Fixed b(10.5f);
 	// Fixed c(4.2f);
 	// Fixed d(2.1f);
 	// const Fixed e(4.2f);
@@ -47,10 +47,10 @@ int main( void )
 	// a -= b;
 	// cout << "a -= b: " << a << endl << endl;
 	//
-	// cout << "a: " << a << " b: " << b <<endl;
-	// cout << "a * b: " << a * b << endl;
-	// cout << "a / b: " << a / b << endl;
-	// cout << "a: " << a << " b: " << b <<endl << endl;
+	cout << "a: " << a << " b: " << b <<endl;
+	cout << "a * b: " << a * b << endl;
+	cout << "a / b: " << a / b << endl;
+	cout << "a: " << a << " b: " << b <<endl << endl;
 	//
 	// cout << "a: " << a << " b: " << b <<endl;
 	// a *= b;
@@ -75,18 +75,18 @@ int main( void )
 	// cout << "e: " << e << " f: " << f <<endl;
 	// cout << "const min(e,f): " << Fixed::min(e, f) << endl;
 	// cout << "const max(e,f): " << Fixed::max(e, f) << endl;
-
-	Fixed a;
-	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-
-	std::cout << Fixed::max( a, b ) << std::endl;
+	//
+	// Fixed a;
+	// Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	//
+	// std::cout << a << std::endl;
+	// std::cout << ++a << std::endl;
+	// std::cout << a << std::endl;
+	// std::cout << a++ << std::endl;
+	// std::cout << a << std::endl;
+	// std::cout << b << std::endl;
+	//
+	// std::cout << Fixed::max( a, b ) << std::endl;
 
 	return (0);
 }

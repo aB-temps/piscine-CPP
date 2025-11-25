@@ -51,7 +51,7 @@ Fixed	&Fixed::operator=(const Fixed &assign)
 
 Fixed	&Fixed::operator++(void)
 {
-	++this->_value; //= (1 << Fixed::_fract);
+	++this->_value;
 
 	return(*this);
 }
@@ -83,7 +83,7 @@ Fixed	Fixed::operator+=(const Fixed &other)
 
 Fixed	&Fixed::operator--(void)
 {
-	--this->_value;// -= (1 << Fixed::_fract);
+	--this->_value;
 
 	return(*this);
 }
@@ -118,7 +118,7 @@ Fixed	Fixed::operator*(const Fixed &other)
 {
 	Fixed res;
 
-	res._value = this->_value * other._value >> Fixed::_fract;
+	// res._value = this->_value * other._value; // SHIT
 
 	return (res);
 }
@@ -134,7 +134,7 @@ Fixed	Fixed::operator/(const Fixed &other)
 {
 	Fixed res;
 
-	res._value = this->_value / other._value << Fixed::_fract;
+	// res._value = this->_value / other._value; // SHIT
 
 	return(res);
 }
