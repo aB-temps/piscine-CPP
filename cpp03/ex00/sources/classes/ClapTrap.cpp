@@ -43,7 +43,10 @@ ClapTrap::ClapTrap(const ClapTrap &copy):
 	cout << "ClapTrap " << this->_name << " is born !(copy)" << endl;
 }
 
-ClapTrap::~ClapTrap(void) {}
+ClapTrap::~ClapTrap(void)
+{
+	cout << "ClapTrap " << this->_name << " has been destructed !" << endl;
+}
 
 // Operator overloads ===================================================================
 ClapTrap	&ClapTrap::operator=(const ClapTrap &assign)
