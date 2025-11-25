@@ -20,8 +20,8 @@ int main( void )
 {
 	Fixed a(5.5f);
 	Fixed b(10.5f);
-	// Fixed c(4.2f);
-	// Fixed d(2.1f);
+	Fixed c(4.2f);
+	Fixed d(2.1f);
 	// const Fixed e(4.2f);
 	// const Fixed f(2.1f);
 	//

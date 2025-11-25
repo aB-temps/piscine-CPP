@@ -118,7 +118,7 @@ Fixed	Fixed::operator*(const Fixed &other)
 {
 	Fixed res;
 
-	// res._value = this->_value * other._value; // SHIT
+	res._value = (this->_value * other._value) >> Fixed::_fract;
 
 	return (res);
 }
@@ -132,11 +132,7 @@ Fixed	Fixed::operator*=(const Fixed &other)
 
 Fixed	Fixed::operator/(const Fixed &other)
 {
-	Fixed res;
-
-	// res._value = this->_value / other._value; // SHIT
-
-	return(res);
+	return(Fixed((static_cast<float>(this->_value) / static_cast<float>(other._value))));
 }
 
 Fixed	Fixed::operator/=(const Fixed &other)
