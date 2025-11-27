@@ -10,23 +10,58 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include	"ClapTrap.hpp"
+
+using		std::cout;
+using		std::endl;
 
 int main(void)
 {
+	cout << "> Constructors" << endl;
 	ClapTrap c1;
 	ClapTrap c2("Fred");
 	ClapTrap c3(c2);
+	ClapTrap c4;
 
+	c4 = c1;
+	cout << endl;
 
-	c1.takeDamage(9);
-	c1.beRepaired(9);
+	cout << "> Stats display" << endl;
+	c1.displayStats();
+	cout << endl;
+	c2.displayStats();
+	cout << endl;
+	c3.displayStats();
+	cout << endl;
 
-	c2.takeDamage(10);
-	c2.takeDamage(10);
-	c2.beRepaired(10);
-	c2.attack("John");
-	c1.takeDamage(10);
+	c1.attack("Dark Vador");
+	c1.takeDamage(5);
+	c1.beRepaired(3);
+	c1.displayStats();
+	c1.beRepaired(11);
+	c1.displayStats();
+	cout << endl;
 
+	c1.takeDamage(8);
+	c1.displayStats();
+	c1.attack("Dark Vador");
+	cout << endl;
+
+	c2.displayStats();
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.attack("David Guetta");
+	c2.displayStats();
+	c2.attack("David Guetta");
+	cout << endl;
+
+	cout << "> Destructors" << endl;
 	return (0);
 }
