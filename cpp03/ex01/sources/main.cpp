@@ -32,16 +32,18 @@ int main(void)
 	cout << endl;
 	s3.displayStats();
 	cout << endl;
+	s4.displayStats();
+	cout << endl;
 
 	s1.attack("Dark Vador");
-	s1.takeDamage(5);
-	s1.beRepaired(3);
+	s1.takeDamage(50);
+	s1.beRepaired(30);
 	s1.displayStats();
-	s1.beRepaired(11);
+	s1.beRepaired(110);
 	s1.displayStats();
 	cout << endl;
 
-	s1.takeDamage(8);
+	s1.takeDamage(80);
 	s1.displayStats();
 	s1.attack("Dark Vador");
 	cout << endl;
@@ -63,6 +65,7 @@ int main(void)
 
 	s3.guardGate();
 	s3.guardGate();
+	cout << endl;
 
 	cout << "> Destructors" << endl;
 	return (0);

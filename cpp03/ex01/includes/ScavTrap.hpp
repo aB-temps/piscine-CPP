@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:50:29 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/27 15:33:21 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:03:53 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ class ScavTrap : public ClapTrap
 
 	private:
 		bool			_gateKeeperMode;
-		std::string		_name;
-		unsigned int	_hitPoints;
-		unsigned int	_energyPoints;
-		unsigned int	_attackDamages;
 
 };
 

@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:51:43 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/27 15:40:09 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:35:55 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,23 @@ using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-ScavTrap::ScavTrap(void):
-	_gateKeeperMode(false),
-	_name(ST_DEF_NAME),
-	_hitPoints(ST_DEF_HP),
-	_energyPoints(ST_DEF_EP),
-	_attackDamages(ST_DEF_DAMAGE)
+ScavTrap::ScavTrap(void): ClapTrap(), _gateKeeperMode(false)
 {
+	this->_hitPoints = ST_DEF_HP;
+	this->_energyPoints = ST_DEF_EP;
+	this->_attackDamages = ST_DEF_DAMAGE;
 	cout << "Anonymous ScavTrap is born!" << endl;
 }
 
-ScavTrap::ScavTrap(std::string name):
-	_gateKeeperMode(false),
-	_name(name),
-	_hitPoints(ST_DEF_HP),
-	_energyPoints(ST_DEF_EP),
-	_attackDamages(ST_DEF_DAMAGE)
+ScavTrap::ScavTrap(std::string name): ClapTrap(name), _gateKeeperMode(false)
 {
+	this->_hitPoints = ST_DEF_HP;
+	this->_energyPoints = ST_DEF_EP;
+	this->_attackDamages = ST_DEF_DAMAGE;
 	cout << "ScavTrap " << this->_name << " is born!" << endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &copy):
-	_gateKeeperMode(copy._gateKeeperMode),
-	_name(copy._name),
-	_hitPoints(copy._hitPoints),
-	_energyPoints(copy._energyPoints),
-	_attackDamages(copy._attackDamages)
+ScavTrap::ScavTrap(const ScavTrap &copy): ClapTrap(copy), _gateKeeperMode(copy._gateKeeperMode)
 {
 	cout << "ScavTrap " << this->_name << " is born!(copy)" << endl;
 }
@@ -56,11 +47,8 @@ ScavTrap	&ScavTrap::operator=(const ScavTrap &assign)
 {
 	if (this != &assign)
 	{
+		ClapTrap::operator=(assign);
 		this->_gateKeeperMode = assign._gateKeeperMode;
-		this->_name = assign._name;
-		this->_hitPoints = assign._hitPoints;
-		this->_energyPoints = assign._energyPoints;
-		this->_attackDamages = assign._attackDamages;
 	}
 	cout << "ScavTrap " << this->_name << " has been assigned!" << endl;
 	return (*this);
