@@ -1,130 +1,143 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.cpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 14:42:49 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/25 15:19:46 by abetemps         ###   ########.fr       */
+/*   Created: 2025/11/27 14:51:43 by abetemps          #+#    #+#             */
+/*   Updated: 2025/11/27 15:40:09 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"ClapTrap.hpp"
+#include	"ScavTrap.hpp"
 
 using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-ClapTrap::ClapTrap(void):
-	_name(DEFAULT_NAME),
-	_hitPoints(DEFAULT_HP),
-	_energyPoints(DEFAULT_EP),
-	_attackDamages(DEFAULT_DAMAGE)
+ScavTrap::ScavTrap(void):
+	_gateKeeperMode(false),
+	_name(ST_DEF_NAME),
+	_hitPoints(ST_DEF_HP),
+	_energyPoints(ST_DEF_EP),
+	_attackDamages(ST_DEF_DAMAGE)
 {
-	cout << "Anonymous ClapTrap is born!" << endl;
+	cout << "Anonymous ScavTrap is born!" << endl;
 }
 
-ClapTrap::ClapTrap(std::string name):
+ScavTrap::ScavTrap(std::string name):
+	_gateKeeperMode(false),
 	_name(name),
-	_hitPoints(DEFAULT_HP),
-	_energyPoints(DEFAULT_EP),
-	_attackDamages(DEFAULT_DAMAGE)
+	_hitPoints(ST_DEF_HP),
+	_energyPoints(ST_DEF_EP),
+	_attackDamages(ST_DEF_DAMAGE)
 {
-	cout << "ClapTrap " << this->_name << " is born!" << endl;
+	cout << "ScavTrap " << this->_name << " is born!" << endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &copy):
+ScavTrap::ScavTrap(const ScavTrap &copy):
+	_gateKeeperMode(copy._gateKeeperMode),
 	_name(copy._name),
 	_hitPoints(copy._hitPoints),
 	_energyPoints(copy._energyPoints),
 	_attackDamages(copy._attackDamages)
 {
-	cout << "ClapTrap " << this->_name << " is born!(copy)" << endl;
+	cout << "ScavTrap " << this->_name << " is born!(copy)" << endl;
 }
 
-ClapTrap::~ClapTrap(void)
+ScavTrap::~ScavTrap(void)
 {
-	cout << "ClapTrap " << this->_name << " has been destructed!" << endl;
+	cout << "ScavTrap " << this->_name << " has been destructed!" << endl;
 }
 
 // Operator overloads ===================================================================
-ClapTrap	&ClapTrap::operator=(const ClapTrap &assign)
+ScavTrap	&ScavTrap::operator=(const ScavTrap &assign)
 {
 	if (this != &assign)
 	{
+		this->_gateKeeperMode = assign._gateKeeperMode;
 		this->_name = assign._name;
 		this->_hitPoints = assign._hitPoints;
 		this->_energyPoints = assign._energyPoints;
 		this->_attackDamages = assign._attackDamages;
 	}
-	cout << "ClapTrap " << this->_name << " has been assigned!" << endl;
+	cout << "ScavTrap " << this->_name << " has been assigned!" << endl;
 	return (*this);
 }
 
 // Member functions =====================================================================
-void		ClapTrap::attack(const std::string &target)
+void		ScavTrap::attack(const std::string &target)
 {
 	if (this->_hitPoints == 0)
 	{
-		cout << "ClapTrap " << this->_name << " is dead, it cannot attack." << endl;
+		cout << "ScavTrap " << this->_name << " is dead, it cannot attack." << endl;
 		return;
 	}
 	if (this->_energyPoints < ATTACK_COST)
 	{
-		cout	<< "Unfortunately, ClapTrap " << this->_name
+		cout	<< "Unfortunately, ScavTrap " << this->_name
 				<< " has not enough energy points to attack "
 				<< target << "(" << this->_energyPoints << " energy points remaining)." << endl;
 		return;
 	}
 	this->_energyPoints -= ATTACK_COST;
-	cout 	<< "ClapTrap " << this->_name << " attacks "
+	cout 	<< "ScavTrap " << this->_name << " attacks "
 			<< target << ", causing " << this->_attackDamages
 			<< " points of damage!" << endl;
 }
 
-void		ClapTrap::takeDamage(unsigned int amount)
+void		ScavTrap::takeDamage(unsigned int amount)
 {
 	if (this->_hitPoints == 0)
 	{
-		cout << "ClapTrap " << this->_name << " is already dead, there is no need to attack a dead body." << endl;
+		cout << "ScavTrap " << this->_name << " is already dead, there is no need to attack a dead body." << endl;
 		return;
 	}
 	this->_hitPoints = (this->_hitPoints >= amount ? this->_hitPoints - amount : 0);
-	cout << "ClapTrap " << this->_name << " has been attacked(-" << amount << " hit points).";
+	cout << "ScavTrap " << this->_name << " has been attacked(-" << amount << " hit points).";
 	if (this->_hitPoints == 0)
 		cout << " Causing its death.";
 	cout << endl;
 }
 
-void		ClapTrap::beRepaired(unsigned int amount)
+void		ScavTrap::beRepaired(unsigned int amount)
 {
 	if (this->_hitPoints == 0)
 	{
-		cout << "ClapTrap " << this->_name << " is dead, it cannot repair itself." << endl;
+		cout << "ScavTrap " << this->_name << " is dead, it cannot repair itself." << endl;
 		return;
 	}
 	if (this->_energyPoints < REPAIR_COST * amount)
 	{
-		cout	<< "Unfortunately, ClapTrap " << this->_name
+		cout	<< "Unfortunately, ScavTrap " << this->_name
 				<< " has not enough energy points to restaure "
 				<< amount << " hit points(" << this->_energyPoints << " energy points remaining)." << endl;
 		return;
 	}
 	this->_hitPoints += amount;
 	this->_energyPoints -= amount * REPAIR_COST;
-	cout	<< "ClapTrap " << this->_name
+	cout	<< "ScavTrap " << this->_name
 			<< " repaired itself(+" << amount << " hit points)." << endl;
 	if (this->_energyPoints == 0)
-		cout << "Warning: ClapTrap " << this->_name << " has no more energy points left." << endl;
+		cout << "Warning: ScavTrap " << this->_name << " has no more energy points left." << endl;
 	
 }
 
-void	ClapTrap::displayStats(void)
+void	ScavTrap::displayStats(void)
 {
-	cout	<< "[STATS] ClapTrap \"" << this->_name << "\":\n"
+	cout	<< "[STATS] ScavTrap \"" << this->_name << "\":\n"
+			<< "gateKeeperMode: " << (this->_gateKeeperMode ? "true" : "false") << "\n"
 			<< "hitPoints: " << this->_hitPoints << "\n"
 			<< "energyPoints: " << this->_energyPoints << "\n"
 			<< "attackDamages: " << this->_attackDamages << endl;
 
+}
+
+void	ScavTrap::guardGate(void)
+{
+	cout	<< "ScavTrap " << this->_name
+		<< (this->_gateKeeperMode ? " has already activated " : " activated ")
+		<< "gate keeper mode!" << endl;
+	this->_gateKeeperMode = true;
 }
