@@ -1,50 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 14:43:25 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/25 14:43:58 by abetemps         ###   ########.fr       */
+/*   Created: 2025/11/27 14:50:29 by abetemps          #+#    #+#             */
+/*   Updated: 2025/11/27 16:50:52 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__CLAPTRAP_HPP__
-# define	__CLAPTRAP_HPP__
+#ifndef		__FRAGTRAP_HPP__
+# define	__FRAGTRAP_HPP__
 
-# include	<iostream>
+# include "ClapTrap.hpp"
 
-# define	DEFAULT_NAME	"Anonymous" 
-# define	DEFAULT_HP		10 
-# define	DEFAULT_EP		10
-# define	DEFAULT_DAMAGE	0
+# define	FT_DEF_NAME	"Anonymous" 
+# define	FT_DEF_HP		100 
+# define	FT_DEF_EP		100
+# define	FT_DEF_DAMAGE	30
 
-# define	ATTACK_COST		1
-# define	REPAIR_COST		1
-
-class		ClapTrap
+class FragTrap : virtual public ClapTrap
 {
-
 	public:
-		ClapTrap(void);
-		ClapTrap(std::string name);
-		ClapTrap(const ClapTrap &copy);
-		~ClapTrap(void);
+		FragTrap(void);
+		FragTrap(std::string name);
+		FragTrap(const FragTrap &copy);
+		~FragTrap(void);
     	
-		ClapTrap		&operator=(const ClapTrap &assign);
+		FragTrap		&operator=(const FragTrap &assign);
                     	
 		void			attack(const std::string &target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
-		void			displayStats(void);
-
-	protected:
-		std::string		_name;
-		unsigned int	_hitPoints;
-		unsigned int	_energyPoints;
-		unsigned int	_attackDamages;
-
+		void			highFivesGuys(void);
 };
 
 #endif

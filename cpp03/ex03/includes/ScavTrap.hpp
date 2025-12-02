@@ -1,49 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 14:43:25 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/25 14:43:58 by abetemps         ###   ########.fr       */
+/*   Created: 2025/11/27 14:50:29 by abetemps          #+#    #+#             */
+/*   Updated: 2025/11/27 16:03:53 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__CLAPTRAP_HPP__
-# define	__CLAPTRAP_HPP__
+#ifndef		__SCAVTRAP_HPP__
+# define	__SCAVTRAP_HPP__
 
-# include	<iostream>
+# include "ClapTrap.hpp"
 
-# define	DEFAULT_NAME	"Anonymous" 
-# define	DEFAULT_HP		10 
-# define	DEFAULT_EP		10
-# define	DEFAULT_DAMAGE	0
+# define	ST_DEF_NAME	"Anonymous" 
+# define	ST_DEF_HP		100 
+# define	ST_DEF_EP		50
+# define	ST_DEF_DAMAGE	20
 
-# define	ATTACK_COST		1
-# define	REPAIR_COST		1
-
-class		ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
-
 	public:
-		ClapTrap(void);
-		ClapTrap(std::string name);
-		ClapTrap(const ClapTrap &copy);
-		~ClapTrap(void);
+		ScavTrap(void);
+		ScavTrap(std::string name);
+		ScavTrap(const ScavTrap &copy);
+		~ScavTrap(void);
     	
-		ClapTrap		&operator=(const ClapTrap &assign);
+		ScavTrap		&operator=(const ScavTrap &assign);
                     	
-		void			attack(const std::string &target);
+		virtual void	attack(const std::string &target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
+		void			guardGate(void);
 		void			displayStats(void);
 
-	protected:
-		std::string		_name;
-		unsigned int	_hitPoints;
-		unsigned int	_energyPoints;
-		unsigned int	_attackDamages;
+	private:
+		bool			_gateKeeperMode;
 
 };
 

@@ -16,7 +16,6 @@ NAME = claptrap
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
 DIR_INC 	:= includes/
-DIR_TEMP 	:= templates/
 DIR_BUILD	:= .build/
 
 # FLAGS & COMPILATOR SETTINGS =========================================================
@@ -24,7 +23,7 @@ CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra
 CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
-INC_FLAGS 	:= -I$(DIR_INC) -I$(DIR_TEMP)
+INC_FLAGS 	:= -I$(DIR_INC)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
 

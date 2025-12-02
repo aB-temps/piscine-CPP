@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # GENERAL SETTINGS ====================================================================
-NAME = scavtrap
+NAME = diamondtrap
 
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
@@ -22,7 +22,7 @@ DIR_BUILD	:= .build/
 CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra
-CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
+CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98 -Wshadow
 INC_FLAGS 	:= -I$(DIR_INC)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
@@ -54,6 +54,8 @@ F_MAIN		:=	main.cpp
 
 F_CLASSES	:=	ClapTrap.cpp		\
 				ScavTrap.cpp		\
+				FragTrap.cpp		\
+				DiamondTrap.cpp		\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
