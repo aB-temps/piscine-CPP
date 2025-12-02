@@ -20,13 +20,13 @@
 # define	FT_DEF_EP		100
 # define	FT_DEF_DAMAGE	30
 
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
 	public:
 		FragTrap(void);
 		FragTrap(std::string name);
 		FragTrap(const FragTrap &copy);
-		~FragTrap(void);
+		virtual ~FragTrap(void);
     	
 		FragTrap		&operator=(const FragTrap &assign);
                     	

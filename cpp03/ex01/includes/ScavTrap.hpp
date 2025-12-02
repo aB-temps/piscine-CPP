@@ -20,19 +20,20 @@
 # define	ST_DEF_EP		50
 # define	ST_DEF_DAMAGE	20
 
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
 	public:
 		ScavTrap(void);
 		ScavTrap(std::string name);
 		ScavTrap(const ScavTrap &copy);
-		~ScavTrap(void);
+		virtual ~ScavTrap(void);
     	
 		ScavTrap		&operator=(const ScavTrap &assign);
                     	
-		void			attack(const std::string &target);
+		virtual void	attack(const std::string &target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
+
 		void			guardGate(void);
 		void			displayStats(void);
 

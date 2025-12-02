@@ -18,32 +18,37 @@ using		std::endl;
 int main(void)
 {
 	cout << "> Constructors" << endl;
-	ScavTrap s1;
-	FragTrap f2("Johnny");
-	DiamondTrap d3("Fred");
-	DiamondTrap d4(d3);
-	DiamondTrap d5;
-	d5 = d3;
+	ClapTrap *c1 = new ClapTrap("Clappie");
+	c1->displayStats();
 	cout << endl;
 
-	cout << "> Stats display" << endl;
-	s1.displayStats();
-	cout << endl;
-	f2.displayStats();
-	cout << endl;
-	d3.displayStats();
-	cout << endl;
-	d4.displayStats();
-	cout << endl;
-	d5.displayStats();
+	ScavTrap *s1 = new ScavTrap("Scavie");
+	s1->guardGate();
+	s1->displayStats();
 	cout << endl;
 
-	d5.ScavTrap::attack("Zidane");
+	FragTrap *f1 = new FragTrap("Fragie");
+	f1->displayStats();
 	cout << endl;
 
-	d4.whoAmI();
+	DiamondTrap *d1 = new DiamondTrap("Diamsou");
+	d1->displayStats();
 	cout << endl;
+
+	d1->ScavTrap::attack("Zidane");
+	d1->whoAmI();
+	cout << endl;
+
 
 	cout << "> Destructors" << endl;
+	delete c1;
+	cout << endl;
+	delete s1;
+	cout << endl;
+	delete f1;
+	cout << endl;
+	delete d1;
+	cout << endl;
+
 	return (0);
 }

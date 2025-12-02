@@ -114,7 +114,7 @@ void		ScavTrap::beRepaired(unsigned int amount)
 
 void	ScavTrap::displayStats(void)
 {
-	cout	<< "[STATS] ScavTrap \"" << this->_name << "\":\n"
+	cout	<< "\"" << this->_name << "\":\n"
 			<< "gateKeeperMode: " << (this->_gateKeeperMode ? "true" : "false") << "\n"
 			<< "hitPoints: " << this->_hitPoints << "\n"
 			<< "energyPoints: " << this->_energyPoints << "\n"

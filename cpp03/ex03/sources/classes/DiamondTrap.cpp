@@ -38,10 +38,6 @@ DiamondTrap::DiamondTrap(std::string name): ClapTrap(name), ScavTrap(name), Frag
 
 DiamondTrap::DiamondTrap(const DiamondTrap &copy): ClapTrap(copy), ScavTrap(copy), FragTrap(copy)
 {
-	this->_name = copy._name;
-	this->_hitPoints = copy._hitPoints;
-	this->_energyPoints = copy._energyPoints;
-	this->_attackDamages = copy._attackDamages;
 	cout << "DiamondTrap " << this->_name << " is born!(copy)" << endl;
 }
 
@@ -65,7 +61,7 @@ void		DiamondTrap::takeDamage(unsigned int amount)
 {
 	if (this->_hitPoints == 0)
 	{
-		cout << "DiamondTrap " << this->_name << " is already dead, there is no need to attack a dead body." << endl;
+		cout << "DiamondTrap " << this->DiamondTrap::_name << " is already dead, there is no need to attack a dead body." << endl;
 		return;
 	}
 	this->_hitPoints = (this->_hitPoints >= amount ? this->_hitPoints - amount : 0);
@@ -96,15 +92,6 @@ void		DiamondTrap::beRepaired(unsigned int amount)
 	if (this->_energyPoints == 0)
 		cout << "Warning: DiamondTrap " << this->_name << " has no more energy points left." << endl;
 	
-}
-
-void	DiamondTrap::displayStats(void)
-{
-	cout	<< "[STATS] DiamondTrap \"" << this->_name << "\":\n"
-			<< "hitPoints: " << this->_hitPoints << "\n"
-			<< "energyPoints: " << this->_energyPoints << "\n"
-			<< "attackDamages: " << this->_attackDamages << endl;
-
 }
 
 void	DiamondTrap::whoAmI(void)

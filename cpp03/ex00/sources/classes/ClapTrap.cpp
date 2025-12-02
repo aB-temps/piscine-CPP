@@ -122,7 +122,7 @@ void		ClapTrap::beRepaired(unsigned int amount)
 
 void	ClapTrap::displayStats(void)
 {
-	cout	<< "[STATS] ClapTrap \"" << this->_name << "\":\n"
+	cout	<< "\"" << this->_name << "\":\n"
 			<< "hitPoints: " << this->_hitPoints << "\n"
 			<< "energyPoints: " << this->_energyPoints << "\n"
 			<< "attackDamages: " << this->_attackDamages << endl;

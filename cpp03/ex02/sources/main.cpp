@@ -18,15 +18,15 @@ using		std::endl;
 int main(void)
 {
 	cout << "> Constructors" << endl;
-	FragTrap f1;
+	FragTrap *f1 = new FragTrap;
 	FragTrap f2("Johnny");
 	FragTrap f3(f2);
 	FragTrap f4;
-	f4 = f1;
+	f4 = *f1;
 	cout << endl;
 
 	cout << "> Stats display" << endl;
-	f1.displayStats();
+	f1->displayStats();
 	cout << endl;
 	f2.displayStats();
 	cout << endl;
@@ -35,17 +35,17 @@ int main(void)
 	f4.displayStats();
 	cout << endl;
 
-	f1.attack("Dark Vador");
-	f1.takeDamage(50);
-	f1.beRepaired(30);
-	f1.displayStats();
-	f1.beRepaired(110);
-	f1.displayStats();
+	f1->attack("Dark Vador");
+	f1->takeDamage(50);
+	f1->beRepaired(30);
+	f1->displayStats();
+	f1->beRepaired(110);
+	f1->displayStats();
 	cout << endl;
 
-	f1.takeDamage(80);
-	f1.displayStats();
-	f1.attack("Dark Vador");
+	f1->takeDamage(80);
+	f1->displayStats();
+	f1->attack("Dark Vador");
 	cout << endl;
 
 	f2.displayStats();
@@ -67,5 +67,6 @@ int main(void)
 	cout << endl;
 
 	cout << "> Destructors" << endl;
+	delete f1;
 	return (0);
 }

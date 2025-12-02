@@ -18,7 +18,7 @@
 
 # define	DT_DEF_NAME "Anonymous"
 
-class DiamondTrap : virtual public ScavTrap, virtual public FragTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
 	public:
 		DiamondTrap(void);
@@ -31,7 +31,6 @@ class DiamondTrap : virtual public ScavTrap, virtual public FragTrap
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
 		void			whoAmI(void);
-		void			displayStats(void);
 
 	private:
 		std::string		_name;
