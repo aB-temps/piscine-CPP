@@ -16,44 +16,21 @@ using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Dog::Dog(void): Animal()
-{
-	cout << "Dog of type: " << this->_type << " has been created!" << endl;
-}
+Dog::Dog(void): Animal("Dog") {}
 
-Dog::Dog(std::string type): Animal(type)
-{
-	cout << "Dog of type: " << type << " has been created!" << endl;
-}
+Dog::Dog(const Dog &copy): Animal(copy) {}
 
-Dog::Dog(const Dog &copy): Animal(copy)
-{
-	cout << "Dog of type: " << this->_type << " has been created!(copy)" << endl;
-}
-
-Dog::~Dog(void)
-{
-	cout << "Dog of type: " << this->_type << " has been destructed!" << endl;
-}
+Dog::~Dog(void) {}
 
 // Operator overloads ===================================================================
 Dog		&Dog::operator=(const Dog &assign)
 {
-	if (this != &assign)
-	{
-		this->_type = assign._type;
-	}
-	cout << "Assignment operator called!" << endl;
+	this->Animal::_type = assign.Animal::_type;
 	return (*this);
 }
 
 // Member function ======================================================================
-std::string	Dog::getType(void)
+void		Dog::makeSound(void) const
 {
-	return (this->_type);
-}
-
-void		Dog::makeSound(void)
-{
-	cout << "Tchoutchoutchoutchou!" << endl;
+	cout << "Ouafffff!" << endl;
 }

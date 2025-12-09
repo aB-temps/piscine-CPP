@@ -15,17 +15,16 @@
 
 # include "Animal.hpp"
 
-class	Dog: Animal
+class	Dog: public Animal
 {
 	public:
 		Dog(void);
-		Dog(std::string type);
 		Dog(const Dog &copy);
 		~Dog(void);
 
 		Dog			&operator=(const Dog &assign);
 
-	 	void	makeSound(void);
+	 	void	makeSound(void) const;
 };
 
 #endif

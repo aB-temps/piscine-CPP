@@ -23,7 +23,7 @@ DIR_BUILD	:= .build/
 CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra
-CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
+CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98 -Wshadow
 INC_FLAGS 	:= -I$(DIR_INC) -I$(DIR_TEMP)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)

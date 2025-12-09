@@ -19,13 +19,12 @@ class	Cat: public Animal
 {
 	public:
 		Cat(void);
-		Cat(std::string type);
 		Cat(const Cat &copy);
 		~Cat(void);
 
 		Cat			&operator=(const Cat &assign);
 
-		void	makeSound(void);
+		void	makeSound(void) const;
 };
 
 #endif

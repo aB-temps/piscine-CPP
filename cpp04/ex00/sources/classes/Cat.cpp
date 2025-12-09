@@ -16,44 +16,21 @@ using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Cat::Cat(void): Animal()
-{
-	cout << "Cat of type: " << this->_type << " has been created!" << endl;
-}
+Cat::Cat(void): Animal("Cat") {}
 
-Cat::Cat(std::string type): Animal(type)
-{
-	cout << "Cat of type: " << type << " has been created!" << endl;
-}
+Cat::Cat(const Cat &copy): Animal(copy) {}
 
-Cat::Cat(const Cat &copy): Animal(copy)
-{
-	cout << "Cat of type: " << this->_type << " has been created!(copy)" << endl;
-}
-
-Cat::~Cat(void)
-{
-	cout << "Cat of type: " << this->_type << " has been destructed!" << endl;
-}
+Cat::~Cat(void) {}
 
 // Operator overloads ===================================================================
 Cat		&Cat::operator=(const Cat &assign)
 {
-	if (this != &assign)
-	{
-		this->Animal::_type = assign.Animal::_type;
-	}
-	cout << "Assignment operator called!" << endl;
+	this->Animal::_type = assign.Animal::_type;
 	return (*this);
 }
 
 // Member function ======================================================================
-std::string	Cat::getType(void)
+void		Cat::makeSound(void) const
 {
-	return (this->_type);
-}
-
-void		Cat::makeSound(void)
-{
-	cout << "Tchoutchoutchoutchou!" << endl;
+	cout << "Meowww!" << endl;
 }

@@ -48,12 +48,9 @@ Animal		&Animal::operator=(const Animal &assign)
 }
 
 // Member function ======================================================================
-std::string	Animal::getType(void)
+const std::string	&Animal::getType(void) const
 {
 	return (this->_type);
 }
 
-void		Animal::makeSound(void)
-{
-	cout << "Tchoutchoutchoutchou!" << endl;
-}
+void		Animal::makeSound(void) const {}
