@@ -53,6 +53,7 @@ COMPONENTS 	:=	CLASSES		\
 F_MAIN		:=	main.cpp
 
 F_CLASSES	:=	Animal.cpp		\
+				AAnimal.cpp		\
 				Cat.cpp			\
 				Dog.cpp			\
 				WrongCat.cpp	\

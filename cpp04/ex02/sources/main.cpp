@@ -12,22 +12,39 @@
 
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "Animal.hpp"
 
 using	std::cout;
 using	std::endl;
 
 int main(void)
 {
-	cout << ">>> Constructors:" << endl;
-	Animal	*animal_array[DEF_ARRAY_SIZE];
-	cout << "> Copies:" << endl;
+	cout << ">>> Abstract:\n";
+	cout << "> Constructors:" << endl;
+	Animal	*a1 = new Animal(); 
+//	AAnimal	*aa1 = new AAnimal(); // does not compile: allocating an object of abstract class type 'AAnimal'
+	cout << endl;
+
+	cout << "> Destructors:" << endl;
+	delete a1;
+//	delete aa1;
+	cout << endl;
+
+	cout << ">>> Copies:\n";
+	cout << "> Constructors:" << endl;
 	Cat		*c1 = new Cat();
 	Cat		*c2 = new Cat(*c1);
 
-	(void)c1;
-	(void)c2;
-	
-	cout << "> Array:" << endl;
+	cout << "> Destructors:" << endl;
+	delete c1;
+	cout << "\n";
+	delete c2;
+	cout << endl;
+
+
+	cout << ">>> Array:\n";
+	cout << "> Constructors:" << endl;
+	AAnimal	*animal_array[DEF_ARRAY_SIZE];
 	for (int i = 0; i < DEF_ARRAY_SIZE; ++i)
 	{
 		if (i <= (DEF_ARRAY_SIZE >> 2))
@@ -37,14 +54,7 @@ int main(void)
 		cout << "\n";
 	}
 
-	cout << ">>> Destructors:" << endl;
-	cout << "> Copies:" << endl;
-	delete c1;
-	cout << "\n";
-	delete c2;
-	cout << endl;
-
-	cout << "> Array:" << endl;
+	cout << "> Destructors:" << endl;
 	for (int i = 0; i < DEF_ARRAY_SIZE; ++i)
 	{
 		delete animal_array[i];

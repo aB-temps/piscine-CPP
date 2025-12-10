@@ -1,41 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   AAnimal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:32:00 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/02 16:46:34 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:43:43 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "AAnimal.hpp"
 
 using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Dog::Dog(void): AAnimal("Dog"), _brain(new Brain()) {}
-
-Dog::Dog(const Dog &copy): AAnimal(copy), _brain(new Brain(*copy._brain)) {}
-
-Dog::~Dog(void)
+AAnimal::AAnimal(void): _type(DEF_ATYPE)
 {
-	delete this->_brain;
+	cout << "AAnimal of type: " << this->_type << " has been created!" << endl;
+}
+
+AAnimal::AAnimal(std::string type): _type(type)
+{
+	cout << "AAnimal of type: " << type << " has been created!" << endl;
+}
+
+AAnimal::AAnimal(const AAnimal &copy): _type(copy._type)
+{
+	cout << "AAnimal of type: " << this->_type << " has been created!(copy)" << endl;
+}
+
+AAnimal::~AAnimal(void)
+{
+	cout << "AAnimal of type: " << this->_type << " has been destructed!" << endl;
 }
 
 // Operator overloads ===================================================================
-Dog		&Dog::operator=(const Dog &assign)
+AAnimal		&AAnimal::operator=(const AAnimal &assign)
 {
-	this->_type = assign._type;
-	this->_brain = assign._brain;
-
+	if (this != &assign)
+	{
+		this->_type = assign._type;
+	}
+	cout << "Assignment operator called!" << endl;
 	return (*this);
 }
 
 // Member function ======================================================================
-void		Dog::makeSound(void) const
+const std::string	&AAnimal::getType(void) const
 {
-	cout << "Ouafffff!" << endl;
+	return (this->_type);
 }

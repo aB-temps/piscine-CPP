@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   AAnimal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/02 16:45:11 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:30:06 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__CAT_HPP__
-# define	__CAT_HPP__
+#ifndef		__AANIMAL_HPP__
+# define	__AANIMAL_HPP__
 
-# include "AAnimal.hpp"
-# include "Brain.hpp"
+# include <iostream>
 
-class	Cat: public AAnimal
+# define DEF_ATYPE "AAnimal"
+
+class	AAnimal
 {
 	public:
-		Cat(void);
-		Cat(const Cat &copy);
-		~Cat(void);
+		AAnimal(void);
+		AAnimal(const AAnimal &copy);
+		virtual ~AAnimal(void);
 
-		Cat		&operator=(const Cat &assign);
+		AAnimal				&operator=(const AAnimal &assign);
 
-		void	makeSound(void) const;
-	
-	private:
-		Brain	*_brain;
+		const std::string	&getType(void) const;
+		virtual void		makeSound(void) const = 0;
+
+	protected:
+		AAnimal(std::string type);
+		std::string			_type;
+
 };
 
 #endif
