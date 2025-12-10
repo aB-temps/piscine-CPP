@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # GENERAL SETTINGS ====================================================================
-NAME = aanimal
+NAME = amateria
 
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
@@ -47,18 +47,13 @@ DEPS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.d,$(SRC_$(1)))
 endef
 
 # COMPONENTS ==========================================================================
-COMPONENTS 	:=	CLASSES		\
+COMPONENTS 	:=	CLASSES			\
 
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
-F_CLASSES	:=	Animal.cpp		\
-				AAnimal.cpp		\
-				Cat.cpp			\
-				Dog.cpp			\
-				WrongCat.cpp	\
-				WrongAnimal.cpp	\
-				Brain.cpp
+F_CLASSES	:=	AMateria.cpp	\
+				
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
