@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:32:00 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/02 16:43:43 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/09 19:24:56 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
 using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Animal::Animal(void): _type(DEF_TYPE)
+WrongAnimal::WrongAnimal(void): _type(DEF_WTYPE)
 {
-	cout << "Animal of type: " << this->_type << " has been created!" << endl;
+	cout << "WrongAnimal of type: " << this->_type << " has been created!" << endl;
 }
 
-Animal::Animal(std::string type): _type(type)
+WrongAnimal::WrongAnimal(std::string type): _type(type)
 {
-	cout << "Animal of type: " << type << " has been created!" << endl;
+	cout << "WrongAnimal of type: " << type << " has been created!" << endl;
 }
 
-Animal::Animal(const Animal &copy): _type(copy._type)
+WrongAnimal::WrongAnimal(const WrongAnimal &copy): _type(copy._type)
 {
-	cout << "Animal of type: " << this->_type << " has been created!(copy)" << endl;
+	cout << "WrongAnimal of type: " << this->_type << " has been created!(copy)" << endl;
 }
 
-Animal::~Animal(void)
+WrongAnimal::~WrongAnimal(void)
 {
-	cout << "Animal of type: " << this->_type << " has been destructed!" << endl;
+	cout << "WrongAnimal of type: " << this->_type << " has been destructed!" << endl;
 }
 
 // Operator overloads ===================================================================
-Animal		&Animal::operator=(const Animal &assign)
+WrongAnimal		&WrongAnimal::operator=(const WrongAnimal &assign)
 {
 	if (this != &assign)
 	{
@@ -48,12 +48,12 @@ Animal		&Animal::operator=(const Animal &assign)
 }
 
 // Member function ======================================================================
-const std::string	&Animal::getType(void) const
+const std::string	&WrongAnimal::getType(void) const
 {
 	return (this->_type);
 }
 
-void		Animal::makeSound(void) const
+void		WrongAnimal::makeSound(void) const
 {
-	cout << "Animal's sound!" << endl;
+	cout << "WrongAnimal's sound!" << endl;
 }

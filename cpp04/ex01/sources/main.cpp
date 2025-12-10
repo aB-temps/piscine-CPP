@@ -12,32 +12,45 @@
 
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongCat.hpp"
 
 using	std::cout;
 using	std::endl;
 
 int main(void)
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	const WrongAnimal* wrongMeta = new WrongAnimal();
-	const WrongAnimal* wrongI = new WrongCat();
+	cout << ">>> Constructors:" << endl;
+	Animal	*animal_array[DEF_ARRAY_SIZE];
+	cout << "> Copies:" << endl;
+	Cat		*c1 = new Cat();
+	Cat		*c2 = new Cat(*c1);
 
-	std::cout << "Type of j: " << j->getType() << std::endl;
-	std::cout << "Type of i: " << i->getType() << std::endl;
+	(void)c1;
+	(void)c2;
+	
+	cout << "> Array:" << endl;
+	for (int i = 0; i < DEF_ARRAY_SIZE; ++i)
+	{
+		if (i <= (DEF_ARRAY_SIZE >> 2))
+			animal_array[i] = new Cat();
+		else
+			animal_array[i] = new Dog();
+		cout << "\n";
+	}
 
-	meta->makeSound();
-	i->makeSound();
-	j->makeSound();
-	wrongI->makeSound();
-	wrongMeta->makeSound();
+	cout << ">>> Destructors:" << endl;
+	cout << "> Copies:" << endl;
+	delete c1;
+	cout << "\n";
+	delete c2;
+	cout << endl;
 
-	delete meta;
-	delete i;
-	delete j;
-	delete wrongMeta;
-	delete wrongI;
+	cout << "> Array:" << endl;
+	for (int i = 0; i < DEF_ARRAY_SIZE; ++i)
+	{
+		delete animal_array[i];
+		cout << "\n";
+	}
+	cout << endl;
+
 	return (0);
 }

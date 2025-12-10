@@ -1,59 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:32:00 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/02 16:43:43 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:46:26 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "Cat.hpp"
 
 using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Animal::Animal(void): _type(DEF_TYPE)
-{
-	cout << "Animal of type: " << this->_type << " has been created!" << endl;
-}
+Cat::Cat(void): Animal("Cat"), _brain(new Brain()) {}
 
-Animal::Animal(std::string type): _type(type)
-{
-	cout << "Animal of type: " << type << " has been created!" << endl;
-}
+Cat::Cat(const Cat &copy): Animal(copy), _brain(new Brain(*copy._brain)) {}
 
-Animal::Animal(const Animal &copy): _type(copy._type)
+Cat::~Cat(void)
 {
-	cout << "Animal of type: " << this->_type << " has been created!(copy)" << endl;
-}
-
-Animal::~Animal(void)
-{
-	cout << "Animal of type: " << this->_type << " has been destructed!" << endl;
+	delete this->_brain;
 }
 
 // Operator overloads ===================================================================
-Animal		&Animal::operator=(const Animal &assign)
+Cat		&Cat::operator=(const Cat &assign)
 {
-	if (this != &assign)
-	{
-		this->_type = assign._type;
-	}
-	cout << "Assignment operator called!" << endl;
+	this->Animal::_type = assign.Animal::_type;
+	this->_brain = assign._brain;
+
 	return (*this);
 }
 
 // Member function ======================================================================
-const std::string	&Animal::getType(void) const
+void		Cat::makeSound(void) const
 {
-	return (this->_type);
-}
-
-void		Animal::makeSound(void) const
-{
-	cout << "Animal's sound!" << endl;
+	cout << "Meowww!" << endl;
 }

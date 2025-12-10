@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # GENERAL SETTINGS ====================================================================
-NAME = animal
+NAME = abstractAnimal
 
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
@@ -57,6 +57,7 @@ F_CLASSES	:=	Animal.cpp		\
 				Dog.cpp			\
 				WrongCat.cpp	\
 				WrongAnimal.cpp	\
+				Brain.cpp
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

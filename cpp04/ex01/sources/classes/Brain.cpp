@@ -1,59 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:32:00 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/02 16:43:43 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/09 21:56:38 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "Brain.hpp"
 
 using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Animal::Animal(void): _type(DEF_TYPE)
+Brain::Brain(void)
 {
-	cout << "Animal of type: " << this->_type << " has been created!" << endl;
+	cout << "A brain has been created!" << endl;
 }
 
-Animal::Animal(std::string type): _type(type)
+Brain::Brain(const Brain &copy)
 {
-	cout << "Animal of type: " << type << " has been created!" << endl;
+	for (int i = 0; i < 100; ++i)
+		this->_ideas[i] = copy._ideas[i];
+	cout << "A brain has been created!(copy)" << endl;
 }
 
-Animal::Animal(const Animal &copy): _type(copy._type)
+Brain::~Brain(void)
 {
-	cout << "Animal of type: " << this->_type << " has been created!(copy)" << endl;
-}
-
-Animal::~Animal(void)
-{
-	cout << "Animal of type: " << this->_type << " has been destructed!" << endl;
+	cout << "A brain has been destructed, all its ideas are vanished..." << endl;
 }
 
 // Operator overloads ===================================================================
-Animal		&Animal::operator=(const Animal &assign)
+Brain		&Brain::operator=(const Brain &assign)
 {
 	if (this != &assign)
 	{
-		this->_type = assign._type;
+		for (int i = 0; i < 100; ++i)
+			this->_ideas[i] = assign._ideas[i];
 	}
 	cout << "Assignment operator called!" << endl;
 	return (*this);
 }
 
 // Member function ======================================================================
-const std::string	&Animal::getType(void) const
-{
-	return (this->_type);
-}
-
-void		Animal::makeSound(void) const
-{
-	cout << "Animal's sound!" << endl;
-}
