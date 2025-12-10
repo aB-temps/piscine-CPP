@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                         :+:      :+:    :+:   */
+/*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/02 14:30:06 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:54:43 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		__ICE_HPP__
 # define	__ICE_HPP__
 
-# include <iostream>
+# include "AMateria.hpp"
 
 class	Ice: public AMateria
 {

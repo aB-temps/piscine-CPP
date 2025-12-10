@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                         :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/02 14:30:06 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:55:17 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		__AMATERIA_HPP__
 # define	__AMATERIA_HPP__
 
-# include <iostream>
+# include	"IMateriaSource.hpp"
 
-class	AMateria
+class	AMateria: public IMateriaSource
 {
 	public:
 		AMateria(void);
@@ -30,6 +30,7 @@ class	AMateria
 		virtual void			use(ICharacter &target);
 
 	protected:
+		std::string				_type;
 		
 };
 

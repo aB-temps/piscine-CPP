@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ICharacter.hpp                                         :+:      :+:    :+:   */
+/*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/02 14:30:06 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:53:50 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ class	ICharacter
 		virtual void				unequip(int idx) = 0;
 		virtual void				use(int idx, ICharacter &target) = 0;
 
-	private:
+	protected:
 		AMateria					_inventory[INV_SIZE];
+		std::string					_name;
 		
 };
 
