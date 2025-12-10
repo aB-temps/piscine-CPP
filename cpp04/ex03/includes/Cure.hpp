@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                         :+:      :+:    :+:   */
+/*   Cure.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,24 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__AMATERIA_HPP__
-# define	__AMATERIA_HPP__
+#ifndef		__CURE_HPP__
+# define	__CURE_HPP__
 
 # include <iostream>
 
-class	AMateria
+class	Cure: public AMateria
 {
 	public:
-		AMateria(void);
-		AMateria(const AMateria &copy);
-		AMateria(std::string const &type);
-		~AMateria(void);
+		Cure(void);
+		Cure(const Cure &copy);
+		~Cure(void);
 
-		AMateria				&operator=(const AMateria &assign);
-
-		std::string const		&getType(void) const;
-		virtual AMateria		*clone(void) const = 0;
-		virtual void			use(ICharacter &target);
+		Cure					&operator=(const Cure &assign);
 
 	protected:
 		

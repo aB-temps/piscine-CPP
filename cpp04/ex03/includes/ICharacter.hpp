@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                         :+:      :+:    :+:   */
+/*   ICharacter.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__AMATERIA_HPP__
-# define	__AMATERIA_HPP__
+#ifndef		__ICHARACTER_HPP__
+# define	__ICHARACTER_HPP__
 
-# include <iostream>
+# include	<iostream>
 
-class	AMateria
+# define	INV_SIZE 4
+
+class	ICharacter
 {
 	public:
-		AMateria(void);
-		AMateria(const AMateria &copy);
-		AMateria(std::string const &type);
-		~AMateria(void);
+		ICharacter(void);
+		ICharacter(const ICharacter &copy);
+		virtual ~ICharacter(void);
 
-		AMateria				&operator=(const AMateria &assign);
+		ICharacter				&operator=(const ICharacter &assign);
 
-		std::string const		&getType(void) const;
-		virtual AMateria		*clone(void) const = 0;
-		virtual void			use(ICharacter &target);
+		virtual std::string const	&getName(void) const = 0;
+		virtual void				equip(AMateria *m) = 0;
+		virtual void				unequip(int idx) = 0;
+		virtual void				use(int idx, ICharacter &target) = 0;
 
-	protected:
+	private:
+		AMateria					_inventory[INV_SIZE];
 		
 };
 

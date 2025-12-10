@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                         :+:      :+:    :+:   */
+/*   Ice.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,24 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__AMATERIA_HPP__
-# define	__AMATERIA_HPP__
+#ifndef		__ICE_HPP__
+# define	__ICE_HPP__
 
 # include <iostream>
 
-class	AMateria
+class	Ice: public AMateria
 {
 	public:
-		AMateria(void);
-		AMateria(const AMateria &copy);
-		AMateria(std::string const &type);
-		~AMateria(void);
+		Ice(void);
+		Ice(const Ice &copy);
+		~Ice(void);
 
-		AMateria				&operator=(const AMateria &assign);
-
-		std::string const		&getType(void) const;
-		virtual AMateria		*clone(void) const = 0;
-		virtual void			use(ICharacter &target);
+		Ice					&operator=(const Ice &assign);
 
 	protected:
 		

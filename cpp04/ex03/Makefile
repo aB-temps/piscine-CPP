@@ -47,13 +47,16 @@ DEPS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.d,$(SRC_$(1)))
 endef
 
 # COMPONENTS ==========================================================================
-COMPONENTS 	:=	CLASSES			\
+COMPONENTS 	:=	CLASSES				\
 
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
-F_CLASSES	:=	AMateria.cpp	\
-				
+F_CLASSES	:=	AMateria.cpp		\
+				IMateriaSource.cpp	\
+				ICharacter.cpp		\
+				Ice.cpp				\
+				Cure.cpp			\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
