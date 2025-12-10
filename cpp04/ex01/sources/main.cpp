@@ -18,16 +18,21 @@ using	std::endl;
 
 int main(void)
 {
-	cout << ">>> Constructors:" << endl;
-	Animal	*animal_array[DEF_ARRAY_SIZE];
-	cout << "> Copies:" << endl;
+	cout << ">>> Copies:\n";
+	cout << "> Constructors:" << endl;
 	Cat		*c1 = new Cat();
 	Cat		*c2 = new Cat(*c1);
 
-	(void)c1;
-	(void)c2;
-	
-	cout << "> Array:" << endl;
+	cout << "> Destructors:" << endl;
+	delete c1;
+	cout << "\n";
+	delete c2;
+	cout << endl;
+
+
+	cout << ">>> Array:\n";
+	cout << "> Constructors:" << endl;
+	Animal	*animal_array[DEF_ARRAY_SIZE];
 	for (int i = 0; i < DEF_ARRAY_SIZE; ++i)
 	{
 		if (i <= (DEF_ARRAY_SIZE >> 2))
@@ -36,15 +41,8 @@ int main(void)
 			animal_array[i] = new Dog();
 		cout << "\n";
 	}
-
-	cout << ">>> Destructors:" << endl;
-	cout << "> Copies:" << endl;
-	delete c1;
-	cout << "\n";
-	delete c2;
-	cout << endl;
-
-	cout << "> Array:" << endl;
+	
+	cout << "> Destructors:" << endl;
 	for (int i = 0; i < DEF_ARRAY_SIZE; ++i)
 	{
 		delete animal_array[i];
