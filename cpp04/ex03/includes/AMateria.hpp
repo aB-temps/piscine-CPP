@@ -14,6 +14,7 @@
 # define	__AMATERIA_HPP__
 
 # include	"IMateriaSource.hpp"
+# define	DEF_TYPENAME "Empty"
 
 class	AMateria: public IMateriaSource
 {

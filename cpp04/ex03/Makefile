@@ -54,6 +54,7 @@ F_MAIN		:=	main.cpp
 
 F_CLASSES	:=	AMateria.cpp		\
 				IMateriaSource.cpp	\
+				Character.cpp		\
 				ICharacter.cpp		\
 				Ice.cpp				\
 				Cure.cpp			\

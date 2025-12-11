@@ -15,6 +15,8 @@
 
 # include	"AMateria.hpp"
 
+# define	CURE_TYPENAME "cure"
+
 class	Cure: public AMateria
 {
 	public:

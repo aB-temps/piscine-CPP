@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cure.cpp                                       :+:      :+:    :+:   */
+/*   Ice.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,31 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cure.hpp"
+#include "Ice.hpp"
 
 using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Cure::Cure(void):
-{
-}
+Ice::Ice(void): AMateria(ICE_TYPENAME) {}
 
-Cure::Cure(const Cure &copy):
-{
-}
+Ice::Ice(const Ice &copy): AMateria(copy) {}
 
-Cure::~Cure(void)
-{
-}
+Ice::~Ice(void) {}
 
 // Operator overloads ===================================================================
-Cure		&Cure::operator=(const Cure &assign)
+Ice		&Ice::operator=(const Ice &assign)
 {
 	if (this != &assign)
 	{
+		this->AMateria::operator=(assign);
 	}
-	cout << "Assignment operator called!" << endl;
 	return (*this);
 }
 

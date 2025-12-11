@@ -13,7 +13,7 @@
 #ifndef		__ICHARACTER_HPP__
 # define	__ICHARACTER_HPP__
 
-# include	<iostream>
+# include	"AMateria.hpp"
 
 # define	INV_SIZE 4
 
@@ -24,7 +24,7 @@ class	ICharacter
 		ICharacter(const ICharacter &copy);
 		virtual ~ICharacter(void);
 
-		ICharacter				&operator=(const ICharacter &assign);
+		ICharacter					&operator=(const ICharacter &assign);
 
 		virtual std::string const	&getName(void) const = 0;
 		virtual void				equip(AMateria *m) = 0;

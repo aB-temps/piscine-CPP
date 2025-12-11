@@ -16,25 +16,19 @@ using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Cure::Cure(void):
-{
-}
+Cure::Cure(void): AMateria(CURE_TYPENAME) {}
 
-Cure::Cure(const Cure &copy):
-{
-}
+Cure::Cure(const Cure &copy): AMateria(copy) {}
 
-Cure::~Cure(void)
-{
-}
+Cure::~Cure(void) {}
 
 // Operator overloads ===================================================================
 Cure		&Cure::operator=(const Cure &assign)
 {
 	if (this != &assign)
 	{
+		this->AMateria::operator=(assign);
 	}
-	cout << "Assignment operator called!" << endl;
 	return (*this);
 }
 
