@@ -34,9 +34,6 @@ IMateriaSource::~IMateriaSource(void)
 // Operator overloads ===================================================================
 IMateriaSource		&IMateriaSource::operator=(const IMateriaSource &assign)
 {
-	if (this != &assign)
-	{
-	}
 	cout << "IMateriaSource: assignment operator called!" << endl;
 	return (*this);
 }

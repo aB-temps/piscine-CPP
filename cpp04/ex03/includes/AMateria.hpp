@@ -13,10 +13,11 @@
 #ifndef		__AMATERIA_HPP__
 # define	__AMATERIA_HPP__
 
-# include	"IMateriaSource.hpp"
-# define	DEF_TYPENAME "Empty"
+# include	<iostream>
 
-class	AMateria: public IMateriaSource
+# define	DEF_TYPENAME "Nothing"
+
+class	AMateria
 {
 	public:
 		AMateria(void);
@@ -32,7 +33,7 @@ class	AMateria: public IMateriaSource
 
 	protected:
 		std::string				_type;
-		
+
 };
 
 #endif

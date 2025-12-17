@@ -33,4 +33,14 @@ Ice		&Ice::operator=(const Ice &assign)
 }
 
 // Member function ======================================================================
+void	Ice::use(ICharacter &target)
+{
+	cout << "* shoots an ice bolt at " << target._name << " *" << endl;
+}
 
+Ice		*Ice::clone(void)
+{
+	Ice *iceMat = new Ice();
+
+	return (iceMat);
+}

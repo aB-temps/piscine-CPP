@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
-/*   Updated: 2025/12/10 17:54:43 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:35:42 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__ICE_HPP__
-# define	__ICE_HPP__
+#ifndef		__MATERIASOURCE_HPP__
+# define	__MATERIASOURCE_HPP__
 
 # include	"AMateria.hpp"
 
-# define	ICE_TYPENAME "ice"
-
-class	Ice: public AMateria
+class	MateriaSource: public IMateriaSource
 {
 	public:
-		Ice(void);
-		Ice(const Ice &copy);
-		~Ice(void);
+		MateriaSource(void);
+		MateriaSource(const MateriaSource &copy);
+		virtual ~MateriaSource(void);
 
-		Ice					&operator=(const Ice &assign);
-		
+		MateriaSource		&operator=(const MateriaSource &assign);
+
 };
 
 #endif

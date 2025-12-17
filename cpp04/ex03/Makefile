@@ -53,11 +53,12 @@ COMPONENTS 	:=	CLASSES				\
 F_MAIN		:=	main.cpp
 
 F_CLASSES	:=	AMateria.cpp		\
-				IMateriaSource.cpp	\
-				Character.cpp		\
-				ICharacter.cpp		\
 				Ice.cpp				\
 				Cure.cpp			\
+				IMateriaSource.cpp	\
+				MateriaSource.cpp	\
+				ICharacter.cpp		\
+				Character.cpp		\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

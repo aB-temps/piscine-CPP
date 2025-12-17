@@ -15,14 +15,23 @@
 
 # include	"ICharacter.hpp"
 
+# define	INV_SIZE 4
+# define	DEF_CHARNAME "Anonymous"
+
 class	Character: public ICharacter
 {
 	public:
 		Character(void);
+		Character(std::string &name);
 		Character(const Character &copy);
 		virtual ~Character(void);
 
-		Character				&operator=(const Character &assign);
+		Character		&operator=(const Character &assign);
+
+	private:
+		std::string		_name;
+		AMateria		*_inventory[INV_SIZE];
+		short			_free_space;
 		
 };
 

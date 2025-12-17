@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.cpp                                       :+:      :+:    :+:   */
+/*   MateriaSource.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,52 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AMateria.hpp"
+#include "MateriaSource.hpp"
 
 using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-AMateria::AMateria(void): _type(DEF_TYPENAME)
+MateriaSource::MateriaSource(void):
 {
-	cout << "AMateria of type:" << this->_type << ", has been constructed." << endl;
+	cout << "MateriaSource has been constructed." << endl;
 }
 
-AMateria::AMateria(const AMateria &copy): _type(copy._type)
+MateriaSource::MateriaSource(const MateriaSource &copy):
 {
-	cout << "AMateria of type:" << this->_type << ", has been constructed(copy)." << endl;
+	cout << "MateriaSource has been constructed(copy)." << endl;
 }
 
-AMateria::AMateria(std::string const &type): _type(type)
+MateriaSource::~MateriaSource(void)
 {
-	cout << "AMateria of type:" << this->_type << ", has been constructed(type)." << endl;
-}
-
-AMateria::~AMateria(void)
-{
-	cout << "AMateria of type:" << this->_type << ", has been destructed." << endl;
+	cout << "MateriaSource has been destructed." << endl;
 }
 
 // Operator overloads ===================================================================
-AMateria			&AMateria::operator=(const AMateria &assign)
+MateriaSource		&MateriaSource::operator=(const MateriaSource &assign)
 {
-	if (this != &assign)
-	{
-		this->_type = assign._type;
-	}
-	cout << "AMateria(" << this->_type << "): assignment operator called!" << endl;
+	// if (this != &assign)
+	// {
+	//
+	// }
+	cout << "MateriaSource: assignment operator called!" << endl;
 	return (*this);
 }
 
 // Member function ======================================================================
-std::string const	AMateria::&getType(void) const
+void				AMateria::learnMateria(AMateria *m)
 {
-	return (this->_type);
+
 }
 
-void				AMateria::use(ICharacter &target)
+AMateria			*AMateria::createMateria(std::string const &type)
 {
-	cout << "Using Materia." << endl;
+
 }
-
-

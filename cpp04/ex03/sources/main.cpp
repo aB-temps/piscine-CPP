@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ".hpp"
+#include "MateriaSource.hpp"
+#include "Character.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
 
 using	std::cout;
 using	std::endl;
@@ -19,6 +22,7 @@ int main(void)
 {
 	cout << ">>> XXXXXXXX:\n";
 	cout << "> Constructors:" << endl;
+
 
 	cout << endl;
 
