@@ -16,26 +16,11 @@ using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-IMateriaSource::IMateriaSource(void):
-{
-	cout << "IMateriaSource has been constructed." << endl;
-}
-
-IMateriaSource::IMateriaSource(const IMateriaSource &copy):
-{
-	cout << "IMateriaSource has been constructed(copy)." << endl;
-}
-
 IMateriaSource::~IMateriaSource(void)
 {
-	cout << "IMateriaSource has been destructed." << endl;
+	// cout << "IMateriaSource has been destructed." << endl;
 }
 
 // Operator overloads ===================================================================
-IMateriaSource		&IMateriaSource::operator=(const IMateriaSource &assign)
-{
-	cout << "IMateriaSource: assignment operator called!" << endl;
-	return (*this);
-}
 
 // Member function ======================================================================

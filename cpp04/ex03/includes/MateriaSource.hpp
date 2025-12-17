@@ -13,7 +13,10 @@
 #ifndef		__MATERIASOURCE_HPP__
 # define	__MATERIASOURCE_HPP__
 
+# include	"IMateriaSource.hpp"
 # include	"AMateria.hpp"
+
+# define	KNOWLEDGE_SIZE 4
 
 class	MateriaSource: public IMateriaSource
 {
@@ -22,7 +25,13 @@ class	MateriaSource: public IMateriaSource
 		MateriaSource(const MateriaSource &copy);
 		virtual ~MateriaSource(void);
 
-		MateriaSource		&operator=(const MateriaSource &assign);
+		MateriaSource	&operator=(const MateriaSource &assign);
+		void			learnMateria(AMateria *m);
+		AMateria		*createMateria(std::string const &type);
+
+	private:
+		AMateria		*_knowledge[KNOWLEDGE_SIZE];
+		int				_free_space;
 
 };
 

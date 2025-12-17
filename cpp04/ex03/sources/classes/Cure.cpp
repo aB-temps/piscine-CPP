@@ -35,12 +35,10 @@ Cure		&Cure::operator=(const Cure &assign)
 // Member function ======================================================================
 void	Cure::use(ICharacter &target)
 {
-	cout << "* heals " << target._name << "'s wounds *" << endl;
+	cout << "* heals " << target.getName() << "'s wounds *" << endl;
 }
 
-Cure		*Cure::clone(void)
+Cure	*Cure::clone(void) const
 {
-	Cure *cureMat = new Cure();
-
-	return (cureMat);
+	return (new Cure());
 }

@@ -22,11 +22,16 @@ class	Character: public ICharacter
 {
 	public:
 		Character(void);
-		Character(std::string &name);
+		Character(std::string name);
 		Character(const Character &copy);
 		virtual ~Character(void);
 
 		Character		&operator=(const Character &assign);
+
+		std::string const	&getName(void) const;
+		void				equip(AMateria *m);
+		void				unequip(int idx);
+		void				use(int idx, ICharacter &target);
 
 	private:
 		std::string		_name;

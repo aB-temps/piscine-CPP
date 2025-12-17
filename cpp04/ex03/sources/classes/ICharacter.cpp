@@ -16,30 +16,12 @@ using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-ICharacter::ICharacter(void):
-{
-	cout << "ICharacter interface has been instanciated." << endl;
-}
-
-ICharacter::ICharacter(const ICharacter &copy)
-{
-	cout << "ICharacter interface has been copied." << endl;
-}
-
 ICharacter::~ICharacter(void)
 {
-	cout << "ICharacter interface has been destructed." << endl;
+	// cout << "ICharacter interface has been destructed." << endl;
 }
 
 // Operator overloads ===================================================================
-ICharacter		&ICharacter::operator=(const ICharacter &assign)
-{
-	// if (this != &assign)
-	// {
-	// }
-	cout << "ICharacter: assignment operator called!" << endl;
-	return (*this);
-}
 
 // Member function ======================================================================
 

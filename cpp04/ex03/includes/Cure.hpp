@@ -24,9 +24,9 @@ class	Cure: public AMateria
 		Cure(const Cure &copy);
 		~Cure(void);
 
-		Cure					&operator=(const Cure &assign);
-
-	protected:
+		Cure	&operator=(const Cure &assign);
+		Cure	*clone(void) const;
+		void	use(ICharacter &target);
 		
 };
 

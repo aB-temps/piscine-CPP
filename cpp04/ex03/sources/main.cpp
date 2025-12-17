@@ -18,17 +18,45 @@
 using	std::cout;
 using	std::endl;
 
-int main(void)
+// int main(void)
+// {
+// 	cout << ">>> XXXXXXXX:\n";
+// 	cout << "> Constructors:" << endl;
+//
+//
+// 	cout << endl;
+//
+// 	cout << "> Destructors:" << endl;
+//
+// 	cout << endl;
+//
+// 	return (0);
+// }
+
+int	main(void)
 {
-	cout << ">>> XXXXXXXX:\n";
-	cout << "> Constructors:" << endl;
+	IMateriaSource* src = new MateriaSource();
+
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
 
 
-	cout << endl;
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
 
-	cout << "> Destructors:" << endl;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
 
-	cout << endl;
 
-	return (0);
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
+
+	delete bob;
+	delete me;
+	delete src;
+
+	return 0;
 }

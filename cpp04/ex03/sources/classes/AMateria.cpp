@@ -18,22 +18,22 @@ using		std::endl;
 // Constructors/Destructor ==============================================================
 AMateria::AMateria(void): _type(DEF_TYPENAME)
 {
-	cout << "AMateria of type:" << this->_type << ", has been constructed." << endl;
+	// cout << "AMateria of type:" << this->_type << " has been constructed." << endl;
 }
 
 AMateria::AMateria(const AMateria &copy): _type(copy._type)
 {
-	cout << "AMateria of type:" << this->_type << ", has been constructed(copy)." << endl;
+	// cout << "AMateria of type:" << this->_type << " has been constructed(copy)." << endl;
 }
 
 AMateria::AMateria(std::string const &type): _type(type)
 {
-	cout << "AMateria of type:" << this->_type << ", has been constructed(type)." << endl;
+	// cout << "AMateria of type:" << this->_type << " has been constructed(type)." << endl;
 }
 
 AMateria::~AMateria(void)
 {
-	cout << "AMateria of type:" << this->_type << ", has been destructed." << endl;
+	// cout << "AMateria of type:" << this->_type << " has been destructed." << endl;
 }
 
 // Operator overloads ===================================================================
@@ -43,19 +43,17 @@ AMateria			&AMateria::operator=(const AMateria &assign)
 	{
 		this->_type = assign._type;
 	}
-	cout << "AMateria(" << this->_type << "): assignment operator called!" << endl;
+	// cout << "AMateria(" << this->_type << "): assignment operator called!" << endl;
 	return (*this);
 }
 
 // Member function ======================================================================
-std::string const	AMateria::&getType(void) const
+std::string const	&AMateria::getType(void) const
 {
 	return (this->_type);
 }
 
 void				AMateria::use(ICharacter &target)
 {
-	cout << "Using Materia." << endl;
+	cout << "Using Materia on " << target.getName() << " ." << endl;
 }
-
-

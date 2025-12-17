@@ -14,8 +14,11 @@
 # define	__AMATERIA_HPP__
 
 # include	<iostream>
+# include	"ICharacter.hpp"
 
 # define	DEF_TYPENAME "Nothing"
+
+class ICharacter;
 
 class	AMateria
 {
@@ -23,7 +26,7 @@ class	AMateria
 		AMateria(void);
 		AMateria(const AMateria &copy);
 		AMateria(std::string const &type);
-		~AMateria(void);
+		virtual ~AMateria(void);
 
 		AMateria				&operator=(const AMateria &assign);
 

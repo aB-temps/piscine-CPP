@@ -16,30 +16,35 @@ using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-Character::Character(void): ICharacter(), _name(DEF_CHARNAME), _free_space(INV_SIZE)
+Character::Character(void): _name(DEF_CHARNAME), _free_space(INV_SIZE)
 {
 	for (int i = 0; i < INV_SIZE; ++i)
 		this->_inventory[i] = NULL;
-	cout << "Character " << this->_name << "is born." << endl;
+	// cout << "Character " << this->_name << "is born." << endl;
 }
 
-Character::Character(std::string &name): ICharacter(), _name(name), _free_space(INV_SIZE)
+Character::Character(std::string name): _name(name), _free_space(INV_SIZE)
 {
 	for (int i = 0; i < INV_SIZE; ++i)
 		this->_inventory[i] = NULL;
-	cout << "Character " << this->_name << "is born." << endl;
+	// cout << "Character " << this->_name << "is born." << endl;
 }
 
-Character::Character(const Character &copy): ICharacter(), _name(copy._name), _free_space(copy._free_space)
+Character::Character(const Character &copy): ICharacter(copy), _name(copy._name), _free_space(copy._free_space)
 {
 	for (int i = 0; i < INV_SIZE; ++i)
-		this->_inventory[i] = copy._inventory[i].clone();
-	cout << "Character " << this->_name << "is born.(copy)" << endl;
+		this->_inventory[i] = copy._inventory[i]->clone();
+	// cout << "Character " << this->_name << "is born.(copy)" << endl;
 }
 
 Character::~Character(void)
 {
-	cout << "Character " << this->_name << "has been destructed." << endl;
+	for (int i = 0; i < INV_SIZE; ++i)
+	{
+		if (this->_inventory[i])
+			delete this->_inventory[i];
+	}
+	// cout << "Character " << this->_name << "has been destructed." << endl;
 }
 
 // Operator overloads ===================================================================
@@ -50,14 +55,18 @@ Character			&Character::operator=(const Character &assign)
 		this->_name = assign._name;
 		this->_free_space = assign._free_space;
 		for (int i = 0; i < INV_SIZE; ++i)
-			this->_inventory[i] = copy._inventory[i].clone();
+		{
+			if (this->_inventory[i])
+				delete this->_inventory[i];
+			this->_inventory[i] = assign._inventory[i]->clone();
+		}
 	}
-	cout << "Character: assignment operator called!" << endl;
+	// cout << "Character: assignment operator called!" << endl;
 	return (*this);
 }
 
 // Member function ======================================================================
-std::string const	&Character::getName(void)
+std::string const	&Character::getName(void) const
 {
 	return (this->_name);
 }
@@ -68,16 +77,17 @@ void				Character::equip(AMateria *m)
 
 	if (!m)
 	{
-		cout << "Cannot equip non-existant Materia" << endl;
+		cout << "Cannot equip non-existant Materia." << endl;
 		return;
 	}
 	else if (!this->_free_space)
 	{
 		cout	<< "Unsufficent space in inventory to store Materia of type "
-				<< m->_type << "." << endl;
+				<< m->getType() << "." << endl;
 		return;
 	}
-	while (this->_inventory[i++]);
+	while (this->_inventory[i] && i < INV_SIZE)
+		++i;
 	this->_inventory[i] = m;
 	--this->_free_space;
 }
@@ -97,8 +107,9 @@ void				Character::unequip(int idx)
 				<< idx << ")." << endl;
 		return;
 	}
-	cout	<< "Materia of type " << this->_inventory[idx]->_type
+	cout	<< "Materia of type " << this->_inventory[idx]->getType()
 			<< " has been unequiped." << endl;
+	// save pointer
 	this->_inventory[idx] = NULL;
 	++this->_free_space;
 }
@@ -111,7 +122,5 @@ void				Character::use(int idx, ICharacter &target)
 			<< idx << ")." << endl;
 		return;
 	}
-	*(this->_inventory[idx]).use(target);
-	this->_inventory[idx] = NULL;
-	++this->_free_space;
+	this->_inventory[idx]->use(target);
 }

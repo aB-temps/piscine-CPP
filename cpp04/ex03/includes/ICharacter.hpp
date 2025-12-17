@@ -15,15 +15,12 @@
 
 # include	"AMateria.hpp"
 
+class AMateria;
 
 class	ICharacter
 {
 	public:
-		ICharacter(void);
-		ICharacter(const ICharacter &copy);
 		virtual ~ICharacter(void);
-
-		ICharacter					&operator=(const ICharacter &assign);
 
 		virtual std::string const	&getName(void) const = 0;
 		virtual void				equip(AMateria *m) = 0;
