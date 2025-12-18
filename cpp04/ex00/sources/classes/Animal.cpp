@@ -12,21 +12,21 @@
 
 #include "Animal.hpp"
 
-using		std::cout;
-using		std::endl;
+using std::cout;
+using std::endl;
 
 // Constructors/Destructor ==============================================================
-Animal::Animal(void): _type(DEF_TYPE)
+Animal::Animal(void) : _type(DEF_TYPE)
 {
 	cout << "Animal of type: " << this->_type << " has been created!" << endl;
 }
 
-Animal::Animal(std::string type): _type(type)
+Animal::Animal(std::string type) : _type(type)
 {
 	cout << "Animal of type: " << type << " has been created!" << endl;
 }
 
-Animal::Animal(const Animal &copy): _type(copy._type)
+Animal::Animal(const Animal &copy) : _type(copy._type)
 {
 	cout << "Animal of type: " << this->_type << " has been created!(copy)" << endl;
 }
@@ -37,23 +37,20 @@ Animal::~Animal(void)
 }
 
 // Operator overloads ===================================================================
-Animal		&Animal::operator=(const Animal &assign)
+Animal &Animal::operator=(const Animal &assign)
 {
-	if (this != &assign)
-	{
-		this->_type = assign._type;
-	}
+	this->_type = assign._type;
 	cout << "Assignment operator called!" << endl;
 	return (*this);
 }
 
 // Member function ======================================================================
-const std::string	&Animal::getType(void) const
+const std::string &Animal::getType(void) const
 {
 	return (this->_type);
 }
 
-void		Animal::makeSound(void) const
+void Animal::makeSound(void) const
 {
 	cout << "Animal's sound!" << endl;
 }

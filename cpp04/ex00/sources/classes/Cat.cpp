@@ -25,7 +25,7 @@ Cat::~Cat(void) {}
 // Operator overloads ===================================================================
 Cat		&Cat::operator=(const Cat &assign)
 {
-	this->Animal::_type = assign.Animal::_type;
+	this->_type = assign._type;
 	return (*this);
 }
 

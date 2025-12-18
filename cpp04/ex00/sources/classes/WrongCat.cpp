@@ -25,7 +25,7 @@ WrongCat::~WrongCat(void) {}
 // Operator overloads ===================================================================
 WrongCat		&WrongCat::operator=(const WrongCat &assign)
 {
-	this->WrongAnimal::_type = assign.WrongAnimal::_type;
+	this->_type = assign._type;
 	return (*this);
 }
 

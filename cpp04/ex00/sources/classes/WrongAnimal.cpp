@@ -12,21 +12,21 @@
 
 #include "WrongAnimal.hpp"
 
-using		std::cout;
-using		std::endl;
+using std::cout;
+using std::endl;
 
 // Constructors/Destructor ==============================================================
-WrongAnimal::WrongAnimal(void): _type(DEF_WTYPE)
+WrongAnimal::WrongAnimal(void) : _type(DEF_WTYPE)
 {
 	cout << "WrongAnimal of type: " << this->_type << " has been created!" << endl;
 }
 
-WrongAnimal::WrongAnimal(std::string type): _type(type)
+WrongAnimal::WrongAnimal(std::string type) : _type(type)
 {
 	cout << "WrongAnimal of type: " << type << " has been created!" << endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &copy): _type(copy._type)
+WrongAnimal::WrongAnimal(const WrongAnimal &copy) : _type(copy._type)
 {
 	cout << "WrongAnimal of type: " << this->_type << " has been created!(copy)" << endl;
 }
@@ -37,23 +37,20 @@ WrongAnimal::~WrongAnimal(void)
 }
 
 // Operator overloads ===================================================================
-WrongAnimal		&WrongAnimal::operator=(const WrongAnimal &assign)
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &assign)
 {
-	if (this != &assign)
-	{
-		this->_type = assign._type;
-	}
+	this->_type = assign._type;
 	cout << "Assignment operator called!" << endl;
 	return (*this);
 }
 
 // Member function ======================================================================
-const std::string	&WrongAnimal::getType(void) const
+const std::string &WrongAnimal::getType(void) const
 {
 	return (this->_type);
 }
 
-void		WrongAnimal::makeSound(void) const
+void WrongAnimal::makeSound(void) const
 {
 	cout << "WrongAnimal's sound!" << endl;
 }
