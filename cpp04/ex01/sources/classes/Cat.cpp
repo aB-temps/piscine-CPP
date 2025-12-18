@@ -18,8 +18,9 @@ using		std::endl;
 // Constructors/Destructor ==============================================================
 Cat::Cat(void): Animal("Cat"), _brain(new Brain()) {}
 
-Cat::Cat(const Cat &copy): Animal(copy), _brain(new Brain(*copy._brain)) {}
-
+Cat::Cat(const Cat &copy): Animal(copy), _brain(new Brain(*copy._brain)) //{}
+{cout << "COPY" << endl;
+}
 Cat::~Cat(void)
 {
 	delete this->_brain;
@@ -28,9 +29,13 @@ Cat::~Cat(void)
 // Operator overloads ===================================================================
 Cat		&Cat::operator=(const Cat &assign)
 {
-	this->Animal::_type = assign.Animal::_type;
-	this->_brain = assign._brain;
-
+	if (this != &assign)
+	{
+		this->_type = assign._type;
+		delete this->_brain;
+		this->_brain = new Brain(*assign._brain);
+	}
+	cout << "ASSIGN" << endl;
 	return (*this);
 }
 

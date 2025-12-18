@@ -28,9 +28,12 @@ Dog::~Dog(void)
 // Operator overloads ===================================================================
 Dog		&Dog::operator=(const Dog &assign)
 {
-	this->Animal::_type = assign.Animal::_type;
-	this->_brain = assign._brain;
-
+	if (this != &assign)
+	{
+		this->_type = assign._type;
+		delete this->_brain;
+		this->_brain = new Brain(*assign._brain);
+	}
 	return (*this);
 }
 

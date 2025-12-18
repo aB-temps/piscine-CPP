@@ -23,10 +23,16 @@ int main(void)
 	Cat		*c1 = new Cat();
 	Cat		*c2 = new Cat(*c1);
 
+	Cat		*c3 = new Cat(*c1);
+	
+	*c3 = *c2;
+	*c3 = *c3;
 	cout << "> Destructors:" << endl;
 	delete c1;
 	cout << "\n";
 	delete c2;
+	cout << endl;
+	delete c3;
 	cout << endl;
 
 
