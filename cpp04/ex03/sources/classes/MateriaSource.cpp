@@ -85,6 +85,7 @@ void MateriaSource::learnMateria(AMateria *m)
 	{
 		cout << "Unsufficent space to learn Materia of type "
 			 << m->getType() << "." << endl;
+		delete m;
 		return;
 	}
 	this->_knowledge[i] = m;

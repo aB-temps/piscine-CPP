@@ -27,6 +27,9 @@ int	main(void)
 
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
+	src->learnMateria(new Cure());
+	src->learnMateria(new Cure());
+	src->learnMateria(new Cure());
 	cout << endl;
 
 	tmp = src->createMateria("ice");
