@@ -39,10 +39,7 @@ AMateria::~AMateria(void)
 // Operator overloads ===================================================================
 AMateria			&AMateria::operator=(const AMateria &assign)
 {
-	if (this != &assign)
-	{
-		this->_type = assign._type;
-	}
+	this->_type = assign._type;
 	// cout << "AMateria(" << this->_type << "): assignment operator called!" << endl;
 	return (*this);
 }
@@ -55,5 +52,5 @@ std::string const	&AMateria::getType(void) const
 
 void				AMateria::use(ICharacter &target)
 {
-	cout << "Using Materia on " << target.getName() << " ." << endl;
+	cout << "Using Materia on " << target.getName() << "." << endl;
 }

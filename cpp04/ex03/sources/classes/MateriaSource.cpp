@@ -14,13 +14,13 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
-using		std::cout;
-using		std::endl;
+using std::cout;
+using std::endl;
 
 // Constructors/Destructor ==============================================================
-MateriaSource::MateriaSource(void): _free_space(KNOWLEDGE_SIZE)
+MateriaSource::MateriaSource(void)
 {
-	for (int i = 0; i < KNOWLEDGE_SIZE; ++i)
+	for (int i = 0; i <= KNOWLEDGE_SIZE; ++i)
 	{
 		this->_knowledge[i] = NULL;
 	}
@@ -28,9 +28,9 @@ MateriaSource::MateriaSource(void): _free_space(KNOWLEDGE_SIZE)
 	// cout << "MateriaSource has been constructed." << endl;
 }
 
-MateriaSource::MateriaSource(const MateriaSource &copy): _free_space(copy._free_space)
+MateriaSource::MateriaSource(const MateriaSource &copy)
 {
-	for (int i = 0; i < KNOWLEDGE_SIZE; ++i)
+	for (int i = 0; i <= KNOWLEDGE_SIZE; ++i)
 	{
 		this->_knowledge[i] = copy._knowledge[i];
 	}
@@ -39,7 +39,7 @@ MateriaSource::MateriaSource(const MateriaSource &copy): _free_space(copy._free_
 
 MateriaSource::~MateriaSource(void)
 {
-	for (int i = 0; i < KNOWLEDGE_SIZE ; ++i)
+	for (int i = 0; i < KNOWLEDGE_SIZE; ++i)
 	{
 		if (this->_knowledge[i])
 			delete this->_knowledge[i];
@@ -48,11 +48,10 @@ MateriaSource::~MateriaSource(void)
 }
 
 // Operator overloads ===================================================================
-MateriaSource	&MateriaSource::operator=(const MateriaSource &assign)
+MateriaSource &MateriaSource::operator=(const MateriaSource &assign)
 {
 	if (this != &assign)
 	{
-		this->_free_space = assign._free_space;
 		for (int i = 0; i < KNOWLEDGE_SIZE; ++i)
 		{
 			this->_knowledge[i] = assign._knowledge[i];
@@ -63,7 +62,7 @@ MateriaSource	&MateriaSource::operator=(const MateriaSource &assign)
 }
 
 // Member function ======================================================================
-void			MateriaSource::learnMateria(AMateria *m)
+void MateriaSource::learnMateria(AMateria *m)
 {
 	int i = 0;
 
@@ -72,19 +71,19 @@ void			MateriaSource::learnMateria(AMateria *m)
 		cout << "Cannot learn non-existant Materia." << endl;
 		return;
 	}
-	else if (!this->_free_space)
+	while (this->_knowledge[i])
+		++i;
+	if (i == KNOWLEDGE_SIZE)
 	{
-		cout	<< "Unsufficent space to learn Materia of type "
-			<< m->getType() << "." << endl;
+		cout << "Unsufficent space to learn Materia of type "
+			 << m->getType() << "." << endl;
 		return;
 	}
-	while (this->_knowledge[i] && i < KNOWLEDGE_SIZE)
-		++i;
+
 	this->_knowledge[i] = m;
-	--this->_free_space;
 }
 
-AMateria		*MateriaSource::createMateria(std::string const &type)
+AMateria *MateriaSource::createMateria(std::string const &type)
 {
 	for (int i = 0; i < KNOWLEDGE_SIZE; ++i)
 	{

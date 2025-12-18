@@ -12,25 +12,25 @@
 
 #include "Character.hpp"
 
-using		std::cout;
-using		std::endl;
+using std::cout;
+using std::endl;
 
 // Constructors/Destructor ==============================================================
-Character::Character(void): _name(DEF_CHARNAME), _free_space(INV_SIZE)
+Character::Character(void) : _name(DEF_CHARNAME)
 {
-	for (int i = 0; i < INV_SIZE; ++i)
+	for (int i = 0; i <= INV_SIZE; ++i)
 		this->_inventory[i] = NULL;
 	// cout << "Character " << this->_name << "is born." << endl;
 }
 
-Character::Character(std::string name): _name(name), _free_space(INV_SIZE)
+Character::Character(std::string name) : _name(name)
 {
-	for (int i = 0; i < INV_SIZE; ++i)
+	for (int i = 0; i <= INV_SIZE; ++i)
 		this->_inventory[i] = NULL;
 	// cout << "Character " << this->_name << "is born." << endl;
 }
 
-Character::Character(const Character &copy): ICharacter(copy), _name(copy._name), _free_space(copy._free_space)
+Character::Character(const Character &copy) : ICharacter(copy), _name(copy._name)
 {
 	for (int i = 0; i < INV_SIZE; ++i)
 		this->_inventory[i] = copy._inventory[i]->clone();
@@ -48,12 +48,11 @@ Character::~Character(void)
 }
 
 // Operator overloads ===================================================================
-Character			&Character::operator=(const Character &assign)
+Character &Character::operator=(const Character &assign)
 {
 	if (this != &assign)
 	{
 		this->_name = assign._name;
-		this->_free_space = assign._free_space;
 		for (int i = 0; i < INV_SIZE; ++i)
 		{
 			if (this->_inventory[i])
@@ -66,60 +65,58 @@ Character			&Character::operator=(const Character &assign)
 }
 
 // Member function ======================================================================
-std::string const	&Character::getName(void) const
+std::string const &Character::getName(void) const
 {
 	return (this->_name);
 }
 
-void				Character::equip(AMateria *m)
+void Character::equip(AMateria *m)
 {
-	int	i = 0;
+	int i = 0;
 
 	if (!m)
 	{
 		cout << "Cannot equip non-existant Materia." << endl;
 		return;
 	}
-	else if (!this->_free_space)
+	while (this->_inventory[i])
+		++i;
+	if (i == INV_SIZE)
 	{
-		cout	<< "Unsufficent space in inventory to store Materia of type "
-				<< m->getType() << "." << endl;
+		cout << "Unsufficent space in inventory to store Materia of type "
+			 << m->getType() << "." << endl;
 		return;
 	}
-	while (this->_inventory[i] && i < INV_SIZE)
-		++i;
 	this->_inventory[i] = m;
-	--this->_free_space;
 }
 
-void				Character::unequip(int idx)
+void Character::unequip(int idx)
 {
 	if (idx >= INV_SIZE)
 	{
-		cout	<< "Index " << idx
-				<< " is out of inventory("
-				<< INV_SIZE << ")." << endl;
+		cout << "Index " << idx
+			 << " is out of inventory("
+			 << INV_SIZE << ")." << endl;
 		return;
 	}
 	else if (!this->_inventory[idx])
 	{
-		cout	<< "Cannot unequip non-existant Materia("
-				<< idx << ")." << endl;
+		cout << "Cannot unequip non-existant Materia("
+			 << idx << ")." << endl;
 		return;
 	}
-	cout	<< "Materia of type " << this->_inventory[idx]->getType()
-			<< " has been unequiped." << endl;
+	cout << "Materia of type " << this->_inventory[idx]->getType()
+		 << " has been unequiped." << endl;
 	// save pointer
 	this->_inventory[idx] = NULL;
-	++this->_free_space;
 }
 
-void				Character::use(int idx, ICharacter &target)
+void Character::use(int idx, ICharacter &target)
 {
 	if (!this->_inventory[idx])
 	{
-		cout	<< "Cannot use non-existant Materia("
-			<< idx << ")." << endl;
+		cout << "Cannot use non-existant Materia("
+			 << idx << ")." << endl;
 		return;
 	}
 	this->_inventory[idx]->use(target);

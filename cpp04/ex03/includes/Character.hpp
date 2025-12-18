@@ -35,9 +35,7 @@ class	Character: public ICharacter
 
 	private:
 		std::string		_name;
-		AMateria		*_inventory[INV_SIZE];
-		short			_free_space;
-		
+		AMateria		*_inventory[INV_SIZE + 1];
 };
 
 #endif

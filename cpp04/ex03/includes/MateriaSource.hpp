@@ -30,8 +30,7 @@ class	MateriaSource: public IMateriaSource
 		AMateria		*createMateria(std::string const &type);
 
 	private:
-		AMateria		*_knowledge[KNOWLEDGE_SIZE];
-		int				_free_space;
+		AMateria		*_knowledge[KNOWLEDGE_SIZE + 1];
 
 };
 
