@@ -26,16 +26,21 @@ class	Character: public ICharacter
 		Character(const Character &copy);
 		virtual ~Character(void);
 
-		Character		&operator=(const Character &assign);
+		Character			&operator=(const Character &assign);
 
+		static int			&getGroundQty(void);
+		static void			clearGround(void);
 		std::string const	&getName(void) const;
 		void				equip(AMateria *m);
 		void				unequip(int idx);
 		void				use(int idx, ICharacter &target);
 
 	private:
-		std::string		_name;
-		AMateria		*_inventory[INV_SIZE + 1];
+		std::string			_name;
+		AMateria			*_inventory[INV_SIZE + 1];
+
+		static AMateria		**_ground;
+		static int			_ground_quantity;
 };
 
 #endif

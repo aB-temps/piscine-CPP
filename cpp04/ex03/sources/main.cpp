@@ -44,11 +44,15 @@ int	main(void)
 	ICharacter* me = new Character("me");
 	AMateria* tmp;
 
+	cout << "GroundQty:" << Character::getGroundQty() << endl;
+
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
 	me->equip(tmp);
 
+	me->unequip(1);
+	cout << "GroundQty:" << Character::getGroundQty() << endl;
 
 	ICharacter* bob = new Character("bob");
 	me->use(0, *bob);
@@ -57,6 +61,7 @@ int	main(void)
 	delete bob;
 	delete me;
 	delete src;
+	Character::clearGround();
 
 	return 0;
 }

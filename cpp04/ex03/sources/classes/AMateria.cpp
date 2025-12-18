@@ -39,7 +39,8 @@ AMateria::~AMateria(void)
 // Operator overloads ===================================================================
 AMateria			&AMateria::operator=(const AMateria &assign)
 {
-	this->_type = assign._type;
+	if (this->_type != assign.getType())
+		cout << "Cannot assign AMaterias of different types." << endl;
 	// cout << "AMateria(" << this->_type << "): assignment operator called!" << endl;
 	return (*this);
 }

@@ -10,10 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Character.hpp"
+#include	"Character.hpp"
 
-using std::cout;
-using std::endl;
+using 		std::cout;
+using		std::endl;
+
+AMateria	**Character::_ground = NULL;
+int			Character::_ground_quantity = 0;
 
 // Constructors/Destructor ==============================================================
 Character::Character(void) : _name(DEF_CHARNAME)
@@ -48,7 +51,7 @@ Character::~Character(void)
 }
 
 // Operator overloads ===================================================================
-Character &Character::operator=(const Character &assign)
+Character 			&Character::operator=(const Character &assign)
 {
 	if (this != &assign)
 	{
@@ -65,12 +68,32 @@ Character &Character::operator=(const Character &assign)
 }
 
 // Member function ======================================================================
-std::string const &Character::getName(void) const
+int					&Character::getGroundQty(void)
+{
+	return (_ground_quantity);
+}
+
+void				Character::clearGround(void)
+{
+	if (!_ground)
+	{
+		cout << "Nothing to clear on the ground." << endl;
+		return;
+	}
+	for (int i = 0; i < _ground_quantity; ++i)
+	{
+		delete _ground[i];
+	}
+	delete[] _ground;
+	cout << "Ground has been cleared!" << endl;
+}
+
+std::string const	&Character::getName(void) const
 {
 	return (this->_name);
 }
 
-void Character::equip(AMateria *m)
+void 				Character::equip(AMateria *m)
 {
 	int i = 0;
 
@@ -90,7 +113,7 @@ void Character::equip(AMateria *m)
 	this->_inventory[i] = m;
 }
 
-void Character::unequip(int idx)
+void				Character::unequip(int idx)
 {
 	if (idx >= INV_SIZE)
 	{
@@ -107,11 +130,20 @@ void Character::unequip(int idx)
 	}
 	cout << "Materia of type " << this->_inventory[idx]->getType()
 		 << " has been unequiped." << endl;
-	// save pointer
+
+
+
+	AMateria **tmp = _ground;
+	_ground = new AMateria*[_ground_quantity + 1];
+	_ground[_ground_quantity] = this->_inventory[idx];
+	for (int i = 0; i < _ground_quantity; ++i)
+		_ground[i] = tmp[i];
+	++_ground_quantity;
+
 	this->_inventory[idx] = NULL;
 }
 
-void Character::use(int idx, ICharacter &target)
+void 				Character::use(int idx, ICharacter &target)
 {
 	if (!this->_inventory[idx])
 	{
