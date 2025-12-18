@@ -72,23 +72,38 @@ void MateriaSource::learnMateria(AMateria *m)
 		return;
 	}
 	while (this->_knowledge[i])
+	{
+		if (this->_knowledge[i] == m)
+		{
+			cout << "Materia of type "
+				<< m->getType() << ", has already been learned." << endl;
+			return;
+		}
 		++i;
+	}
 	if (i == KNOWLEDGE_SIZE)
 	{
 		cout << "Unsufficent space to learn Materia of type "
 			 << m->getType() << "." << endl;
 		return;
 	}
-
 	this->_knowledge[i] = m;
+	cout << "Materia of type "
+		<< m->getType() << ", has been learned." << endl;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
 {
-	for (int i = 0; i < KNOWLEDGE_SIZE; ++i)
+	for (int i = 0; i < KNOWLEDGE_SIZE && this->_knowledge[i]; ++i)
 	{
 		if (type == this->_knowledge[i]->getType())
+		{
+			cout << "Materia of type "
+				<< type << ", has been created." << endl;
 			return (this->_knowledge[i]->clone());
+		}
 	}
+	cout << "No materia of type "
+		<< type << ", has been learned yet." << endl;
 	return (NULL);
 }

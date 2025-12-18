@@ -30,6 +30,7 @@ class	Character: public ICharacter
 
 		static int			&getGroundQty(void);
 		static void			clearGround(void);
+
 		std::string const	&getName(void) const;
 		void				equip(AMateria *m);
 		void				unequip(int idx);

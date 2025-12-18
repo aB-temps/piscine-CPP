@@ -102,6 +102,15 @@ void 				Character::equip(AMateria *m)
 		cout << "Cannot equip non-existant Materia." << endl;
 		return;
 	}
+	for (int j = 0; j < INV_SIZE; ++j)
+	{
+		if (this->_inventory[j] == m)
+		{
+			cout << "Materia of type "
+				<< m->getType() << ", has already been equiped." << endl;
+			return;
+		}
+	}
 	while (this->_inventory[i])
 		++i;
 	if (i == INV_SIZE)
@@ -111,6 +120,31 @@ void 				Character::equip(AMateria *m)
 		return;
 	}
 	this->_inventory[i] = m;
+	for (int j = 0; j < _ground_quantity; ++j)
+	{
+		if (_ground[j] == m)
+		{
+			AMateria **tmp = _ground;
+			_ground = new AMateria*[_ground_quantity];
+
+			int l = 0;
+			for (int k = 0; k < _ground_quantity - 1; ++k)
+			{
+				if (k == j)	
+					++l;
+				else
+					_ground[k] = tmp[l];
+				++l;
+			}
+			if (tmp)
+				delete[] tmp;
+			--_ground_quantity;
+			cout << "Materia of type "
+				<< m->getType() << ", has been grabbed from ground and equiped." << endl;
+			return;
+		}
+	}
+	cout << "Materia of type " << m->getType() << ", has been equiped." << endl;
 }
 
 void				Character::unequip(int idx)
@@ -128,18 +162,21 @@ void				Character::unequip(int idx)
 			 << idx << ")." << endl;
 		return;
 	}
-	cout << "Materia of type " << this->_inventory[idx]->getType()
-		 << " has been unequiped." << endl;
-
-
 
 	AMateria **tmp = _ground;
 	_ground = new AMateria*[_ground_quantity + 1];
-	_ground[_ground_quantity] = this->_inventory[idx];
+
 	for (int i = 0; i < _ground_quantity; ++i)
 		_ground[i] = tmp[i];
+
+	if (tmp)
+		delete[] tmp;
+
+	_ground[_ground_quantity] = this->_inventory[idx];
 	++_ground_quantity;
 
+	cout << "Materia of type " << this->_inventory[idx]->getType()
+		 << " has been unequiped." << endl;
 	this->_inventory[idx] = NULL;
 }
 

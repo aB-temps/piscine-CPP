@@ -18,45 +18,48 @@
 using	std::cout;
 using	std::endl;
 
-// int main(void)
-// {
-// 	cout << ">>> XXXXXXXX:\n";
-// 	cout << "> Constructors:" << endl;
-//
-//
-// 	cout << endl;
-//
-// 	cout << "> Destructors:" << endl;
-//
-// 	cout << endl;
-//
-// 	return (0);
-// }
-
 int	main(void)
 {
 	IMateriaSource* src = new MateriaSource();
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
+	cout << "GroundQty:" << Character::getGroundQty() << endl;
 
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
-
-
-	ICharacter* me = new Character("me");
-	AMateria* tmp;
-
-	cout << "GroundQty:" << Character::getGroundQty() << endl;
+	cout << endl;
 
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
 	me->equip(tmp);
+	cout << endl;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
 
+	me->unequip(0);
+	cout << "GroundQty:" << Character::getGroundQty() << endl;
 	me->unequip(1);
 	cout << "GroundQty:" << Character::getGroundQty() << endl;
+	me->unequip(2);
+	cout << "GroundQty:" << Character::getGroundQty() << endl;
+	me->unequip(3);
+	cout << "GroundQty:" << Character::getGroundQty() << endl;
+	me->equip(tmp);
+	cout << "GroundQty:" << Character::getGroundQty() << endl;
+	me->unequip(3);
+	cout << "GroundQty:" << Character::getGroundQty() << endl;
+	me->equip(tmp);
+	cout << endl;
 
 	ICharacter* bob = new Character("bob");
 	me->use(0, *bob);
 	me->use(1, *bob);
+	me->use(2, *bob);
+	me->use(3, *bob);
+	cout << endl;
 
 	delete bob;
 	delete me;

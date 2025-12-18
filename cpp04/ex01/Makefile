@@ -21,8 +21,8 @@ DIR_BUILD	:= .build/
 # FLAGS & COMPILATOR SETTINGS =========================================================
 CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
-WARN_FLAGS	:= -Wall -Werror -Wextra -g3
-CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98 -Wshadow
+WARN_FLAGS	:= -Wall -Werror -Wextra -Wshadow
+CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
 INC_FLAGS 	:= -I$(DIR_INC)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
