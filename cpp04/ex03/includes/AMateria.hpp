@@ -31,11 +31,14 @@ class	AMateria
 		AMateria				&operator=(const AMateria &assign);
 
 		std::string const		&getType(void) const;
+		const bool				&getLearnedState(void) const;
+		void					setLearnedState(const bool &state);
 		virtual AMateria		*clone(void) const = 0;
 		virtual void			use(ICharacter &target);
 
 	protected:
 		std::string				_type;
+		bool					_learned;
 
 };
 

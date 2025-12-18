@@ -20,13 +20,16 @@ using	std::endl;
 
 int	main(void)
 {
+	Ice *iceMat = new Ice();
 	IMateriaSource* src = new MateriaSource();
+	IMateriaSource* src2 = new MateriaSource();
 	ICharacter* me = new Character("me");
 	AMateria* tmp;
 	cout << "GroundQty:" << Character::getGroundQty() << endl;
 
 	src->learnMateria(new Ice());
-	src->learnMateria(new Cure());
+	src->learnMateria(iceMat);
+	src2->learnMateria(iceMat);
 	src->learnMateria(new Cure());
 	src->learnMateria(new Cure());
 	src->learnMateria(new Cure());
@@ -67,6 +70,7 @@ int	main(void)
 	delete bob;
 	delete me;
 	delete src;
+	delete src2;
 	Character::clearGround();
 
 	return 0;

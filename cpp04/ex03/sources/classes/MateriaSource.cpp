@@ -71,6 +71,11 @@ void MateriaSource::learnMateria(AMateria *m)
 		cout << "Cannot learn non-existant Materia." << endl;
 		return;
 	}
+	else if (m->getLearnedState())
+	{
+		cout << "Cannot learn a Materia that has already been learned by another MateriaSource." << endl;
+		return;
+	}
 	while (this->_knowledge[i])
 	{
 		if (this->_knowledge[i] == m)
@@ -89,6 +94,7 @@ void MateriaSource::learnMateria(AMateria *m)
 		return;
 	}
 	this->_knowledge[i] = m;
+	this->_knowledge[i]->setLearnedState(true);
 	cout << "Materia of type "
 		<< m->getType() << ", has been learned." << endl;
 }

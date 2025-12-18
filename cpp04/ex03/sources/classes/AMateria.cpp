@@ -16,17 +16,17 @@ using		std::cout;
 using		std::endl;
 
 // Constructors/Destructor ==============================================================
-AMateria::AMateria(void): _type(DEF_TYPENAME)
+AMateria::AMateria(void): _type(DEF_TYPENAME), _learned(false)
 {
 	// cout << "AMateria of type:" << this->_type << " has been constructed." << endl;
 }
 
-AMateria::AMateria(const AMateria &copy): _type(copy._type)
+AMateria::AMateria(const AMateria &copy): _type(copy._type), _learned(copy._learned)
 {
 	// cout << "AMateria of type:" << this->_type << " has been constructed(copy)." << endl;
 }
 
-AMateria::AMateria(std::string const &type): _type(type)
+AMateria::AMateria(std::string const &type): _type(type), _learned(false)
 {
 	// cout << "AMateria of type:" << this->_type << " has been constructed(type)." << endl;
 }
@@ -39,6 +39,7 @@ AMateria::~AMateria(void)
 // Operator overloads ===================================================================
 AMateria			&AMateria::operator=(const AMateria &assign)
 {
+	this->_learned = assign._learned;
 	if (this->_type != assign.getType())
 		cout << "Cannot assign AMaterias of different types." << endl;
 	// cout << "AMateria(" << this->_type << "): assignment operator called!" << endl;
@@ -49,6 +50,16 @@ AMateria			&AMateria::operator=(const AMateria &assign)
 std::string const	&AMateria::getType(void) const
 {
 	return (this->_type);
+}
+
+bool const			&AMateria::getLearnedState(void) const
+{
+	return (this->_learned);
+}
+
+void				AMateria::setLearnedState(const bool &state)
+{
+	this->_learned = state;
 }
 
 void				AMateria::use(ICharacter &target)
