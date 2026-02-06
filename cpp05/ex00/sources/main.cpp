@@ -17,12 +17,28 @@ using	std::endl;
 
 int main(void)
 {
-	Bureaucrat b1;
-	Bureaucrat b2("Fred", 12);
-	Bureaucrat b3(b2);
+	try
+	{
+		Bureaucrat b1;
+		Bureaucrat b2("Fred", 1);
+		Bureaucrat b3("Mike", 150);
+		Bureaucrat b4(b2);
 
-	cout << b1 << endl;
-	cout << b2 << endl;
-	cout << b3 << endl;
+		cout << b1 << endl;
+
+		cout << b1++ << endl;
+		cout << b1 << endl;
+		cout << ++b1 << endl;
+
+		cout << --b2 << endl;
+
+		cout << --b3 << endl;
+	}
+	catch (const Bureaucrat::GradeException &e)
+	{
+		cout << e.name() << ": " << e.what() << endl;
+		return (1);
+	}
+
 	return (0);
 }

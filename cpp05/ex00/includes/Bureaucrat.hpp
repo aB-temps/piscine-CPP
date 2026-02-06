@@ -18,15 +18,6 @@
 // Typedef =====================================================================
 typedef unsigned char	t_uint8;
 
-// Namespace ===================================================================
-namespace	ns_BureaucratSettings
-{
-	extern const char		defaultName[];
-	extern const t_uint8	minGrade;
-	extern const t_uint8 	maxGrade;
-	extern const t_uint8	defaultGrade;
-}
-
 // Class declaration ===========================================================
 class	Bureaucrat
 {
@@ -36,14 +27,51 @@ class	Bureaucrat
 		Bureaucrat(const std::string &name, const t_uint8 &grade);
 		~Bureaucrat(void);
 
-		Bureaucrat			&operator=(const Bureaucrat &assign);
+		Bureaucrat					&operator=(const Bureaucrat &assign);
+		Bureaucrat					operator++(int);
+		Bureaucrat					&operator++(void);
+		Bureaucrat					operator--(int);
+		Bureaucrat					&operator--(void);
+                            	
+		const std::string			&getName(void) const;
+		const t_uint8				&getGrade(void) const;
+		void						upGrade(void);
+		void						downGrade(void);
 
-		const std::string	&getName(void) const;
-		const t_uint8		&getGrade(void) const;
+		static const char			*defaultName;
+		static const t_uint8		minGrade;
+		static const t_uint8 		maxGrade;
+		static const t_uint8		defaultGrade;
+
+		class GradeException: public std::exception
+		{
+			public:
+				const char	*what(void) const throw();
+				const char	*name(void) const;
+
+			protected:
+				GradeException(const char *msg);
+				const char			*_msg;
+
+			private:
+				static const char	*_name;
+		};
+
+		class GradeTooHighException: public GradeException
+		{
+			public:
+				GradeTooHighException(void);
+		};
+
+		class GradeTooLowException: public GradeException
+		{
+			public:
+				GradeTooLowException(void);
+		};
 
 	private:
-		std::string	_name;	
-		t_uint8		_grade;	
+		std::string					_name;	
+		t_uint8						_grade;	
 
 };
 
