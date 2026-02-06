@@ -13,29 +13,42 @@
 #ifndef		__BUREAUCRAT_HPP__
 # define	__BUREAUCRAT_HPP__
 
-namespace	bureaucratDefault
+# include <iostream>
+
+// Typedef =====================================================================
+typedef unsigned char	t_uint8;
+
+// Namespace ===================================================================
+namespace	ns_BureaucratSettings
 {
-	extern const char defName[];
-	extern const uint8_t defGrade;
+	extern const char		defaultName[];
+	extern const t_uint8	minGrade;
+	extern const t_uint8 	maxGrade;
+	extern const t_uint8	defaultGrade;
 }
 
+// Class declaration ===========================================================
 class	Bureaucrat
 {
 	public:
 		Bureaucrat(void);
 		Bureaucrat(const Bureaucrat &copy);
-		Bureaucrat(const std::string &name, const uint8_t &grade);
+		Bureaucrat(const std::string &name, const t_uint8 &grade);
 		~Bureaucrat(void);
 
 		Bureaucrat			&operator=(const Bureaucrat &assign);
 
 		const std::string	&getName(void) const;
-		const uint8_t		&getGrade(void) const;
+		const t_uint8		&getGrade(void) const;
 
 	private:
-		const std::string	_name;	
-		const uint8_t		_grade;	
+		std::string	_name;	
+		t_uint8		_grade;	
 
 };
+
+// Utils =======================================================================
+std::ostream	&operator<<(std::ostream &outstream, const t_uint8 &insert);
+std::ostream	&operator<<(std::ostream &outstream, const Bureaucrat &insert);
 
 #endif

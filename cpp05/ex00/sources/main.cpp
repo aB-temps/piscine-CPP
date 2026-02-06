@@ -10,13 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Bureaucrat.hpp"
+
 using	std::cout;
 using	std::endl;
 
-#include "Bureaucrat.hpp"
-
 int main(void)
 {
+	Bureaucrat b1;
+	Bureaucrat b2("Fred", 12);
+	Bureaucrat b3(b2);
 
+	cout << b1 << endl;
+	cout << b2 << endl;
+	cout << b3 << endl;
 	return (0);
 }
