@@ -54,6 +54,7 @@ F_MAIN		:=	main.cpp
 
 F_CLASSES	:=	Bureaucrat.cpp		\
 				Form.cpp			\
+				GradeException.cpp	\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

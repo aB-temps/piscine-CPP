@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
-/*   Updated: 2026/02/06 18:57:18 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:10:58 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define	__BUREAUCRAT_HPP__
 
 # include <iostream>
+# include "GradeException.hpp"
 
 // Typedef =====================================================================
 typedef unsigned char	t_uint8;
@@ -35,6 +36,7 @@ class	Bureaucrat
                             	
 		const std::string			&getName(void) const;
 		const t_uint8				&getGrade(void) const;
+
 		void						upGrade(void);
 		void						downGrade(void);
 
@@ -43,30 +45,23 @@ class	Bureaucrat
 		static const t_uint8 		maxGrade;
 		static const t_uint8		defaultGrade;
 
-		class GradeException: public std::exception
+		class BureaucratException: public GradeException
 		{
 			public:
-				const char	*what(void) const throw();
-				const char	*name(void) const;
-
-			protected:
-				GradeException(const char *msg);
-				const char			*_msg;
-
-			private:
-				static const char	*_name;
+				BureaucratException();
+				BureaucratException(const char *msg);
 		};
 
-		class GradeTooHighException: public GradeException
+		class GradeTooLowException: public BureaucratException
 		{
 			public:
-				GradeTooHighException(void);
+				GradeTooLowException();
 		};
 
-		class GradeTooLowException: public GradeException
+		class GradeTooHighException: public BureaucratException
 		{
 			public:
-				GradeTooLowException(void);
+				GradeTooHighException();
 		};
 
 	private:

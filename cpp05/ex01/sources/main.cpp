@@ -34,10 +34,9 @@ int main(void)
 
 		cout << --b3 << endl;
 	}
-	catch (const Bureaucrat::GradeException &e)
+	catch (const GradeException &e)
 	{
-		cout << e.name() << ": " << e.what() << endl;
-		return (1);
+		cout << e.what() << endl;
 	}
 
 	return (0);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:39:42 by abetemps          #+#    #+#             */
-/*   Updated: 2026/02/06 18:57:15 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:11:17 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 // Using =======================================================================
 using	std::cout;
@@ -18,129 +18,103 @@ using	std::endl;
 
 
 // Static attr. init ============================================================
-const char			*Bureaucrat::defaultName = "Anonymous";
-const t_uint8		Bureaucrat::minGrade = 150;
-const t_uint8 		Bureaucrat::maxGrade = 1;
-const t_uint8 		Bureaucrat::defaultGrade = Bureaucrat::minGrade;
-
-const char			*Bureaucrat::GradeException::_name = "Bureaucrat_Grade_Exception";
+const char			*Form::defaultName = "Useless sheet";
+const t_uint8 		Form::defaultSignGrade = 42;
+const t_uint8 		Form::defaultExecGrade = 21;
 
 
 // Constructor & Destructor ====================================================
-Bureaucrat::Bureaucrat(void):
-	_name(Bureaucrat::defaultName), 
-	_grade(Bureaucrat::defaultGrade) {}
+Form::Form(void):
+	_name(Form::defaultName), 
+	_sign_grade(Form::defaultSignGrade),
+	_exec_grade(Form::defaultExecGrade),
+	_signed(false) {}
 
-Bureaucrat::Bureaucrat(const Bureaucrat &copy):
+Form::Form(const Form &copy):
 	_name(copy._name),
-	_grade(copy._grade) {}
+	_sign_grade(copy._sign_grade),
+	_exec_grade(copy._exec_grade),
+	_signed(copy._signed) {}
 
-Bureaucrat::Bureaucrat(const std::string &name, const t_uint8 &grade):
+Form::Form(const std::string &name, const t_uint8 &sign_grade, const t_uint8 &exec_grade):
 	_name(name),
-	_grade(grade)
+	_sign_grade(sign_grade),
+	_exec_grade(exec_grade),
+	_signed(false)
 {
-	if (grade < Bureaucrat::maxGrade)
-		throw (Bureaucrat::GradeTooHighException());
-	else if (grade > Bureaucrat::minGrade)
-		throw (Bureaucrat::GradeTooLowException());
+	if (_sign_grade < Bureaucrat::maxGrade || _exec_grade < Bureaucrat::maxGrade)
+		throw (Form::GradeTooHighException());
+	else if (_sign_grade > Bureaucrat::minGrade || _exec_grade > Bureaucrat::minGrade)
+		throw (Form::GradeTooLowException());
 }
 
-Bureaucrat::~Bureaucrat(void) {}
+Form::~Form(void) {}
 
 
 // Operator Overloads ==========================================================
-std::ostream	&operator<<(std::ostream &outstream, const t_uint8 &insert)
-{
-	outstream << +insert;
-
-	return (outstream);
-}
-
-std::ostream	&operator<<(std::ostream &outstream, const Bureaucrat &insert)
+std::ostream	&operator<<(std::ostream &outstream, const Form &insert)
 {
 	outstream	<< insert.getName()
-				<< ", bureaucrat grade " << insert.getGrade()
-				<< ".";
+				<< " | sign grade: " << insert.getSignGrade()
+				<< " | exec grade: " << insert.getExecGrade()
+				<< " | status:  " << (insert.getStatus() ? "signed" : "unsigned");
 
 	return (outstream);
 }
 
-Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &assign)
+Form	&Form::operator=(const Form &assign)
 {
-	if (this != &assign)
-	{
-		this->_name = assign._name;
-		this->_grade = assign._grade;
-	}
+	(void)	assign;
 	return (*this);
 }
-
-Bureaucrat		&Bureaucrat::operator++(void)
-{
-	this->upGrade();
-
-	return (*this);
-}
-
-Bureaucrat		Bureaucrat::operator++(int)
-{
-	Bureaucrat tmp(*this);
-
-	this->upGrade();
-
-	return (tmp);
-}
-
-Bureaucrat		&Bureaucrat::operator--(void)
-{
-	this->downGrade();
-
-	return (*this);
-}
-
-Bureaucrat		Bureaucrat::operator--(int)
-{
-	Bureaucrat tmp(*this);
-
-	this->downGrade();
-
-	return (tmp);
-}
-
 
 // Getters =====================================================================
-const std::string	&Bureaucrat::getName(void) const { return (this->_name); }
+const std::string	&Form::getName(void) const { return (this->_name); }
 
-const t_uint8		&Bureaucrat::getGrade(void) const { return (this->_grade); }
+const t_uint8		&Form::getSignGrade(void) const { return (this->_sign_grade); }
 
-void				Bureaucrat::upGrade(void)
+const t_uint8		&Form::getExecGrade(void) const { return (this->_exec_grade); }
+
+const bool			&Form::getStatus(void) const { return (this->_signed); }
+
+
+// Member functions ============================================================
+void				Form::beSigned(const Bureaucrat &b)
 {
-	if (this->_grade - 1< Bureaucrat::maxGrade)
-		throw (Bureaucrat::GradeTooHighException());
-	--this->_grade;
+	if (b.getGrade() <= this->_sign_grade)
+		this->_signed = true;
+	else
+		throw (Form::GradeTooLowException());
 }
 
-void				Bureaucrat::downGrade(void)
+void				Form::signForm(const Bureaucrat &b)
 {
-	if (this->_grade + 1 > Bureaucrat::minGrade)
-		throw (Bureaucrat::GradeTooLowException());
-	++this->_grade;
+	try
+	{
+		this->beSigned(b);
+	}
+	catch (const Bureaucrat::BureaucratException &e)
+	{
+		cout	<< b << " couldn't sign"
+				<< *this << "because " << e.what()
+				<< "." << endl;
+	}
+	cout	<< b << " signed"
+			<< *this << endl;
 }
+
 
 // Exceptions ==================================================================
 // Constructor & Destructor ----------------------------------------------------
-Bureaucrat::GradeException::GradeException(const char *msg): _msg(msg) {}
+Form::FormException::FormException(void):
+	GradeException("FormException", "") {}
 
-Bureaucrat::GradeTooHighException::GradeTooHighException(void): GradeException("Grade too high.") {}
+Form::FormException::FormException(const char *msg):
+	GradeException("FormException", msg) {}
 
-Bureaucrat::GradeTooLowException::GradeTooLowException(void): GradeException("Grade too low.") {}
+Form::GradeTooHighException::GradeTooHighException(void):
+	FormException("Grade too high") {}
 
-// what() overload -------------------------------------------------------------
-const char	*Bureaucrat::GradeException::name(void) const { return (this->_name); }
+Form::GradeTooLowException::GradeTooLowException(void):
+	FormException("Grade too low") {}
 
-const char	*Bureaucrat::GradeException::what(void) const throw() { return (this->_msg); }
-
-
-// const char	*Bureaucrat::GradeTooHighException::what(void) const throw() { return ("Grade too high."); }
-//
-// const char	*Bureaucrat::GradeTooLowException::what(void) const throw() { return ("Grade too low."); }
