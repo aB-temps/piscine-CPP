@@ -23,10 +23,8 @@ GradeException::~GradeException(void) throw() {}
 
 GradeException::GradeException(const char *targetType, const char *msg):
 	_targetType(std::string(targetType)),
-	_errMsg(std::string(msg))
-{
-	this->_whatMsg = this->_targetType + "(" + GradeException::_excptType + "): " + this->_errMsg + ".";
-}
+	_errMsg(std::string(msg)),
+	_whatMsg(_targetType + "(" + GradeException::_excptType + "): " + _errMsg + ".") {}
 
 // what() overload =============================================================
 const char	*GradeException::what(void) const throw()

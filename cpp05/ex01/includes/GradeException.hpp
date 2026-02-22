@@ -28,7 +28,7 @@ class GradeException: public std::exception
 		static const std::string	_excptType;
 		const std::string			_targetType;
 		const std::string			_errMsg;
-		std::string			_whatMsg;
+		const std::string			_whatMsg;
 };
 
 #endif
