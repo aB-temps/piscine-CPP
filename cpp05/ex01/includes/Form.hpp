@@ -32,7 +32,6 @@ class	Form
 		const t_uint8				&getExecGrade(void) const;
 		const bool					&getStatus(void) const;
 
-		void						beSigned(const Bureaucrat &b);
 		void						signForm(const Bureaucrat &b);
 
 		static const char			*defaultName;
@@ -58,7 +57,14 @@ class	Form
 				GradeTooHighException();
 		};
 
+		class AlreadySignedException: public FormException
+		{
+			public:
+				AlreadySignedException();
+		};
+
 	private:
+		void						_beSigned(const Bureaucrat &b);
 		const std::string			_name;	
 		const t_uint8				_sign_grade;	
 		const t_uint8				_exec_grade;	
