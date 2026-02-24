@@ -51,6 +51,7 @@ class	Form
 			public:
 				GradeTooLowException();
 		};
+
 		class GradeTooHighException: public FormException
 		{
 			public:

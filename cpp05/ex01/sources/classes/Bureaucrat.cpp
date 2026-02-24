@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "text_formatting.hpp"
 
 // Using =======================================================================
 using	std::cout;
@@ -55,9 +56,9 @@ std::ostream	&operator<<(std::ostream &outstream, const t_uint8 &insert)
 
 std::ostream	&operator<<(std::ostream &outstream, const Bureaucrat &insert)
 {
-	outstream	<< insert.getName()
-				<< ", bureaucrat grade " << insert.getGrade()
-				<< ".";
+	outstream	<< "[" BOLD << insert.getName()
+				<< RST ", bureaucrat grade " << insert.getGrade()
+				<< "]";
 
 	return (outstream);
 }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "text_formatting.hpp"
 
 // Using =======================================================================
 using	std::cout;
@@ -54,10 +55,11 @@ Form::~Form(void) {}
 // Operator Overloads ==========================================================
 std::ostream	&operator<<(std::ostream &outstream, const Form &insert)
 {
-	outstream	<< insert.getName()
-				<< " | sign grade: " << insert.getSignGrade()
-				<< " | exec grade: " << insert.getExecGrade()
-				<< " | status:  " << (insert.getStatus() ? "signed" : "unsigned");
+	outstream	<< "[" BOLD << insert.getName()
+				<< RST " | sign grade: " BLUE << insert.getSignGrade()
+				<< RST " | exec grade: " MAGENTA << insert.getExecGrade()
+				<< RST " | status:  " << (insert.getStatus() ? GREEN "signed" : RED "unsigned")
+				<< RST "]";
 
 	return (outstream);
 }
@@ -93,13 +95,14 @@ void				Form::signForm(const Bureaucrat &b)
 	{
 		this->beSigned(b);
 	}
-	catch (const Bureaucrat::BureaucratException &e)
+	catch (const Form::GradeTooLowException &e)
 	{
-		cout	<< b << " couldn't sign"
-				<< *this << "because " << e.what()
-				<< "." << endl;
+		cout	<< b << RED BOLD " couldn't sign " RST
+				<< *this << " because [" RED BOLD << e.what()
+				<< RST "]."<< endl;
+		return;
 	}
-	cout	<< b << " signed"
+	cout	<< b << GREEN BOLD " signed " RST
 			<< *this << endl;
 }
 
