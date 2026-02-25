@@ -28,9 +28,22 @@ int main(void)
 			<< f2 << '\n'
 			<< f3 << endl;
 
-	Bureaucrat				b1("Enchevri", 1);
+	Bureaucrat				b1("Enchevri", 136);
+
 	f1.signForm(b1);
-	b1.executeForm(f1);
+	try
+	{
+		b1.executeForm(f1);
+	}
+	catch (const std::exception &e)
+	{
+		return (1);
+	}
+
+	// Bureaucrat				b2("Pde-petr", 13);
+	//
+	// f2.signForm(b2);
+	// b2.executeForm(f2);
 
 	return (0);
 }

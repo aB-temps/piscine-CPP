@@ -24,7 +24,24 @@ using	std::endl;
 const char		*ShrubberyCreationForm::_defaultName = "ShrubberyCreationForm";
 const t_uint8	ShrubberyCreationForm::_defaultSignGrade = 145;
 const t_uint8	ShrubberyCreationForm::_defaultExecGrade = 137;
-const char		*ShrubberyCreationForm::_defaultTree = "";
+const char		*ShrubberyCreationForm::_defaultTree =
+"              * *    \n"
+"           *    *  *\n"
+"      *  *    *     *  *\n"
+"     *     *    *  *    *\n"
+" * *   *    *    *    *   *\n"
+" *     *  *    * * .#  *   *\n"
+" *   *     * #.  .# *   *\n"
+"  *     \"#.  #: #\" * *    *\n"
+" *   * * \"#. ##\"       *\n"
+"   *       \"###\n"
+"             \"##\n"
+"              ##.\n"
+"              .##:\n"
+"              :###\n"
+"              ;###\n"
+"            ,####.\n"
+"/\\/\\/\\/\\/.######.\\/\\/\\/\\/\\\\\n";
 
 
 // Constructor & Destructor ====================================================
@@ -57,13 +74,16 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	try
 	{
 		std::ofstream	outfile;
-			outfile.open(ofname.c_str());
-		outfile << "YOLO";
+		
+		outfile.exceptions(std::ios::eofbit | std::ios::failbit | std::ios::badbit);
+		outfile.open(ofname.c_str());
+
+		outfile.close();
+		
+		outfile << ShrubberyCreationForm::_defaultTree;
 	}
 	catch (const std::ios::failure &e)
 	{
-		cout << e.what() << endl;
+		throw;
 	}
-
-
 }

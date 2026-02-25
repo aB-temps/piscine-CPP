@@ -65,7 +65,7 @@ std::ostream	&operator<<(std::ostream &outstream, const AForm &insert)
 				<< RST " | target: " YELLOW << insert.getTarget()
 				<< RST " | sign grade: " BLUE << insert.getSignGrade()
 				<< RST " | exec grade: " MAGENTA << insert.getExecGrade()
-				<< RST " | status:  " << (insert.getStatus() ? GREEN "signed" : RED "unsigned")
+				<< RST " | status: " << (insert.getStatus() ? GREEN "signed" : RED "unsigned")
 				<< RST "]";
 
 	return (outstream);
@@ -109,7 +109,7 @@ void				AForm::signForm(const Bureaucrat &b)
 	catch (const AForm::FormException &e)
 	{
 		cout	<< b << RED BOLD " couldn't sign " RST
-				<< *this << " because [" RED BOLD << e.what()
+				<< *this << BOLD " because [" BOLD << e.what()
 				<< RST "]."<< endl;
 		return;
 	}
