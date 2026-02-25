@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+#include "Bureaucrat.hpp"
 
 // Using =======================================================================
 using	std::cout;
@@ -21,6 +22,7 @@ using	std::endl;
 const char		*RobotomyRequestForm::defaultName = "RobotomyRequestForm";
 const t_uint8	RobotomyRequestForm::defaultSignGrade = 72;
 const t_uint8	RobotomyRequestForm::defaultExecGrade = 45;
+
 
 // Constructor & Destructor ====================================================
 RobotomyRequestForm::RobotomyRequestForm(const char *target):
@@ -34,6 +36,7 @@ RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &copy):
 
 RobotomyRequestForm::~RobotomyRequestForm(void) {}
 
+
 // Operator Overloads ==========================================================
 RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm &assign)
 {
@@ -41,10 +44,12 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm &assign)
 	return (*this);
 }
 
-// Getters =====================================================================
-
 
 // Member functions ============================================================
+void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
+{
+	this->_isExecutable(executor.getGrade());
+}
 
 
 // Exceptions ==================================================================

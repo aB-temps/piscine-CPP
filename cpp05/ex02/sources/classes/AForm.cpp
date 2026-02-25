@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "AForm.hpp"
+
+#include "Bureaucrat.hpp"
 #include "text_formatting.hpp"
 
 // Using =======================================================================
@@ -29,27 +31,27 @@ const t_uint8 		AForm::defaultExecGrade = 21;
 AForm::AForm(void):
 	_name(AForm::defaultName), 
 	_target(AForm::defaultTarget), 
-	_sign_grade(AForm::defaultSignGrade),
-	_exec_grade(AForm::defaultExecGrade),
+	_signGrade(AForm::defaultSignGrade),
+	_execGrade(AForm::defaultExecGrade),
 	_signed(false) {}
 
 AForm::AForm(const AForm &copy):
 	_name(copy._name),
 	_target(copy._target),
-	_sign_grade(copy._sign_grade),
-	_exec_grade(copy._exec_grade),
+	_signGrade(copy._signGrade),
+	_execGrade(copy._execGrade),
 	_signed(copy._signed) {}
 
 AForm::AForm(const std::string &name, const std::string &target, const t_uint8 &sign_grade, const t_uint8 &exec_grade):
 	_name(name),
 	_target(target),
-	_sign_grade(sign_grade),
-	_exec_grade(exec_grade),
+	_signGrade(sign_grade),
+	_execGrade(exec_grade),
 	_signed(false)
 {
-	if (_sign_grade < Bureaucrat::maxGrade || _exec_grade < Bureaucrat::maxGrade)
+	if (sign_grade < Bureaucrat::maxGrade || exec_grade < Bureaucrat::maxGrade)
 		throw (AForm::GradeTooHighException());
-	else if (_sign_grade > Bureaucrat::minGrade || _exec_grade > Bureaucrat::minGrade)
+	else if (sign_grade > Bureaucrat::minGrade || exec_grade > Bureaucrat::minGrade)
 		throw (AForm::GradeTooLowException());
 }
 
@@ -80,9 +82,9 @@ const std::string	&AForm::getName(void) const { return (this->_name); }
 
 const std::string	&AForm::getTarget(void) const { return (this->_target); }
 
-const t_uint8		&AForm::getSignGrade(void) const { return (this->_sign_grade); }
+const t_uint8		&AForm::getSignGrade(void) const { return (this->_signGrade); }
 
-const t_uint8		&AForm::getExecGrade(void) const { return (this->_exec_grade); }
+const t_uint8		&AForm::getExecGrade(void) const { return (this->_execGrade); }
 
 const bool			&AForm::getStatus(void) const { return (this->_signed); }
 
@@ -92,7 +94,7 @@ void				AForm::_beSigned(const Bureaucrat &b)
 {
 	if (this->_signed)
 		throw (AForm::AlreadySignedException());
-	if (b.getGrade() <= this->_sign_grade)
+	if (b.getGrade() <= this->_signGrade)
 		this->_signed = true;
 	else
 		throw (AForm::GradeTooLowException());
@@ -115,6 +117,14 @@ void				AForm::signForm(const Bureaucrat &b)
 			<< *this << endl;
 }
 
+void				AForm::_isExecutable(const t_uint8 executorGrade) const
+{
+	if (!this->_signed)
+		throw (AForm::NotSignedException());
+	if (executorGrade <= this->_execGrade)
+		throw (Bureaucrat::GradeTooLowException());
+}
+
 
 // Exceptions ==================================================================
 // Constructor & Destructor ----------------------------------------------------
@@ -131,4 +141,7 @@ AForm::GradeTooLowException::GradeTooLowException(void):
 	FormException("Grade too low") {}
 
 AForm::AlreadySignedException::AlreadySignedException(void):
-	FormException("Already signed") {}
+	FormException("Cannot sign a form that has already been signed") {}
+
+AForm::NotSignedException::NotSignedException(void):
+	FormException("Cannot execute a form that has not been signed") {}

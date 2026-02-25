@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+#include "Bureaucrat.hpp"
 
 // Using =======================================================================
 using	std::cout;
@@ -21,6 +22,7 @@ using	std::endl;
 const char		*PresidentialPardonForm::defaultName = "PresidentialPardonForm";
 const t_uint8	PresidentialPardonForm::defaultSignGrade = 25;
 const t_uint8	PresidentialPardonForm::defaultExecGrade = 5;
+
 
 // Constructor & Destructor ====================================================
 PresidentialPardonForm::PresidentialPardonForm(const char *target):
@@ -34,6 +36,7 @@ PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &copy):
 
 PresidentialPardonForm::~PresidentialPardonForm(void) {}
 
+
 // Operator Overloads ==========================================================
 PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm &assign)
 {
@@ -41,10 +44,12 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm
 	return (*this);
 }
 
-// Getters =====================================================================
-
 
 // Member functions ============================================================
+void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
+{
+	this->_isExecutable(executor.getGrade());
+}
 
 
 // Exceptions ==================================================================

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+
+#include "AForm.hpp"
 #include "text_formatting.hpp"
 
 // Using =======================================================================
@@ -123,6 +125,18 @@ void				Bureaucrat::downGrade(void)
 	if (this->_grade + 1 > Bureaucrat::minGrade)
 		throw (Bureaucrat::GradeTooLowException());
 	++this->_grade;
+}
+
+void				Bureaucrat::executeForm(AForm const &form) const
+{
+	try
+	{
+		form.execute(*this);
+	}
+	catch (const GradeException &e)
+	{
+		cout << e.what() << endl;
+	}
 }
 
 

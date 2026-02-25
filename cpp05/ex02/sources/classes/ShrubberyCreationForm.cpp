@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
 
 // Using =======================================================================
 using	std::cout;
@@ -21,6 +22,7 @@ using	std::endl;
 const char		*ShrubberyCreationForm::defaultName = "ShrubberyCreationForm";
 const t_uint8	ShrubberyCreationForm::defaultSignGrade = 145;
 const t_uint8	ShrubberyCreationForm::defaultExecGrade = 137;
+
 
 // Constructor & Destructor ====================================================
 ShrubberyCreationForm::ShrubberyCreationForm(const char *target):
@@ -34,6 +36,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &copy):
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
 
+
 // Operator Overloads ==========================================================
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm &assign)
 {
@@ -41,10 +44,12 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm &a
 	return (*this);
 }
 
-// Getters =====================================================================
-
 
 // Member functions ============================================================
+void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+{
+	this->_isExecutable(executor.getGrade());
+}
 
 
 // Exceptions ==================================================================

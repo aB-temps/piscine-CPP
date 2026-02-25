@@ -27,6 +27,8 @@ class ShrubberyCreationForm: public AForm
 		static const char			*defaultName;
 		static const t_uint8		defaultSignGrade;
 		static const t_uint8		defaultExecGrade;
+
+		void						execute(Bureaucrat const &executor) const;
 };
 
 #endif

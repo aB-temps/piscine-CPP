@@ -14,7 +14,13 @@
 # define	__AFORM_HPP__
 
 # include <iostream>
-# include "Bureaucrat.hpp"
+# include "GradeException.hpp"
+
+class Bureaucrat;
+
+// Typedef =====================================================================
+typedef unsigned char	t_uint8;
+
 
 // Class declaration ===========================================================
 class	AForm
@@ -34,6 +40,7 @@ class	AForm
 		const bool					&getStatus(void) const;
 
 		void						signForm(const Bureaucrat &b);
+		virtual void				execute(Bureaucrat const &executor) const = 0;
 
 		static const char			*defaultName;
 		static const char			*defaultTarget;
@@ -65,12 +72,21 @@ class	AForm
 				AlreadySignedException();
 		};
 
+		class NotSignedException: public FormException
+		{
+			public:
+				NotSignedException();
+		};
+
+	protected:
+		void						_isExecutable(const t_uint8 executorGrade) const;
+
 	private:
 		void						_beSigned(const Bureaucrat &b);
 		const std::string			_name;	
 		const std::string			_target;	
-		const t_uint8				_sign_grade;	
-		const t_uint8				_exec_grade;	
+		const t_uint8				_signGrade;	
+		const t_uint8				_execGrade;	
 		bool						_signed;
 
 };
