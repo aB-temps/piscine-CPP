@@ -78,8 +78,6 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		outfile.exceptions(std::ios::eofbit | std::ios::failbit | std::ios::badbit);
 		outfile.open(ofname.c_str());
 
-		outfile.close();
-		
 		outfile << ShrubberyCreationForm::_defaultTree;
 	}
 	catch (const std::ios::failure &e)

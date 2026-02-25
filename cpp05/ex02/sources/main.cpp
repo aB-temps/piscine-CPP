@@ -15,6 +15,12 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+enum
+{
+	SUCCESS,
+	FATAL_IOS
+};
+
 using	std::cout;
 using	std::endl;
 
@@ -35,15 +41,21 @@ int main(void)
 	{
 		b1.executeForm(f1);
 	}
-	catch (const std::exception &e)
+	catch (const std::ios::failure &e)
 	{
-		return (1);
+		return (FATAL_IOS);
 	}
 
-	// Bureaucrat				b2("Pde-petr", 13);
-	//
-	// f2.signForm(b2);
-	// b2.executeForm(f2);
+	Bureaucrat				b2("Pde-petr", 42);
 
-	return (0);
+	f2.signForm(b2);
+	b2.executeForm(f2);
+
+
+	Bureaucrat				b3("Cviel", 5);
+
+	f3.signForm(b3);
+	b3.executeForm(f3);
+
+	return (SUCCESS);
 }

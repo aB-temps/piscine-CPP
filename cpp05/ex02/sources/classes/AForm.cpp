@@ -109,7 +109,7 @@ void				AForm::signForm(const Bureaucrat &b)
 	catch (const AForm::FormException &e)
 	{
 		cout	<< b << RED BOLD " couldn't sign " RST
-				<< *this << BOLD " because [" BOLD << e.what()
+				<< *this << " because [" BOLD RED << e.what()
 				<< RST "]."<< endl;
 		return;
 	}

@@ -11,7 +11,11 @@
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+
+#include <cstdlib>
+#include <ctime>
 #include "Bureaucrat.hpp"
+#include "text_formatting.hpp"
 
 // Using =======================================================================
 using	std::cout;
@@ -49,4 +53,19 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm &assign)
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	this->_isExecutable(executor.getGrade());
+
+	cout << YELLOW "Drrrrrrrrrrrrrrrrr!!" << endl;
+	std::srand(std::time(0));
+	if (std::rand() % 2)
+	{
+		cout	<< GREEN BOLD
+				<< this->getTarget() << RST GREEN "'s robotomy was a success!" RST
+				<< endl;
+	}
+	else
+	{
+		cout	<< RED BOLD
+				<< this->getTarget() << RST RED "'s robotomy failed..." RST
+				<< endl;
+	}
 }

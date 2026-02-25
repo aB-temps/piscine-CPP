@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+
 #include "Bureaucrat.hpp"
+#include "text_formatting.hpp"
 
 // Using =======================================================================
 using	std::cout;
@@ -49,4 +51,10 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	this->_isExecutable(executor.getGrade());
+
+	cout	<< YELLOW BOLD
+			<< this->getTarget()
+			<< RST YELLOW " has been pardoned by "
+			<< BOLD "Zaphod Beeblebrox" RST YELLOW << "."
+			<< endl;
 }
