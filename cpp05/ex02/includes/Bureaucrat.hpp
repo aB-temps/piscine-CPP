@@ -44,10 +44,8 @@ class	Bureaucrat
 		void						executeForm(AForm const &form) const;
 
 
-		static const char			*defaultName;
 		static const t_uint8		minGrade;
 		static const t_uint8 		maxGrade;
-		static const t_uint8		defaultGrade;
 
 		class BureaucratException: public GradeException
 		{
@@ -69,6 +67,9 @@ class	Bureaucrat
 		};
 
 	private:
+		static const char			*_defaultName;
+		static const t_uint8		_defaultGrade;
+
 		std::string					_name;	
 		t_uint8						_grade;	
 

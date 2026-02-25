@@ -21,18 +21,18 @@ using	std::endl;
 
 
 // Static attr. init ============================================================
-const char			*AForm::defaultName = "Useless sheet";
-const char			*AForm::defaultTarget = "Random";
-const t_uint8 		AForm::defaultSignGrade = 42;
-const t_uint8 		AForm::defaultExecGrade = 21;
+const char			*AForm::_defaultName = "Useless sheet";
+const char			*AForm::_defaultTarget = "Random";
+const t_uint8 		AForm::_defaultSignGrade = 42;
+const t_uint8 		AForm::_defaultExecGrade = 21;
 
 
 // Constructor & Destructor ====================================================
 AForm::AForm(void):
-	_name(AForm::defaultName), 
-	_target(AForm::defaultTarget), 
-	_signGrade(AForm::defaultSignGrade),
-	_execGrade(AForm::defaultExecGrade),
+	_name(AForm::_defaultName), 
+	_target(AForm::_defaultTarget), 
+	_signGrade(AForm::_defaultSignGrade),
+	_execGrade(AForm::_defaultExecGrade),
 	_signed(false) {}
 
 AForm::AForm(const AForm &copy):
@@ -121,7 +121,7 @@ void				AForm::_isExecutable(const t_uint8 executorGrade) const
 {
 	if (!this->_signed)
 		throw (AForm::NotSignedException());
-	if (executorGrade <= this->_execGrade)
+	if (executorGrade > this->_execGrade)
 		throw (Bureaucrat::GradeTooLowException());
 }
 

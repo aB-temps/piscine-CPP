@@ -19,14 +19,14 @@ using	std::endl;
 
 
 // Static attr. init ============================================================
-const char		*RobotomyRequestForm::defaultName = "RobotomyRequestForm";
-const t_uint8	RobotomyRequestForm::defaultSignGrade = 72;
-const t_uint8	RobotomyRequestForm::defaultExecGrade = 45;
+const char		*RobotomyRequestForm::_defaultName = "RobotomyRequestForm";
+const t_uint8	RobotomyRequestForm::_defaultSignGrade = 72;
+const t_uint8	RobotomyRequestForm::_defaultExecGrade = 45;
 
 
 // Constructor & Destructor ====================================================
 RobotomyRequestForm::RobotomyRequestForm(const char *target):
-	AForm(RobotomyRequestForm::defaultName, target, RobotomyRequestForm::defaultSignGrade, RobotomyRequestForm::defaultExecGrade) {}
+	AForm(RobotomyRequestForm::_defaultName, target, RobotomyRequestForm::_defaultSignGrade, RobotomyRequestForm::_defaultExecGrade) {}
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &copy):
 	AForm()
@@ -50,6 +50,3 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	this->_isExecutable(executor.getGrade());
 }
-
-
-// Exceptions ==================================================================

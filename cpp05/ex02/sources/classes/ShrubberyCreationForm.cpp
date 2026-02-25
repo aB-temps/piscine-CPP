@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+
+#include <fstream>
 #include "Bureaucrat.hpp"
 
 // Using =======================================================================
@@ -19,14 +21,15 @@ using	std::endl;
 
 
 // Static attr. init ============================================================
-const char		*ShrubberyCreationForm::defaultName = "ShrubberyCreationForm";
-const t_uint8	ShrubberyCreationForm::defaultSignGrade = 145;
-const t_uint8	ShrubberyCreationForm::defaultExecGrade = 137;
+const char		*ShrubberyCreationForm::_defaultName = "ShrubberyCreationForm";
+const t_uint8	ShrubberyCreationForm::_defaultSignGrade = 145;
+const t_uint8	ShrubberyCreationForm::_defaultExecGrade = 137;
+const char		*ShrubberyCreationForm::_defaultTree = "";
 
 
 // Constructor & Destructor ====================================================
 ShrubberyCreationForm::ShrubberyCreationForm(const char *target):
-	AForm(ShrubberyCreationForm::defaultName, target, ShrubberyCreationForm::defaultSignGrade, ShrubberyCreationForm::defaultExecGrade) {}
+	AForm(ShrubberyCreationForm::_defaultName, target, ShrubberyCreationForm::_defaultSignGrade, ShrubberyCreationForm::_defaultExecGrade) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &copy):
 	AForm()
@@ -49,7 +52,18 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm &a
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	this->_isExecutable(executor.getGrade());
+
+	std::string	ofname(this->getTarget() + "_shrubbery");
+	try
+	{
+		std::ofstream	outfile;
+			outfile.open(ofname.c_str());
+		outfile << "YOLO";
+	}
+	catch (const std::ios::failure &e)
+	{
+		cout << e.what() << endl;
+	}
+
+
 }
-
-
-// Exceptions ==================================================================

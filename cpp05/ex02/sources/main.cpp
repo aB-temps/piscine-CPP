@@ -28,5 +28,9 @@ int main(void)
 			<< f2 << '\n'
 			<< f3 << endl;
 
+	Bureaucrat				b1("Enchevri", 1);
+	f1.signForm(b1);
+	b1.executeForm(f1);
+
 	return (0);
 }

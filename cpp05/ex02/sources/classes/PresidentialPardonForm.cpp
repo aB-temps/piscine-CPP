@@ -19,14 +19,14 @@ using	std::endl;
 
 
 // Static attr. init ============================================================
-const char		*PresidentialPardonForm::defaultName = "PresidentialPardonForm";
-const t_uint8	PresidentialPardonForm::defaultSignGrade = 25;
-const t_uint8	PresidentialPardonForm::defaultExecGrade = 5;
+const char		*PresidentialPardonForm::_defaultName = "PresidentialPardonForm";
+const t_uint8	PresidentialPardonForm::_defaultSignGrade = 25;
+const t_uint8	PresidentialPardonForm::_defaultExecGrade = 5;
 
 
 // Constructor & Destructor ====================================================
 PresidentialPardonForm::PresidentialPardonForm(const char *target):
-	AForm(PresidentialPardonForm::defaultName, target, PresidentialPardonForm::defaultSignGrade, PresidentialPardonForm::defaultExecGrade) {}
+	AForm(PresidentialPardonForm::_defaultName, target, PresidentialPardonForm::_defaultSignGrade, PresidentialPardonForm::_defaultExecGrade) {}
 
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &copy):
 	AForm()
@@ -50,6 +50,3 @@ void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	this->_isExecutable(executor.getGrade());
 }
-
-
-// Exceptions ==================================================================

@@ -42,11 +42,6 @@ class	AForm
 		void						signForm(const Bureaucrat &b);
 		virtual void				execute(Bureaucrat const &executor) const = 0;
 
-		static const char			*defaultName;
-		static const char			*defaultTarget;
-		static const t_uint8		defaultSignGrade;
-		static const t_uint8		defaultExecGrade;
-
 		class FormException:  public GradeException
 		{
 			public:
@@ -80,8 +75,13 @@ class	AForm
 
 	protected:
 		void						_isExecutable(const t_uint8 executorGrade) const;
+		static const t_uint8		_defaultSignGrade;
+		static const t_uint8		_defaultExecGrade;
 
 	private:
+		static const char			*_defaultName;
+		static const char			*_defaultTarget;
+
 		void						_beSigned(const Bureaucrat &b);
 		const std::string			_name;	
 		const std::string			_target;	

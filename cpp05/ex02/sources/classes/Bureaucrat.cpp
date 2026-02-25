@@ -21,15 +21,15 @@ using	std::endl;
 
 
 // Static attr. init ============================================================
-const char			*Bureaucrat::defaultName = "Anonymous";
+const char			*Bureaucrat::_defaultName = "Anonymous";
 const t_uint8		Bureaucrat::minGrade = 150;
 const t_uint8 		Bureaucrat::maxGrade = 1;
-const t_uint8 		Bureaucrat::defaultGrade = Bureaucrat::minGrade;
+const t_uint8 		Bureaucrat::_defaultGrade = Bureaucrat::minGrade;
 
 // Constructor & Destructor ====================================================
 Bureaucrat::Bureaucrat(void):
-	_name(Bureaucrat::defaultName), 
-	_grade(Bureaucrat::defaultGrade) {}
+	_name(Bureaucrat::_defaultName), 
+	_grade(Bureaucrat::_defaultGrade) {}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy):
 	_name(copy._name),

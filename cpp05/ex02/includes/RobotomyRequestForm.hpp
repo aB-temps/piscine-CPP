@@ -24,11 +24,12 @@ class RobotomyRequestForm: public AForm
 
 		RobotomyRequestForm	&operator=(RobotomyRequestForm &assign);
 
-		static const char			*defaultName;
-		static const t_uint8		defaultSignGrade;
-		static const t_uint8		defaultExecGrade;
-
 		void						execute(Bureaucrat const &executor) const;
+
+	private:
+		static const char			*_defaultName;
+		static const t_uint8		_defaultSignGrade;
+		static const t_uint8		_defaultExecGrade;
 };
 
 #endif

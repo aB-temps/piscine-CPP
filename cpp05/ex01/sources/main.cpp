@@ -45,6 +45,8 @@ int main(void)
 
 		f2.signForm(b2); // KO: Grade too low
 
+		throw(std::bad_alloc());
+
 		Form		f3("Application of qpupier", 0, 5); // KO: Grade too high (Form)
 		++b1;											// KO: Grade too high (Bureaucrat)
 	}
