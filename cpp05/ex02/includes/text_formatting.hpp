@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
 #ifndef		__TEXT_FORMATTING_HPP__
 # define	__TEXT_FORMATTING_HPP__
 

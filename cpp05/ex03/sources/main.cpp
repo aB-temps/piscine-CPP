@@ -10,57 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
-
-enum
-{
-	SUCCESS,
-	FATAL_IOS
-};
+#include "AForm.hpp"
+#include "Intern.hpp"
 
 using	std::cout;
 using	std::endl;
 
 int main(void)
 {
-	ShrubberyCreationForm	f1("JM");
-	RobotomyRequestForm		f2("JP");
-	PresidentialPardonForm	f3("JF");
+	Intern	someRandomIntern;
+	AForm	*rrf;
 
-	cout	<< f1 << '\n'
-			<< f2 << '\n'
-			<< f3 << endl;
+	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 
-	Bureaucrat				b1("Enchevri", 136);
-	Bureaucrat				b2("Pde-petr", 42);
-	Bureaucrat				b3("Cviel", 5);
+	cout << *rrf << endl;
 
-	cout	<< b1 << '\n'
-			<< b2 << '\n'
-			<< b3 << endl;
-
-
-	f1.signForm(b1);
-	try
-	{
-		b1.executeForm(f1);
-	}
-	catch (const std::ios::failure &e) // dedicated exception's return code
-	{
-		return (FATAL_IOS);
-	}
-
-
-	f2.signForm(b2);
-	b2.executeForm(f2);
-
-
-
-	f3.signForm(b3);
-	b3.executeForm(f3);
-
-	return (SUCCESS);
+	delete rrf;
+	return (0);
 }
