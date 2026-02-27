@@ -39,8 +39,8 @@ class	AForm
 		const t_uint8				&getExecGrade(void) const;
 		const bool					&getStatus(void) const;
 
-		void						signForm(const Bureaucrat &b);
-		virtual void				execute(Bureaucrat const &executor) const = 0;
+		void						beSigned(const Bureaucrat &b);
+		void						execute(Bureaucrat const &executor) const;
 
 		class FormException:  public GradeException
 		{
@@ -67,22 +67,21 @@ class	AForm
 				AlreadySignedException();
 		};
 
-		class NotSignedException: public FormException
+		class UnsignedException: public FormException
 		{
 			public:
-				NotSignedException();
+				UnsignedException();
 		};
 
 	protected:
-		void						_isExecutable(const t_uint8 executorGrade) const;
 		static const t_uint8		_defaultSignGrade;
 		static const t_uint8		_defaultExecGrade;
+		virtual void				_executeSelf(void) const = 0;
 
 	private:
 		static const char			*_defaultName;
 		static const char			*_defaultTarget;
 
-		void						_beSigned(const Bureaucrat &b);
 		const std::string			_name;	
 		const std::string			_target;	
 		const t_uint8				_signGrade;	

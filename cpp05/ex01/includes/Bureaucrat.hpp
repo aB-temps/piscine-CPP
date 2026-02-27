@@ -16,6 +16,8 @@
 # include <iostream>
 # include "GradeException.hpp"
 
+class	Form;
+
 // Typedef =====================================================================
 typedef unsigned char	t_uint8;
 
@@ -39,6 +41,7 @@ class	Bureaucrat
 
 		void						upGrade(void);
 		void						downGrade(void);
+		void						signForm(Form &f);
 
 		static const char			*defaultName;
 		static const t_uint8		minGrade;

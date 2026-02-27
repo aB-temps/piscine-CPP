@@ -48,10 +48,8 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm
 
 
 // Member functions ============================================================
-void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
+void	PresidentialPardonForm::_executeSelf(void) const
 {
-	this->_isExecutable(executor.getGrade());
-
 	cout	<< YELLOW BOLD
 			<< this->getTarget()
 			<< RST YELLOW " has been pardoned by "

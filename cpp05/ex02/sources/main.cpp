@@ -43,7 +43,7 @@ int main(void)
 			<< b3 << endl;
 
 
-	f1.signForm(b1);
+	b1.signForm(f1);
 	try
 	{
 		b1.executeForm(f1);
@@ -54,12 +54,12 @@ int main(void)
 	}
 
 
-	f2.signForm(b2);
+	b2.signForm(f2);
 	b2.executeForm(f2);
 
 
 
-	f3.signForm(b3);
+	b3.signForm(f3);
 	b3.executeForm(f3);
 
 	return (SUCCESS);

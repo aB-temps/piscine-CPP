@@ -24,9 +24,8 @@ class RobotomyRequestForm: public AForm
 
 		RobotomyRequestForm	&operator=(RobotomyRequestForm &assign);
 
-		void						execute(Bureaucrat const &executor) const;
-
 	private:
+		void						_executeSelf(void) const;
 		static const char			*_defaultName;
 		static const t_uint8		_defaultSignGrade;
 		static const t_uint8		_defaultExecGrade;

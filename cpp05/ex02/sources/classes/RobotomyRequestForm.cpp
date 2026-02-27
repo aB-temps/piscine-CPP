@@ -50,10 +50,8 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm &assign)
 
 
 // Member functions ============================================================
-void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
+void	RobotomyRequestForm::_executeSelf(void) const
 {
-	this->_isExecutable(executor.getGrade());
-
 	cout << YELLOW "Drrrrrrrrrrrrrrrrr!!" << endl;
 	std::srand(std::time(0));
 	if (std::rand() % 2)

@@ -30,7 +30,7 @@ const char						*Intern::formNames[Intern::FORMS_QTY] =
 	"presidential pardon"
 };
 
-const Intern::formConstructor	Intern::_constructors[Intern::FORMS_QTY] =
+const Intern::formConstructor	Intern::_constructors[Intern::FORMS_QTY] = 
 {
 	&Intern::buildForm<ShrubberyCreationForm>,
 	&Intern::buildForm<RobotomyRequestForm>,
@@ -40,7 +40,7 @@ const Intern::formConstructor	Intern::_constructors[Intern::FORMS_QTY] =
 // Constructor & Destructor ====================================================
 Intern::Intern(void) {}
 
-Intern::Intern(const Intern &copy)
+Intern::Intern(const Intern &copy) 
 {
 	(void) copy;
 }
@@ -64,6 +64,7 @@ AForm	*Intern::makeForm(const std::string &name, const std::string &target)
 		if (name == Intern::formNames[i])
 			return (Intern::_constructors[i](target.c_str()));
 	}
+	//TODO: write which form was created
 	throw (Intern::UnknownFormException());
 }
 

@@ -39,13 +39,11 @@ int main(void)
 		Form		f1("Application of jweber", 10, 5);
 		Form		f2("Application of civel", 10, 5);
 
-		f1.signForm(b1); // OK
+		b1.signForm(f1); // OK
 
-		f1.signForm(b2); // KO: Already signed
+		b1.signForm(f2); // KO: Already signed
 
-		f2.signForm(b2); // KO: Grade too low
-
-		throw(std::bad_alloc());
+		b2.signForm(f2); // KO: Grade too low
 
 		Form		f3("Application of qpupier", 0, 5); // KO: Grade too high (Form)
 		++b1;											// KO: Grade too high (Bureaucrat)

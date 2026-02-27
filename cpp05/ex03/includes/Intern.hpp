@@ -66,6 +66,7 @@ class	Intern
 		}
 
 		static const formConstructor	_constructors[FORMS_QTY];
+
 };
 
 #endif

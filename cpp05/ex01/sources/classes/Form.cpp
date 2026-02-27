@@ -81,7 +81,7 @@ const bool			&Form::getStatus(void) const { return (this->_signed); }
 
 
 // Member functions ============================================================
-void				Form::_beSigned(const Bureaucrat &b)
+void				Form::beSigned(const Bureaucrat &b)
 {
 	if (this->_signed)
 		throw (Form::AlreadySignedException());
@@ -89,23 +89,6 @@ void				Form::_beSigned(const Bureaucrat &b)
 		this->_signed = true;
 	else
 		throw (Form::GradeTooLowException());
-}
-
-void				Form::signForm(const Bureaucrat &b)
-{
-	try
-	{
-		this->_beSigned(b);
-	}
-	catch (const Form::FormException &e)
-	{
-		cout	<< b << RED BOLD " couldn't sign " RST
-				<< *this << " because [" RED BOLD << e.what()
-				<< RST "]."<< endl;
-		return;
-	}
-	cout	<< b << GREEN BOLD " signed " RST
-			<< *this << endl;
 }
 
 

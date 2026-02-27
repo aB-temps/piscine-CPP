@@ -41,8 +41,8 @@ class	Bureaucrat
 
 		void						upGrade(void);
 		void						downGrade(void);
+		void						signForm(AForm &f);
 		void						executeForm(AForm const &form) const;
-
 
 		static const t_uint8		minGrade;
 		static const t_uint8 		maxGrade;

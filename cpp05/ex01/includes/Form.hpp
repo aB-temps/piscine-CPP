@@ -32,7 +32,7 @@ class	Form
 		const t_uint8				&getExecGrade(void) const;
 		const bool					&getStatus(void) const;
 
-		void						signForm(const Bureaucrat &b);
+		void						beSigned(const Bureaucrat &b);
 
 		static const char			*defaultName;
 		static const t_uint8		defaultSignGrade;
@@ -64,7 +64,6 @@ class	Form
 		};
 
 	private:
-		void						_beSigned(const Bureaucrat &b);
 		const std::string			_name;	
 		const t_uint8				_sign_grade;	
 		const t_uint8				_exec_grade;	

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+
+#include "Form.hpp"
 #include "text_formatting.hpp"
 
 // Using =======================================================================
@@ -125,6 +127,22 @@ void				Bureaucrat::downGrade(void)
 	++this->_grade;
 }
 
+void				Bureaucrat::signForm(Form &f)
+{
+	try
+	{
+		f.beSigned(*this);
+	}
+	catch (const Form::FormException &e)
+	{
+		cout	<< *this << RED BOLD " couldn't sign " RST
+				<< f << " because [" RED BOLD << e.what()
+				<< RST "]."<< endl;
+		return;
+	}
+	cout	<< *this << GREEN BOLD " signed " RST
+			<< f << endl;
+}
 
 // Exceptions ==================================================================
 // Constructor & Destructor ----------------------------------------------------

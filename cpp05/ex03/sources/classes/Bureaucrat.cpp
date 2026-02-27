@@ -127,28 +127,45 @@ void				Bureaucrat::downGrade(void)
 	++this->_grade;
 }
 
-void				Bureaucrat::executeForm(AForm const &form) const
+void				Bureaucrat::signForm(AForm &f)
 {
 	try
 	{
-		form.execute(*this);
+		f.beSigned(*this);
+	}
+	catch (const AForm::FormException &e)
+	{
+		cout	<< *this << RED BOLD " couldn't sign " RST
+				<< f << " because [" RED BOLD << e.what()
+				<< RST "]."<< endl;
+		return;
+	}
+	cout	<< *this << GREEN BOLD " signed " RST
+			<< f << endl;
+}
+
+void				Bureaucrat::executeForm(AForm const &f) const
+{
+	try
+	{
+		f.execute(*this);
 	}
 	catch (const GradeException &e)
 	{
 		cout	<< *this << RED BOLD " couldn't execute " RST
-				<< form << BOLD " because [" RED BOLD << e.what()
+				<< f << BOLD " because [" RED BOLD << e.what()
 				<< RST "]."<< endl;
 		return;
 	}
 	catch (const std::ios::failure &e)
 	{
 		cout	<< RED BOLD "Fatal error occured while executing " RST
-				<< form << BOLD " because [" RED BOLD << e.what()
+				<< f << BOLD " because [" RED BOLD << e.what()
 				<< RST "]."<< endl;
 		throw;
 	}
 	cout	<< *this << GREEN BOLD " executed " RST
-			<< form << endl;
+			<< f << endl;
 }
 
 

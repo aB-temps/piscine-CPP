@@ -90,7 +90,7 @@ const bool			&AForm::getStatus(void) const { return (this->_signed); }
 
 
 // Member functions ============================================================
-void				AForm::_beSigned(const Bureaucrat &b)
+void				AForm::beSigned(const Bureaucrat &b)
 {
 	if (this->_signed)
 		throw (AForm::AlreadySignedException());
@@ -100,29 +100,14 @@ void				AForm::_beSigned(const Bureaucrat &b)
 		throw (AForm::GradeTooLowException());
 }
 
-void				AForm::signForm(const Bureaucrat &b)
-{
-	try
-	{
-		this->_beSigned(b);
-	}
-	catch (const AForm::FormException &e)
-	{
-		cout	<< b << RED BOLD " couldn't sign " RST
-				<< *this << " because [" BOLD RED << e.what()
-				<< RST "]."<< endl;
-		return;
-	}
-	cout	<< b << GREEN BOLD " signed " RST
-			<< *this << endl;
-}
-
-void				AForm::_isExecutable(const t_uint8 executorGrade) const
+void				AForm::execute(Bureaucrat const &executor) const
 {
 	if (!this->_signed)
-		throw (AForm::NotSignedException());
-	if (executorGrade > this->_execGrade)
+		throw (AForm::UnsignedException());
+	if (executor.getGrade() > this->_execGrade)
 		throw (Bureaucrat::GradeTooLowException());
+
+	this->_executeSelf();
 }
 
 
@@ -143,5 +128,5 @@ AForm::GradeTooLowException::GradeTooLowException(void):
 AForm::AlreadySignedException::AlreadySignedException(void):
 	FormException("Cannot sign a form that has already been signed") {}
 
-AForm::NotSignedException::NotSignedException(void):
+AForm::UnsignedException::UnsignedException(void):
 	FormException("Cannot execute a form that has not been signed") {}

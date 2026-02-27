@@ -66,10 +66,8 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm &a
 
 
 // Member functions ============================================================
-void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+void	ShrubberyCreationForm::_executeSelf(void) const
 {
-	this->_isExecutable(executor.getGrade());
-
 	std::string	ofname(this->getTarget() + "_shrubbery");
 	try
 	{
