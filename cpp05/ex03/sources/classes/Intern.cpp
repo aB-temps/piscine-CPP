@@ -64,7 +64,9 @@ AForm	*Intern::makeForm(const std::string &name, const std::string &target)
 		if (name == Intern::formNames[i])
 			return (Intern::_constructors[i](target.c_str()));
 	}
-	//TODO: write which form was created
+	cout	<< RED "Cannot make form of type: '"
+			<< BOLD << name << RST RED "'" RST
+			<< endl; 
 	throw (Intern::UnknownFormException());
 }
 

@@ -53,6 +53,6 @@ void	PresidentialPardonForm::_executeSelf(void) const
 	cout	<< YELLOW BOLD
 			<< this->getTarget()
 			<< RST YELLOW " has been pardoned by "
-			<< BOLD "Zaphod Beeblebrox" RST YELLOW << "."
+			<< BOLD "Zaphod Beeblebrox" RST YELLOW << "." RST
 			<< endl;
 }
