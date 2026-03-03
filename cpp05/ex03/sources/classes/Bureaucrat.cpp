@@ -35,7 +35,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &copy):
 	_name(copy._name),
 	_grade(copy._grade) {}
 
-Bureaucrat::Bureaucrat(const std::string &name, const t_uint8 &grade):
+Bureaucrat::Bureaucrat(const std::string &name, const int &grade):
 	_name(name),
 	_grade(grade)
 {

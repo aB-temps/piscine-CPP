@@ -22,7 +22,7 @@ class	Form
 	public:
 		Form(void);
 		Form(const Form &copy);
-		Form(const std::string &name, const t_uint8 &sign_grade, const t_uint8 &exec_grade);
+		Form(const std::string &name, const int &sign_grade, const int &exec_grade);
 		~Form(void);
 
 		Form						&operator=(const Form &assign);

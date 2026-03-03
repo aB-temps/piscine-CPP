@@ -27,7 +27,7 @@ class	Bureaucrat
 	public:
 		Bureaucrat(void);
 		Bureaucrat(const Bureaucrat &copy);
-		Bureaucrat(const std::string &name, const t_uint8 &grade);
+		Bureaucrat(const std::string &name, const int &grade);
 		~Bureaucrat(void);
 
 		Bureaucrat					&operator=(const Bureaucrat &assign);

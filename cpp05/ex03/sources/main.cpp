@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ctime>
+#include <cstdlib>
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "Intern.hpp"
@@ -26,29 +28,30 @@ using	std::endl;
 
 int main(void)
 {
-	Intern	i1;
+	std::srand(std::time(0));
 
-	AForm	*f1;
-	AForm	*f2;
-	AForm	*f3;
-	AForm	*f4;
+	unsigned char	error = SUCCESS;
+	AForm			*forms[4] = {0};
+	Intern			i1;
 
 	try 
 	{
-		f1 = i1.makeForm("shrubbery creation", "JM");
-		f2 = i1.makeForm("robotomy request", "JP");
-		f3 = i1.makeForm("presidential pardon", "JF");
-		f4 = i1.makeForm("Form", "JF");
+		forms[0] = i1.makeForm("shrubbery creation", "JM");
+		forms[1] = i1.makeForm("robotomy request", "JP");
+		forms[2] = i1.makeForm("presidential pardon", "JF");
+		forms[3] = i1.makeForm("Form", "JF");
 	}
 	catch (const std::bad_alloc &ba)
 	{
 		cout << ba.what() << endl;
-		return (FATAL_MEM);
+		error = FATAL_MEM;
 	}
 	catch (const Intern::InternException &ie)
 	{
 		cout << ie.what() << endl;
-		return (FATAL_INTERN);
+		error = FATAL_INTERN;
 	}
-	return (SUCCESS);
+	for (int i = 0; forms[i]; ++i)
+		delete forms[i];
+	return (error);
 }

@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:24:58 by abetemps          #+#    #+#             */
-/*   Updated: 2026/02/24 18:25:06 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/03/04 00:22:54 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ const char		*ShrubberyCreationForm::_defaultTree =
 
 // Constructor & Destructor ====================================================
 ShrubberyCreationForm::ShrubberyCreationForm(const char *target):
-	AForm(ShrubberyCreationForm::_defaultName, target, ShrubberyCreationForm::_defaultSignGrade, ShrubberyCreationForm::_defaultExecGrade) {}
+	AForm(	ShrubberyCreationForm::_defaultName,
+			target,
+			ShrubberyCreationForm::_defaultSignGrade,
+			ShrubberyCreationForm::_defaultExecGrade	) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &copy):
-	AForm()
-{
-	(void) copy;
-}
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &copy): AForm() { (void) copy; }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
 

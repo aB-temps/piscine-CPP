@@ -46,13 +46,12 @@ const char		*ShrubberyCreationForm::_defaultTree =
 
 // Constructor & Destructor ====================================================
 ShrubberyCreationForm::ShrubberyCreationForm(const char *target):
-	AForm(ShrubberyCreationForm::_defaultName, target, ShrubberyCreationForm::_defaultSignGrade, ShrubberyCreationForm::_defaultExecGrade) {}
+	AForm(	ShrubberyCreationForm::_defaultName,
+			target,
+			ShrubberyCreationForm::_defaultSignGrade,
+			ShrubberyCreationForm::_defaultExecGrade	) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &copy):
-	AForm()
-{
-	(void) copy;
-}
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &copy): AForm() { (void) copy; }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
 

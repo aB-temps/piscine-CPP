@@ -23,13 +23,15 @@ int main(void)
 		Bureaucrat	b1("Mark", 1);
 		Bureaucrat	b2("Fred", 42);
 		
-		Form		f1("Application of jweber", 10, 5);
+		Form		f1("Application of jweber", -10, 5);
 		Form		f2("Jweber's application's scandal", 0, 151);
 	}
 	catch (const GradeException &e) // catches wheiter a Bureaucrat's or Forms's GradeException(tooLow, tooHigh)
 	{
 		cout << e.what() << endl;
 	}
+
+	cout << endl;
 
 	try
 	{

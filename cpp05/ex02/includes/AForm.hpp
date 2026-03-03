@@ -21,14 +21,13 @@ class Bureaucrat;
 // Typedef =====================================================================
 typedef unsigned char	t_uint8;
 
-
 // Class declaration ===========================================================
 class	AForm
 {
 	public:
 		AForm(void);
 		AForm(const AForm &copy);
-		AForm(const std::string &name, const std::string &target, const t_uint8 &sign_grade, const t_uint8 &exec_grade);
+		AForm(const std::string &name, const std::string &target, const int &sign_grade, const int &exec_grade);
 		virtual ~AForm(void);
 
 		AForm						&operator=(const AForm &assign);

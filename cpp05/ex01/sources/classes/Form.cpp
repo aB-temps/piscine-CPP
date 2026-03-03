@@ -37,15 +37,15 @@ Form::Form(const Form &copy):
 	_exec_grade(copy._exec_grade),
 	_signed(copy._signed) {}
 
-Form::Form(const std::string &name, const t_uint8 &sign_grade, const t_uint8 &exec_grade):
+Form::Form(const std::string &name, const int &sign_grade, const int &exec_grade):
 	_name(name),
 	_sign_grade(sign_grade),
 	_exec_grade(exec_grade),
 	_signed(false)
 {
-	if (_sign_grade < Bureaucrat::maxGrade || _exec_grade < Bureaucrat::maxGrade)
+	if (sign_grade < Bureaucrat::maxGrade || exec_grade < Bureaucrat::maxGrade)
 		throw (Form::GradeTooHighException());
-	else if (_sign_grade > Bureaucrat::minGrade || _exec_grade > Bureaucrat::minGrade)
+	else if (sign_grade > Bureaucrat::minGrade || exec_grade > Bureaucrat::minGrade)
 		throw (Form::GradeTooLowException());
 }
 

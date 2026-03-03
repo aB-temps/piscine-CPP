@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:24:19 by abetemps          #+#    #+#             */
-/*   Updated: 2026/02/24 18:24:43 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/03/04 00:05:36 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ const t_uint8	PresidentialPardonForm::_defaultExecGrade = 5;
 
 // Constructor & Destructor ====================================================
 PresidentialPardonForm::PresidentialPardonForm(const char *target):
-	AForm(PresidentialPardonForm::_defaultName, target, PresidentialPardonForm::_defaultSignGrade, PresidentialPardonForm::_defaultExecGrade) {}
+	AForm(	PresidentialPardonForm::_defaultName,
+			target,
+			PresidentialPardonForm::_defaultSignGrade,
+			PresidentialPardonForm::_defaultExecGrade	) {}
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &copy):
-	AForm()
-{
-	(void) copy;
-}
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &copy): AForm() { (void) copy; }
 
 PresidentialPardonForm::~PresidentialPardonForm(void) {}
 

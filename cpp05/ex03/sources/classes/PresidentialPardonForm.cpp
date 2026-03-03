@@ -28,13 +28,12 @@ const t_uint8	PresidentialPardonForm::_defaultExecGrade = 5;
 
 // Constructor & Destructor ====================================================
 PresidentialPardonForm::PresidentialPardonForm(const char *target):
-	AForm(PresidentialPardonForm::_defaultName, target, PresidentialPardonForm::_defaultSignGrade, PresidentialPardonForm::_defaultExecGrade) {}
+	AForm(	PresidentialPardonForm::_defaultName,
+			target,
+			PresidentialPardonForm::_defaultSignGrade,
+			PresidentialPardonForm::_defaultExecGrade	) {}
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &copy):
-	AForm()
-{
-	(void) copy;
-}
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &copy): AForm() { (void) copy; }
 
 PresidentialPardonForm::~PresidentialPardonForm(void) {}
 

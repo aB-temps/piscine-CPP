@@ -42,7 +42,7 @@ AForm::AForm(const AForm &copy):
 	_execGrade(copy._execGrade),
 	_signed(copy._signed) {}
 
-AForm::AForm(const std::string &name, const std::string &target, const t_uint8 &sign_grade, const t_uint8 &exec_grade):
+AForm::AForm(const std::string &name, const std::string &target, const int &sign_grade, const int &exec_grade):
 	_name(name),
 	_target(target),
 	_signGrade(sign_grade),

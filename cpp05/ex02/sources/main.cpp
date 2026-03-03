@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstdlib>
+#include <ctime>
+
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -26,6 +29,7 @@ using	std::endl;
 
 int main(void)
 {
+	std::srand(std::time(0));			// initializing the seed of rand()
 	ShrubberyCreationForm	f1("JM");
 	RobotomyRequestForm		f2("JP");
 	PresidentialPardonForm	f3("JF");

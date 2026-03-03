@@ -6,14 +6,13 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:24:45 by abetemps          #+#    #+#             */
-/*   Updated: 2026/02/24 18:24:56 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/03/04 00:24:01 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
 #include <cstdlib>
-#include <ctime>
 #include "Bureaucrat.hpp"
 #include "text_formatting.hpp"
 
@@ -30,13 +29,12 @@ const t_uint8	RobotomyRequestForm::_defaultExecGrade = 45;
 
 // Constructor & Destructor ====================================================
 RobotomyRequestForm::RobotomyRequestForm(const char *target):
-	AForm(RobotomyRequestForm::_defaultName, target, RobotomyRequestForm::_defaultSignGrade, RobotomyRequestForm::_defaultExecGrade) {}
+	AForm(	RobotomyRequestForm::_defaultName,
+			target,
+			RobotomyRequestForm::_defaultSignGrade,
+			RobotomyRequestForm::_defaultExecGrade	) {}
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &copy):
-	AForm()
-{
-	(void) copy;
-}
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &copy): AForm() { (void) copy; }
 
 RobotomyRequestForm::~RobotomyRequestForm(void) {}
 
@@ -53,7 +51,6 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm &assign)
 void	RobotomyRequestForm::_executeSelf(void) const
 {
 	cout << YELLOW "Drrrrrrrrrrrrrrrrr!!" << endl;
-	std::srand(std::time(0));
 	if (std::rand() % 2)
 	{
 		cout	<< GREEN BOLD
