@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:26:17 by abetemps          #+#    #+#             */
-/*   Updated: 2026/03/10 15:03:22 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/03/10 15:06:17 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ Base	*generate(void)
 void	identify(Base *p)
 {
 	if (!p)
-	{
-		cout << "null ptr" << endl;
 		return ;
-	}
 	if (dynamic_cast<A *>(p))
 		cout << "A" << endl;
 	else if (dynamic_cast<B *>(p))
@@ -84,7 +81,7 @@ int main(void)
 
 	Base	*b[ELEMENTS] = {0};
 
-	for (int i = 0; i < ELEMENTS; ++i)
+	for (int i = 0; i < ELEMENTS - 3; ++i)
 		b[i] = generate();
 
 	for (int i = 0; i < ELEMENTS; ++i)
