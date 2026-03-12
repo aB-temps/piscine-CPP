@@ -21,6 +21,7 @@ int main(int ac, char *av[])
 		return (1);
 	for (int i = 1; av[i]; ++i)
 	{
+		cout << "=> " <<  av[i] << endl;
 		ScalarConverter::convert(av[i]);
 		cout << endl;
 	}
