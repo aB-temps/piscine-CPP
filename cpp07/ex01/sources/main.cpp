@@ -15,7 +15,7 @@
 using	std::cout;
 using	std::endl;
 
-void			sub1(int &v)
+static void			sub1(int &v)
 {
 	--v;
 }

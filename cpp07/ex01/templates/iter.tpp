@@ -26,6 +26,7 @@ void		iter(T *array, const size_t length, void (func)(T &))
 		func(array[i]);
 }
 
+// util template function
 template	<typename T>
 void		display(T *array, const size_t length)
 {
@@ -34,7 +35,7 @@ void		display(T *array, const size_t length)
 		cout << "[" << i << "] -> " <<  array[i] << endl;
 }
 
-// iteration functions examples
+// test template functions
 template	<typename T>
 void		add2(T &a)
 {
