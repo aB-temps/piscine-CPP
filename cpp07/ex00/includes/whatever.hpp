@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   A.hpp                                              :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
-/*   Updated: 2026/03/10 13:28:28 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:21:00 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__A_HPP__
-# define	__A_HPP__
+#ifndef		__WHATEVER_HPP__
+# define	__WHATEVER_HPP__
 
-# include "Base.hpp"
-
-class	A: public Base {};
+# include 	"swap.tpp"
+# include 	"min.tpp"
+# include 	"max.tpp"
 
 #endif

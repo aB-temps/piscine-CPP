@@ -11,60 +11,33 @@
 # **************************************************************************** #
 
 # GENERAL SETTINGS ====================================================================
-NAME = scalarConverter
+NAME = whatever
 
 # DIRECTORIES==========================================================================
 DIR_SRC		:= sources/
+DIR_TEMPL 	:= templates/
 DIR_INC 	:= includes/
 DIR_BUILD	:= .build/
 
 # FLAGS & COMPILATOR SETTINGS =========================================================
 CXX			:= c++
-DEPS_FLAGS  := -MMD -MP
+DEPS_FLAGS  := -MD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra -Wshadow
 CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
-INC_FLAGS 	:= -I$(DIR_INC)
+INC_FLAGS 	:= -I$(DIR_INC) -I$(DIR_TEMPL)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
 
-ANTI_RELINK	:= Makefile $(DIR_INC) 
-
-# FUNCTIONS ===========================================================================
-define generate_var_sources_dir
-DIR_$(1) = $(addprefix $(DIR_SRC), $(shell echo $(1) | tr '[:upper:]' '[:lower:]')/)
-endef
-
-define generate_var_sources
-SRC_$(1) = $(addprefix $(DIR_$(1)),$(F_$(1)))
-endef
-
-define generate_var_objects
-OBJS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.o,$(SRC_$(1)))
-endef
-
-define generate_var_deps
-DEPS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.d,$(SRC_$(1)))
-endef
-
-# COMPONENTS ==========================================================================
-COMPONENTS 	:=	CLASSES					\
+ANTI_RELINK	:= Makefile $(DIR_INC) $(DIR_TEMPL)
 
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
-F_CLASSES	:=	ScalarConverter.cpp		\
 
 # VARS GENERATION =====================================================================
-$(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
-$(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources,$(comp))))
-$(foreach comp,$(COMPONENTS),$(eval $(call generate_var_objects,$(comp))))
-$(foreach comp,$(COMPONENTS),$(eval $(call generate_var_deps,$(comp))))
+OBJS := $(DIR_BUILD)main.o
 
-OBJS := $(foreach comp, $(COMPONENTS), $(OBJS_$(comp))) \
-		$(DIR_BUILD)main.o
-
-DEPS := $(foreach comp, $(COMPONENTS), $(DEPS_$(comp))) \
-		$(DIR_BUILD)main.d
+DEPS := $(DIR_BUILD)main.d
 
 # COMPILATION =========================================================================
 $(NAME) : $(OBJS)

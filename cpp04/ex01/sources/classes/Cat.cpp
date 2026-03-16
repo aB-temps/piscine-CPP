@@ -18,9 +18,8 @@ using		std::endl;
 // Constructors/Destructor ==============================================================
 Cat::Cat(void): Animal("Cat"), _brain(new Brain()) {}
 
-Cat::Cat(const Cat &copy): Animal(copy), _brain(new Brain(*copy._brain)) //{}
-{cout << "COPY" << endl;
-}
+Cat::Cat(const Cat &copy): Animal(copy), _brain(new Brain(*copy._brain)) {}
+
 Cat::~Cat(void)
 {
 	delete this->_brain;

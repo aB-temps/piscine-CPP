@@ -6,25 +6,28 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:26:17 by abetemps          #+#    #+#             */
-/*   Updated: 2026/02/06 18:39:27 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/10/29 11:14:22 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include <iostream>
 
 using	std::cout;
 using	std::endl;
 
-int main(int ac, char *av[])
+int main(void)
 {
-	if (ac < 2)
-		return (1);
-	for (int i = 1; av[i]; ++i)
-	{
-		cout << "=> " <<  av[i] << endl;
-		ScalarConverter::convert(av[i]);
-		cout << endl;
-	}
-
-	return (0);
+	// int a = 2;
+	// int b = 3;
+	// ::swap( a, b );
+	// std::cout << "a = " << a << ", b = " << b << std::endl;
+	// std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+	// std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+	// std::string c = "chaine1";
+	// std::string d = "chaine2";
+	// ::swap(c, d);
+	// std::cout << "c = " << c << ", d = " << d << std::endl;
+	// std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
+	// std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+	return 0;
 }

@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.hpp                                           :+:      :+:    :+:   */
+/*   min.tpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 16:57:21 by abetemps          #+#    #+#             */
-/*   Updated: 2026/03/10 13:20:11 by abetemps         ###   ########.fr       */
+/*   Created: 2026/03/12 18:13:03 by abetemps          #+#    #+#             */
+/*   Updated: 2026/03/12 18:14:56 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__DATA_HPP__
-# define	__DATA_HPP__
+#ifndef		__MIN_TPP__
+# define	__MIN_TPP__
 
-# include <iostream>
 
-class	Data
-{
-	public:
-		Data(void);
-		Data(const Data &copy);
-		Data(const std::string &name);
-		~Data(void);
 
-		Data	&operator=(const Data &assign);
-	
-		const std::string	&getName(void) const;
-
-	private:
-		std::string	_name;
-};
-
-#endif
+# endif
