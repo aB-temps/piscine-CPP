@@ -6,35 +6,47 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:26:17 by abetemps          #+#    #+#             */
-/*   Updated: 2026/03/16 16:31:51 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:30:04 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "whatever.hpp"
-#include <iostream>
+#include "iter.tpp"
 
 using	std::cout;
 using	std::endl;
 
-int main(void)
+void			sub1(int &v)
 {
-	int a = 2;
-	int b = 3;
+	--v;
+}
 
-	cout << "a = " << a << ", b = " << b << endl;
-	::swap( a, b );
-	cout << "a = " << a << ", b = " << b << endl;
-	cout << "min( a, b ) = " << ::min( a, b ) << endl;
-	cout << "max( a, b ) = " << ::max( a, b ) << endl << endl;
+int	main(void)
+{
+	int			arr1[5] = { 2, 4, 91, 21, 7 };
+	const int	carr1[3] = { 2, 4, 7 };
 
+	char		arr2[4] = { 'a', 'f', 'x', 'm' };
+	const char	carr2[6] = { 'a', '1', 'f', 'x', 'm', 'e' };
 
-	std::string c = "chaine1";
-	std::string d = "chaine2";
+	display(arr1, 5);
+	display(carr1, 3);
+	display(arr2, 4);
+	display(carr2, 6);
 
-	cout << "c = " << c << ", d = " << d << endl;
-	::swap(c, d);
-	cout << "c = " << c << ", d = " << d << endl;
-	cout << "min( c, d ) = " << ::min( c, d ) << endl;
-	cout << "max( c, d ) = " << ::max( c, d ) << endl;
-	return 0;
+	cout << endl;
+
+	iter(arr1, 5, add2);
+	iter(carr1, 3, funny_display);
+	display(arr1, 5);
+	iter(arr1, 5, sub1);
+	display(arr1, 5);
+	
+
+	cout << endl;
+	iter(arr2, 4, add2);
+	iter(carr2, 6, funny_display);
+
+	display(arr2, 4);
+
+	return (0);
 }
