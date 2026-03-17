@@ -21,7 +21,7 @@ DIR_BUILD	:= .build/
 # FLAGS & COMPILATOR SETTINGS =========================================================
 CXX			:= c++
 DEPS_FLAGS  := -MD -MP
-WARN_FLAGS	:= -Wall -Werror -Wextra -Wshadow
+WARN_FLAGS	:= -Wall -Werror -Wextra -Wshadow -fdiagnostics-show-template-tree
 CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
 INC_FLAGS 	:= -I$(DIR_TEMPL)
 

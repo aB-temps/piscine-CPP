@@ -19,8 +19,8 @@
 using	std::cout;
 using	std::endl;
 
-template	<typename T>
-void		iter(T *array, const size_t length, void (func)(T &))
+template	<typename T, typename F>
+void		iter(T *array, const size_t length, F func)
 {
 	for (size_t i = 0; i < length; ++i)
 		func(array[i]);
@@ -37,14 +37,12 @@ void		display(T *array, const size_t length)
 
 // test template functions
 template	<typename T>
-void		add2(T &a)
-{
-	a += 2;
-}
+void		add2(T &a) { a += 2; }
 
 template	<typename T>
 void		funny_display(const T &a)
 {
 	cout << "This is a fun value '" << a << "' isn't it?" << endl;
 }
+
 #endif
