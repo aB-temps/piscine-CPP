@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.tpp                                           :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 16:29:22 by abetemps          #+#    #+#             */
-/*   Updated: 2026/03/16 16:31:23 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/03/17 16:55:25 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		__ITER_TPP__
-# define	__ITER_TPP__
+#ifndef		__ITER_HPP__
+# define	__ITER_HPP__
 
 #include <cstddef>
 #include <iostream>
