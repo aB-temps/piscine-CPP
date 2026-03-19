@@ -40,13 +40,7 @@ Array<Type>::Array(const Array &copy):
 template <typename Type>
 Array<Type>::~Array(void)
 {
-	// const unsigned int	size = this->size();
-	//
-	// for (unsigned int i = 0; i < size; ++i)
-	// {
-	// 	this->_array[i] = reinterpret_cast<Type>(0);
 	delete[] this->_array;
-	// }
 }
 
 
@@ -54,13 +48,19 @@ Array<Type>::~Array(void)
 template	<typename Type>
 Array<Type>		&Array<Type>::operator=(const Array<Type> &assign)
 {
-	delete[] this->_array;
-
-	*this = Array<Type>(assign);
-	// for (unsigned int i = 0; i < assign._size; ++i)
-	// {
-	// 	this->_array[i] = assign._array[i];
-	// }
+	if (this != &assign)
+	{
+		delete[] this->_array;
+		
+		this->_size = assign._size;
+		this->_array = new Type[this->_size];
+	
+		for (unsigned int i = 0; i < this->_size; ++i)
+		{
+			this->_array[i] = assign._array[i];
+		}
+	}
+	return (*this);
 }
 
 template	<typename Type>

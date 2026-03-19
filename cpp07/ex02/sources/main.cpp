@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:32:34 by abetemps          #+#    #+#             */
-/*   Updated: 2026/03/19 16:54:44 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:22:43 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <cstdlib>
 #include <Array.tpp>
 
-#define MAX_VAL 750
+#define MAX_VAL 1000
 
 int main(int, char**)
 {
@@ -33,6 +33,10 @@ int main(int, char**)
         Array<int> tmp = numbers;
         Array<int> test(tmp);
     }
+
+    Array<int>  a;
+
+    a = numbers;
 
     for (int i = 0; i < MAX_VAL; i++)
     {
