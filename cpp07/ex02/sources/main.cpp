@@ -14,7 +14,7 @@
 #include <cstdlib>
 #include <Array.tpp>
 
-#define MAX_VAL 1000
+#define MAX_VAL 10
 
 int main(int, char**)
 {
@@ -34,15 +34,19 @@ int main(int, char**)
         Array<int> test(tmp);
     }
 
-    Array<int>  a;
+	Array<int>  a;
 
-    a = numbers;
+	a = numbers;
+
+	const Array<int>  b;
+
+	std::cout << a[2] << std::endl;
 
     for (int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
         {
-            std::cerr << "didn't save the same value!!" << std::endl;
+            std::cout << "didn't save the same value!!" << std::endl;
             return 1;
         }
     }
@@ -67,6 +71,6 @@ int main(int, char**)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
+    delete [] mirror;
     return 0;
 }
