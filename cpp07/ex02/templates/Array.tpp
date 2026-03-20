@@ -13,8 +13,6 @@
 #ifndef		__ARRAY_TPP__
 # define	__ARRAY_TPP__
 
-// # include	"Array.hpp"
-
 // Constructors/Destructor =====================================================
 template <typename Type>
 Array<Type>::Array(void):
