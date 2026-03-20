@@ -38,4 +38,6 @@ class		Array
 template		<typename Type>
 std::ostream	&operator<<(std::ostream &out, Array<Type> &array);
 
+# include "Array.tpp"
+
 #endif
