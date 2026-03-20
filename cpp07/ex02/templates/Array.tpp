@@ -68,9 +68,16 @@ Type		&Array<Type>::operator[](const unsigned int &i)
 {
 	if (i >= this->_size)
 		throw (std::exception());
-	return (reinterpret_cast<Type *>(this->_array)[i]);
+	return (this->_array[i]);
 }
 
+template	<typename Type>
+const Type		&Array<Type>::operator[](const unsigned int &i) const
+{
+	if (i >= this->_size)
+		throw (std::exception());
+	return (this->_array[i]);
+}
 
 template	<typename Type>
 std::ostream	&operator<<(std::ostream &out, Array<Type> &array)
