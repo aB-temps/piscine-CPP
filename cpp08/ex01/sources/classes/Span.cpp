@@ -138,7 +138,7 @@ int	Span::longestSpan(void) const
 	return (max - min);
 }
 
-int	Span::shortestSpan(void)
+int	Span::shortestSpan(void) const
 {
 	std::vector<int> tmp = this->_array;
 

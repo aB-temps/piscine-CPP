@@ -18,15 +18,21 @@
 using	std::cout;
 using	std::endl;
 
+int size= 1000000;
+
 int main(void)
 {
 	srand(time(0));
 
 	const Span c_sp(5);
-	Span sp(5);
+	Span sp(size + 1);
 
 	try
 	{
+		// for (int i = 0; i < size; ++i)
+		// {
+		// 	sp.addNumber(rand() % size);
+		// }
 		sp.addNumber(2);
 		sp.addNumber(9);
 		sp.addNumber(4);

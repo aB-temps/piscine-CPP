@@ -34,7 +34,7 @@ class	Span
 		void			addNumber(const int &n);
 		void			addRange(const unsigned int &r);
 		int				longestSpan(void) const;
-		int				shortestSpan(void);
+		int				shortestSpan(void) const;
 
 		void			outOfRange(const unsigned int &i, const unsigned char mode) const;
 
