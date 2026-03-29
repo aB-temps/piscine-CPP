@@ -13,18 +13,33 @@
 #ifndef		__MUTANTSTACK_HPP__
 # define	__MUTANTSTACK_HPP__
 
+# include <iterator>
+# include <stack>
 
 // Class declaration ===========================================================
-class	MutantStack
+template	<class T>
+class		MutantStack: public std::stack<T>
 {
 	public:
+		typedef typename std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
-	private:
+		MutantStack(void);
+		MutantStack(const MutantStack &cpy);
+		~MutantStack(void);
+
+		MutantStack&	operator=(const MutantStack &assign);
+
+		iterator		begin(void);
+		iterator		end(void);
+
+		const_iterator	begin(void) const;
+		const_iterator	end(void) const;
 
 };
 
 // Utils =======================================================================
-std::ostream	&operator<<(std::ostream &out, const MutantStack &mst);
+// std::ostream	&operator<<(std::ostream &out, const MutantStack &mst);
 
 # include "MutantStack.tpp"
 

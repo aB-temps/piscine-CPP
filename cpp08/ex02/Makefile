@@ -14,58 +14,29 @@
 NAME = mutantStack
 
 # DIRECTORIES==========================================================================
-DIR_SRC		:= sources/
-DIR_INC 	:= includes/
-DIR_TMPL 	:= templates/
-DIR_BUILD	:= .build/
+DIR_SRC		= sources/
+DIR_INC 	= includes/
+DIR_TMPL 	= templates/
+DIR_BUILD	= .build/
 
 # FLAGS & COMPILATOR SETTINGS =========================================================
-CXX			:= c++
-DEPS_FLAGS  := -MMD -MP
-WARN_FLAGS	:= -Wall -Werror -Wextra -Wshadow -g3
-CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
-INC_FLAGS 	:= -I$(DIR_INC) -I$(DIR_TMPL)
+CXX			= c++
+DEPS_FLAGS  = -MD -MP
+WARN_FLAGS	= -Wall -Werror -Wextra -g3
+CXX_FLAGS	= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
+INC_FLAGS 	= -I$(DIR_INC) -I$(DIR_TMPL)
 
-COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
+COMP 		= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
 
-ANTI_RELINK	:= Makefile $(DIR_INC) $(DIR_TMPL)
-
-# FUNCTIONS ===========================================================================
-define generate_var_sources_dir
-DIR_$(1) = $(addprefix $(DIR_SRC), $(shell echo $(1) | tr '[:upper:]' '[:lower:]')/)
-endef
-
-define generate_var_sources
-SRC_$(1) = $(addprefix $(DIR_$(1)),$(F_$(1)))
-endef
-
-define generate_var_objects
-OBJS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.o,$(SRC_$(1)))
-endef
-
-define generate_var_deps
-DEPS_$(1) = $(patsubst $(DIR_SRC)%.cpp,$(DIR_BUILD)%.d,$(SRC_$(1)))
-endef
-
-# COMPONENTS ==========================================================================
-COMPONENTS 	:=	CLASSES		\
+ANTI_RELINK	= Makefile $(DIR_INC) $(DIR_TMPL)
 
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
-F_CLASSES	:=	MutantStack.cpp	\
-
 # VARS GENERATION =====================================================================
-$(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
-$(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources,$(comp))))
-$(foreach comp,$(COMPONENTS),$(eval $(call generate_var_objects,$(comp))))
-$(foreach comp,$(COMPONENTS),$(eval $(call generate_var_deps,$(comp))))
+OBJS := $(DIR_BUILD)main.o
 
-OBJS := $(foreach comp, $(COMPONENTS), $(OBJS_$(comp))) \
-		$(DIR_BUILD)main.o
-
-DEPS := $(foreach comp, $(COMPONENTS), $(DEPS_$(comp))) \
-		$(DIR_BUILD)main.d
+DEPS :=	$(DIR_BUILD)main.d
 
 # COMPILATION =========================================================================
 $(NAME) : $(OBJS)
