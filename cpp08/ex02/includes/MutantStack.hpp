@@ -13,7 +13,6 @@
 #ifndef		__MUTANTSTACK_HPP__
 # define	__MUTANTSTACK_HPP__
 
-# include <iterator>
 # include <stack>
 
 // Class declaration ===========================================================
@@ -37,9 +36,6 @@ class		MutantStack: public std::stack<T>
 		const_iterator	end(void) const;
 
 };
-
-// Utils =======================================================================
-// std::ostream	&operator<<(std::ostream &out, const MutantStack &mst);
 
 # include "MutantStack.tpp"
 

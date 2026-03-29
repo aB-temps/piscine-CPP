@@ -17,7 +17,7 @@
 using	std::cout;
 using	std::endl;
 
-int main(void)
+int	main(void)
 {
 	cout << "STACK >>>>>>>>>>>>" << endl;
 	MutantStack<int> mstack;
