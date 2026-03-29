@@ -12,6 +12,7 @@
 
 #include <cstdlib>
 #include <algorithm>
+#include <iterator>
 #include <numeric>
 #include <stdexcept>
 #include <sstream>
@@ -115,6 +116,17 @@ void	Span::addRange(const unsigned int &r)
 	}
 	else
 		outOfRange(r, ADD_RANGE);
+}
+
+void	Span::addRange(const std::vector<int>::iterator &begin, const std::vector<int>::iterator &end)
+{
+	const unsigned int dist = std::distance(begin, end);
+	if (this->_array.size() + dist <= this->_capacity)
+	{
+		this->_array.insert(this->_array.end(), begin, end);
+	}
+	else
+		outOfRange(dist, ADD_RANGE);
 }
 
 void	Span::addNumber(const int &n)

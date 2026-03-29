@@ -12,30 +12,31 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <stack>
 
 #include "Span.hpp"
 
+#define SIZE 1000000
+
 using	std::cout;
 using	std::endl;
-
-int size= 1000000;
 
 int main(void)
 {
 	srand(time(0));
 
-	const Span c_sp(5);
-	Span sp(size + 1);
+	const Span			c_sp(5);
+	Span				sp(SIZE);
 
+	std::vector<int>	filler;
+	
 	try
 	{
-		// for (int i = 0; i < size; ++i)
-		// {
-		// 	sp.addNumber(rand() % size);
-		// }
-		sp.addNumber(2);
-		sp.addNumber(9);
-		sp.addNumber(4);
+		for (int i = 0; i < SIZE; ++i)
+			filler.push_back(rand() % SIZE);
+
+		sp.addRange(filler.begin(), filler.end());
+		// sp.addNumber(4);	// ADD_RANGE out of range
 		// sp.addRange(999999);	// ADD_RANGE out of range
 		cout << "Shortest span: " << sp.shortestSpan() << endl;
 		cout << "Longest span: " << sp.longestSpan() << endl;
@@ -43,9 +44,14 @@ int main(void)
 		Span sp2(sp);
 
 		// cout << sp[-1]; // ACCESS out of range
-		cout << sp ; //<< endl << sp2 << endl;
+		// cout << sp ; //<< endl << sp2 << endl;
 	}
 	catch (const std::out_of_range &e)
+	{
+		cout << e.what() << endl;
+		return (2);
+	}
+	catch (const std::exception &e)
 	{
 		cout << e.what() << endl;
 		return (1);
