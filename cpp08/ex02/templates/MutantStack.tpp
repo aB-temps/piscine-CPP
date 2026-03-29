@@ -48,15 +48,15 @@ typename MutantStack<T>::iterator	MutantStack<T>::end(void)
 }
 
 template	<typename T>
-typename MutantStack<T>::const_iterator	MutantStack<T>::begin(void) const
+typename MutantStack<T>::const_iterator	MutantStack<T>::cbegin(void) const
 {
-	return (this->std::stack<T>::c.begin());
+	return (this->std::stack<T>::c.cbegin());
 }
 
 template	<typename T>
-typename MutantStack<T>::const_iterator	MutantStack<T>::end(void) const
+typename MutantStack<T>::const_iterator	MutantStack<T>::cend(void) const
 {
-	return (this->std::stack<T>::c.end());
+	return (this->std::stack<T>::c.cend());
 }
 
 #endif
