@@ -10,7 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
-{
+# include "BitcoinExchange.hpp"
 
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+	{
+		// bad arg
+		return (1);
+	}
+
+	return (0);
 }

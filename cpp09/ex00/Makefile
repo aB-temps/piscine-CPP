@@ -52,8 +52,7 @@ COMPONENTS 	:=	CLASSES				\
 # FILES ===============================================================================
 F_MAIN		:=	main.cpp
 
-F_CLASSES	:=	\
-				\
+F_CLASSES	:=	BitcoinExchange.cpp
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
