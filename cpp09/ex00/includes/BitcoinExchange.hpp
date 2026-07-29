@@ -15,7 +15,9 @@
 
 # include <iostream>
 # include <stdexcept>
+# include <map>
 
+// # define PRICES_DB	"input.txt"
 # define PRICES_DB	"data.csv"
 
 class BitcoinExchange
@@ -23,16 +25,26 @@ class BitcoinExchange
 	public:
 		typedef	std::map<time_t, float>	valuesMap;
 
+		struct	dbSettings
+		{
+			std::string fieldA;
+			std::string fieldB;
+			std::string separator;
+		};
+
 		BitcoinExchange(void);
 		BitcoinExchange(const BitcoinExchange &cpy);
 		~BitcoinExchange(void);
 
 		BitcoinExchange	&operator=(const BitcoinExchange &assign);
 
-		static void			displayWalletHistory(const char *wallet_db_filename);
+		static void					displayWalletHistory(const char *wallet_db_filename);
 
-		static valuesMap	parseDb(const char *db_filename);
-		float				computeValueAtTime(const valuesMap::iterator *walletEntry);
+		static valuesMap			parseDb(const char *db_filename);
+		static struct dbSettings	parseDbSettings(std::string line);
+
+		static float				computeValueAtTime(valuesMap::iterator &walletEntry);
+
 
 	private:
 		static valuesMap	_stockMarketPrices;
