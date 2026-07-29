@@ -53,13 +53,12 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 
 
 	BitcoinExchange::valuesMap			vmap;
-	struct BitcoinExchange::dbSettings	settings;
 	std::string							line;
 
 	try
 	{
 		std::getline(db, line);
-		settings = BitcoinExchange::parseDbSettings(line);
+		char	separator = BitcoinExchange::parseDbSettings(line);
 
 		for (size_t i = 1; std::getline(db, line); ++i)
 		{
@@ -67,12 +66,14 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 				continue;
 			// cout << "line: " << line << endl;
 
-			size_t				sep_pos = line.find(settings.separator);
+			size_t				sep_pos = line.find(separator);
 			std::stringstream	ss;
 			float				value;
 			std::tm				tm = {};
 
-			if (!strptime(line.substr(0, sep_pos).c_str(), "%04Y-%02m-%02d", &tm))
+			if (!strptime(line.substr(0, sep_pos).c_str(), "%04Y-%02m-%02d", &tm) || 
+					(tm.tm_mon == 1 && (tm.tm_mday > 29 || 
+										(tm.tm_mday == 29 && !BitcoinExchange::isLeapYear(tm.tm_year)))))
 			{
 				cerr << "Error: bad input => '" << line.substr(0, sep_pos) << "' [" << db_filename << ":line "<< i << "]" << endl;
 				continue;
@@ -104,10 +105,9 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 	return (vmap);
 }
 
-struct BitcoinExchange::dbSettings	BitcoinExchange::parseDbSettings(std::string line)
+char	BitcoinExchange::parseDbSettings(std::string line)
 {
 	const char							*allowedSeparator = ",|/";
-	struct BitcoinExchange::dbSettings	settings;
 	size_t								sep_pos = std::string::npos;
 
 	for (int i = 0; i < 3 && sep_pos == std::string::npos; ++i)
@@ -115,9 +115,7 @@ struct BitcoinExchange::dbSettings	BitcoinExchange::parseDbSettings(std::string 
 	if (sep_pos == std::string::npos)
 		throw (std::invalid_argument("wrong separator in file header"));
 
-	settings.separator = line.substr(sep_pos, 1);
-
-	return (settings);
+	return (line.substr(sep_pos, 1).c_str()[0]);
 }
 
 void				BitcoinExchange::displayWalletHistory(const char *wallet_db_filename)
@@ -158,4 +156,12 @@ float				BitcoinExchange::computeValueAtTime(BitcoinExchange::valuesMap::iterato
 	float	result = walletEntry->second * valueAtTime;
 
 	return (result);
+}
+
+bool			BitcoinExchange::isLeapYear(int year)
+{
+	if (year % 4 == 0 || year % 400 == 0)
+		return (true);
+	else
+		return (false);
 }

@@ -25,23 +25,17 @@ class BitcoinExchange
 	public:
 		typedef	std::map<time_t, float>	valuesMap;
 
-		struct	dbSettings
-		{
-			std::string fieldA;
-			std::string fieldB;
-			std::string separator;
-		};
-
 		BitcoinExchange(void);
 		BitcoinExchange(const BitcoinExchange &cpy);
 		~BitcoinExchange(void);
 
 		BitcoinExchange	&operator=(const BitcoinExchange &assign);
 
+		static bool					isLeapYear(int year);
 		static void					displayWalletHistory(const char *wallet_db_filename);
 
 		static valuesMap			parseDb(const char *db_filename);
-		static struct dbSettings	parseDbSettings(std::string line);
+		static char					parseDbSettings(std::string line);
 
 		static float				computeValueAtTime(valuesMap::iterator &walletEntry);
 
