@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 
 		for (int i = 1; i < ac; ++i)
 		{
-			cout << "For wallet \"" << av[i] << "\":\n";
+			cout << "-------------\nFor wallet \"" << av[i] << "\":\n";
 			BitcoinExchange::displayWalletHistory(av[i]);
 		}
 	}

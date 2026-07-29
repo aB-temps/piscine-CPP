@@ -63,22 +63,30 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 
 		while (std::getline(db, line))
 		{
-			cout << "line is: " << line << endl;
+			cout << "line: " << line << endl;
 
 			size_t				sep_pos = line.find(settings.separator);
 			std::stringstream	ss;
 			float				value;
+			std::tm				tm = {};
 
-			ss << line.find();
-			ss >> ;
-			vmap[line.substr(0, sep_pos)];
+			strptime(line.substr(0, sep_pos).c_str(), "%04Y-%02m-%02d", &tm);
+
+			ss << line.substr(sep_pos + 1);
+			ss >> value;
+
+			cout << "mktime: " << std::mktime(&tm) << endl;
+			cout << "time: '" << line.substr(0, sep_pos) << "'" << endl;
+			cout << "value: '" << value << "'\n" << endl;
+
+			vmap[std::mktime(&tm)] = value;
 		}
 
 	}
 	catch (const std::exception &e)
 	{
 		cerr << "Fatal error while reading \"" << db_filename << "\" [" << e.what() << "]" << endl;
-		throw ;
+		throw 1;
 	}
 	// open db_filename, getline to store each line
 		// parsing the validity of each one:
@@ -90,21 +98,25 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 
 struct BitcoinExchange::dbSettings	BitcoinExchange::parseDbSettings(std::string line)
 {
+	const char							*allowedSeparator = ",|/";
 	struct BitcoinExchange::dbSettings	settings;
-	size_t	sp_pos = line.find(' ');
+	size_t								sep_pos = std::string::npos;
 
-	
-	settings.fieldA = line.substr(0, sp_pos);
+	for (int i = 0; i < 3 && sep_pos == std::string::npos; ++i)
+		sep_pos = line.find(allowedSeparator[i]);
+	if (sep_pos == std::string::npos)
+		throw (std::invalid_argument("wrong separator in file header"));
+
+	settings.separator = line.substr(sep_pos, 1);
+	// cout << "Separator: " << settings.separator << endl;
+
+	// settings.fieldA = line.substr(0, sp_pos);
 	// cout << settings.fieldA << endl;
-
-	line = line.substr(++sp_pos);
-	sp_pos = line.find(' ');
-	settings.separator = line.substr(0, sp_pos);
-	// cout << settings.separator << endl;
-
-	settings.fieldB = line.substr(++sp_pos); 
+	//
+	//
+	// settings.fieldB = line.substr(++sp_pos); 
 	// cout << settings.fieldB << endl;
-
+	//
 	return (settings);
 }
 
@@ -118,8 +130,8 @@ void				BitcoinExchange::displayWalletHistory(const char *wallet_db_filename)
 	{
 		if (/*walletIt->first != errorDate &&*/ walletIt->second >= 0)
 		{
-			char	tmp_date[10];
-			std::strftime(tmp_date, 10, "", std::localtime(&walletIt->first));
+			char	tmp_date[11];
+			std::strftime(tmp_date, 11, "%04Y-%02m-%02d", std::localtime(&walletIt->first));
 			cout << tmp_date << " => " << BitcoinExchange::computeValueAtTime(walletIt) << endl;
 		}
 	}
@@ -127,18 +139,24 @@ void				BitcoinExchange::displayWalletHistory(const char *wallet_db_filename)
 
 float				BitcoinExchange::computeValueAtTime(BitcoinExchange::valuesMap::iterator &walletEntry)
 {
-	float	result = .0;
-	float	nearest_value = -1.;
+	float	nearest_value = .0;
 
  	if (BitcoinExchange::_stockMarketPrices.count(walletEntry->first))
 		nearest_value = BitcoinExchange::_stockMarketPrices[walletEntry->first];
-	// else
-	// 	nearest_value = std::lower_bound(
-	// 			BitcoinExchange::_stockMarketPrices.begin(),
-	// 			BitcoinExchange::_stockMarketPrices.end(),
-	// 			walletEntry->first)->second;
+	else
+	{
+		cerr << "not found" << endl;
+		// nearest_value = std::lower_bound(
+		// 		BitcoinExchange::_stockMarketPrices.begin(),
+		// 		BitcoinExchange::_stockMarketPrices.end(),
+		// 		walletEntry->first)->second;
+	}
 
-	result = walletEntry->second * nearest_value;
+	cout << "\nnearest: " << nearest_value << endl;
+	cout << "date: " << walletEntry->first << endl;
+	cout << "value: " << walletEntry->second << endl << "result: ";
+
+	float	result = walletEntry->second * nearest_value;
 
 	return (result);
 }

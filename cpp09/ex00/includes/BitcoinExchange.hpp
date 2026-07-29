@@ -18,7 +18,7 @@
 # include <map>
 
 // # define PRICES_DB	"input.txt"
-# define PRICES_DB	"data.csv"
+# define PRICES_DB	"data2.csv"
 
 class BitcoinExchange
 {
