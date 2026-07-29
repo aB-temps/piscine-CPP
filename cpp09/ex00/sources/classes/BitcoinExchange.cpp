@@ -139,24 +139,25 @@ void				BitcoinExchange::displayWalletHistory(const char *wallet_db_filename)
 
 float				BitcoinExchange::computeValueAtTime(BitcoinExchange::valuesMap::iterator &walletEntry)
 {
-	float	nearest_value = .0;
+	float	valueAtTime = .0;
 
  	if (BitcoinExchange::_stockMarketPrices.count(walletEntry->first))
-		nearest_value = BitcoinExchange::_stockMarketPrices[walletEntry->first];
+		valueAtTime = BitcoinExchange::_stockMarketPrices[walletEntry->first];
 	else
 	{
-		cerr << "not found" << endl;
-		// nearest_value = std::lower_bound(
-		// 		BitcoinExchange::_stockMarketPrices.begin(),
-		// 		BitcoinExchange::_stockMarketPrices.end(),
-		// 		walletEntry->first)->second;
+		BitcoinExchange::valuesMap::iterator	nearestEntry = --(std::lower_bound(
+				BitcoinExchange::_stockMarketPrices.begin(),
+				BitcoinExchange::_stockMarketPrices.end(),
+				*walletEntry));
+		cout << "\nnearest date: '" << nearestEntry->first << "'\n";
+		valueAtTime = nearestEntry->second;
 	}
 
-	cout << "\nnearest: " << nearest_value << endl;
+	cout << "princeAtTime: " << valueAtTime << endl;
 	cout << "date: " << walletEntry->first << endl;
 	cout << "value: " << walletEntry->second << endl << "result: ";
 
-	float	result = walletEntry->second * nearest_value;
+	float	result = walletEntry->second * valueAtTime;
 
 	return (result);
 }
