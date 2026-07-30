@@ -17,31 +17,27 @@
 # include <stdexcept>
 # include <map>
 
-// # define PRICES_DB	"input.txt"
-# define PRICES_DB	"data2.csv"
+# define PRICES_DB	"data.csv"
 
 class BitcoinExchange
 {
 	public:
 		typedef	std::map<time_t, float>	valuesMap;
 
-		BitcoinExchange(void);
-		BitcoinExchange(const BitcoinExchange &cpy);
-		~BitcoinExchange(void);
-
-		BitcoinExchange	&operator=(const BitcoinExchange &assign);
-
-		static bool					isLeapYear(int year);
 		static void					displayWalletHistory(const char *wallet_db_filename);
-
-		static valuesMap			parseDb(const char *db_filename);
-		static char					parseDbSettings(std::string line);
-
-		static float				computeValueAtTime(valuesMap::iterator &walletEntry);
-
 
 	private:
 		static valuesMap	_stockMarketPrices;
+
+		BitcoinExchange(void);
+		BitcoinExchange(const BitcoinExchange &cpy);
+		~BitcoinExchange(void);
+		BitcoinExchange	&operator=(const BitcoinExchange &assign);
+
+		static bool					_isLeapYear(int year);
+		static valuesMap			_parseDb(const char *db_filename);
+		static char					_parseDbSettings(std::string line);
+		static float				_computeValueAtTime(valuesMap::iterator &walletEntry);
 };
 
 #endif

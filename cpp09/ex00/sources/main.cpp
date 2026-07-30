@@ -29,8 +29,9 @@ int	main(int ac, char **av)
 
 		for (int i = 1; i < ac; ++i)
 		{
-			cout << "-------------\nFor wallet \"" << av[i] << "\":\n";
+			cout << "For wallet \"" << av[i] << "\":\n";
 			BitcoinExchange::displayWalletHistory(av[i]);
+			cout << endl;
 		}
 	}
 	catch (const std::invalid_argument &e)

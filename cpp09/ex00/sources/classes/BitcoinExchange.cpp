@@ -20,7 +20,7 @@ using	std::cerr;
 using	std::endl;
 
 // Static attr. init -----------------------------------------------------------
-BitcoinExchange::BitcoinExchange::valuesMap	BitcoinExchange::_stockMarketPrices = BitcoinExchange::parseDb(PRICES_DB);
+BitcoinExchange::BitcoinExchange::valuesMap	BitcoinExchange::_stockMarketPrices = BitcoinExchange::_parseDb(PRICES_DB);
 
 
 // Constructors/Destructor -----------------------------------------------------
@@ -44,7 +44,27 @@ BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &assign)
 }
 
 // Member Function -------------------------------------------------------------
-BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
+void				BitcoinExchange::displayWalletHistory(const char *wallet_db_filename)
+{
+	BitcoinExchange::valuesMap				walletMap = BitcoinExchange::_parseDb(wallet_db_filename);
+	BitcoinExchange::valuesMap::iterator	walletIt = walletMap.begin();
+
+	for (size_t i = 1; walletIt != walletMap.end(); ++i,  ++walletIt)
+	{
+		if (walletIt->second < 0)
+			cerr << "Error: value '" << walletIt->second << "': not a positive number. [" << wallet_db_filename << ":line " << i << "]" << endl;
+		else if (walletIt->second > 1000)
+			cerr << "Error: value '" << walletIt->second << "': a too large number. [" << wallet_db_filename << ":line "<< i << "]" << endl;
+		else
+		{
+			char	tmp_date[11];
+			std::strftime(tmp_date, 11, "%04Y-%02m-%02d", std::localtime(&walletIt->first));
+			cout << tmp_date << " => " << BitcoinExchange::_computeValueAtTime(walletIt) << endl;
+		}
+	}
+}
+
+BitcoinExchange::valuesMap			BitcoinExchange::_parseDb(const char *db_filename)
 {
 	std::ifstream	db(db_filename);
 	if (!db.is_open())
@@ -58,13 +78,12 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 	try
 	{
 		std::getline(db, line);
-		char	separator = BitcoinExchange::parseDbSettings(line);
+		char	separator = BitcoinExchange::_parseDbSettings(line);
 
 		for (size_t i = 1; std::getline(db, line); ++i)
 		{
 			if (line[0] == '#')
 				continue;
-			// cout << "line: " << line << endl;
 
 			size_t				sep_pos = line.find(separator);
 			std::stringstream	ss;
@@ -73,7 +92,7 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 
 			if (!strptime(line.substr(0, sep_pos).c_str(), "%04Y-%02m-%02d", &tm) || 
 					(tm.tm_mon == 1 && (tm.tm_mday > 29 || 
-										(tm.tm_mday == 29 && !BitcoinExchange::isLeapYear(tm.tm_year)))))
+										(tm.tm_mday == 29 && !BitcoinExchange::_isLeapYear(tm.tm_year)))))
 			{
 				cerr << "Error: bad input => '" << line.substr(0, sep_pos) << "' [" << db_filename << ":line "<< i << "]" << endl;
 				continue;
@@ -81,10 +100,6 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 
 			ss << line.substr(sep_pos + 1);
 			ss >> value;
-
-			// cout << "mktime: " << std::mktime(&tm) << endl;
-			// cout << "time: '" << line.substr(0, sep_pos) << "'" << endl;
-			// cout << "value: '" << value << "'\n" << endl;
 
 			vmap[std::mktime(&tm)] = value;
 		}
@@ -97,18 +112,14 @@ BitcoinExchange::valuesMap			BitcoinExchange::parseDb(const char *db_filename)
 		cerr << "Fatal error while reading \"" << db_filename << "\" [" << e.what() << "]" << endl;
 		throw 1;
 	}
-	// open db_filename, getline to store each line
-		// parsing the validity of each one:
-			// <date> [YYYY MM DD] | <value> [0, 1000] (float/int)
-			// if invalid set first or seconc to errState (date = ?? & value = <0)
 
 	return (vmap);
 }
 
-char	BitcoinExchange::parseDbSettings(std::string line)
+char	BitcoinExchange::_parseDbSettings(std::string line)
 {
-	const char							*allowedSeparator = ",|/";
-	size_t								sep_pos = std::string::npos;
+	const char	*allowedSeparator = ",|/";
+	size_t		sep_pos = std::string::npos;
 
 	for (int i = 0; i < 3 && sep_pos == std::string::npos; ++i)
 		sep_pos = line.find(allowedSeparator[i]);
@@ -118,27 +129,7 @@ char	BitcoinExchange::parseDbSettings(std::string line)
 	return (line.substr(sep_pos, 1).c_str()[0]);
 }
 
-void				BitcoinExchange::displayWalletHistory(const char *wallet_db_filename)
-{
-	BitcoinExchange::valuesMap				walletMap = BitcoinExchange::parseDb(wallet_db_filename);
-	BitcoinExchange::valuesMap::iterator	walletIt = walletMap.begin();
-
-	for (size_t i = 1; walletIt != walletMap.end(); ++i,  ++walletIt)
-	{
-		if (walletIt->second < 0)
-			cerr << "Error: value '" << walletIt->second << "': not a positive number. [" << wallet_db_filename << ":line " << i << "]" << endl;
-		else if (walletIt->second > 1000)
-			cerr << "Error: value '" << walletIt->second << "': a too large number. [" << wallet_db_filename << ":line "<< i << "]" << endl;
-		else
-		{
-			char	tmp_date[11];
-			std::strftime(tmp_date, 11, "%04Y-%02m-%02d", std::localtime(&walletIt->first));
-			cout << tmp_date << " => " << BitcoinExchange::computeValueAtTime(walletIt) << endl;
-		}
-	}
-}
-
-float				BitcoinExchange::computeValueAtTime(BitcoinExchange::valuesMap::iterator &walletEntry)
+float				BitcoinExchange::_computeValueAtTime(BitcoinExchange::valuesMap::iterator &walletEntry)
 {
 	float	valueAtTime = .0;
 
@@ -158,7 +149,7 @@ float				BitcoinExchange::computeValueAtTime(BitcoinExchange::valuesMap::iterato
 	return (result);
 }
 
-bool			BitcoinExchange::isLeapYear(int year)
+bool			BitcoinExchange::_isLeapYear(int year)
 {
 	if (year % 4 == 0 || year % 400 == 0)
 		return (true);
