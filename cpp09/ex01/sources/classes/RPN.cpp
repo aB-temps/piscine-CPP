@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 12:31:24 by abetemps          #+#    #+#             */
-/*   Updated: 2026/07/30 08:12:59 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/07/30 09:05:53 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,20 @@ float	RPN::computeExpr(const char *input)
 			continue;
 		else if (std::isdigit(input[i]))
 		{
-			// cout << "pushing: " << input[i] << endl;
 			operands.push(input[i] - '0');
 		}
 		else if (RPN::_isOperator(input[i]))
 		{
 			if (operands.size() < 2)
-			{
-				cerr << "Error: invalid expression." << endl;
-				return (-1);
-			}
-			const float	o1 = operands.top();
-			operands.pop();
+				throw (std::runtime_error("invalid expression"));
+
 			const float	o2 = operands.top();
 			operands.pop();
 
-			const float res = RPN::_compute(o1, o2, input[i]);
-			if (res < 0)
-			{
-				cerr << "Error: cannot divide by 0." << endl;
-				return (-1);
-			}
-			operands.push(res);
+			const float	o1 = operands.top();
+			operands.pop();
+
+			operands.push(RPN::_compute(o1, o2, input[i]));
 		}
 	}
 	
@@ -84,10 +76,10 @@ float	RPN::_compute(const float o1, const float o2, const char op)
 		case ('+'):
 			return (o1 + o2);
 		case ('-'):
-			return (o1 / o2);
+			return (o1 - o2);
 		case ('/'):
 			if (!o2)
-				return (-1);
+				throw (std::runtime_error("division by 0"));
 			return (o1 / o2);
 		case ('*'):
 			return (o1 * o2);

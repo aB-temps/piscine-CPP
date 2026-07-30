@@ -27,10 +27,17 @@ int	main(int ac, char **av)
 	for (int i = 1; i < ac; ++i)
 	{
 		cout	<< "Expression no " << i
-				<< ": '" << av[i] << "'"
+				<< ": \"" << av[i] << "\""
 				<< endl;
 
-		cout << "result: " << RPN::computeExpr(av[i]) << endl;
+		try
+		{
+			cout << RPN::computeExpr(av[i]) << '\n' << endl;
+		}
+		catch (const std::runtime_error &e)
+		{
+			cerr << "Error: " << e.what() << ".\n" << endl;
+		}
 	}
 	return (0);
 }
