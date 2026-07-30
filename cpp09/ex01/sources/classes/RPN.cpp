@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 12:31:24 by abetemps          #+#    #+#             */
-/*   Updated: 2026/07/30 09:05:53 by abetemps         ###   ########.fr       */
+/*   Updated: 2026/07/30 09:10:08 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ float	RPN::computeExpr(const char *input)
 		if (std::isspace(input[i]))
 			continue;
 		else if (std::isdigit(input[i]))
-		{
 			operands.push(input[i] - '0');
-		}
 		else if (RPN::_isOperator(input[i]))
 		{
 			if (operands.size() < 2)
@@ -64,6 +62,8 @@ float	RPN::computeExpr(const char *input)
 
 			operands.push(RPN::_compute(o1, o2, input[i]));
 		}
+		else
+			throw (std::runtime_error("invalid expression"));
 	}
 	
 	return (operands.top());
