@@ -20,13 +20,13 @@ class		Array
 {
 	public:
 		Array(void);
-		Array(const unsigned int &n);
+		Array(const unsigned int n);
 		Array(const Array &copy);
 		~Array(void);
 
 		Array<Type>			&operator=(const Array<Type> &assign);
-		Type 				&operator[](const unsigned int &i);
-		const Type 			&operator[](const unsigned int &i) const;
+		Type 				&operator[](const unsigned int i);
+		const Type 			&operator[](const unsigned int i) const;
 
 		unsigned int		size(void) const;
 

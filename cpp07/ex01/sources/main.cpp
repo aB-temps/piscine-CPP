@@ -38,8 +38,11 @@ int	main(void)
 	cout << endl;
 
 	iter(arr1, 5, add2<int>);
-	iter(carr1, 3, funny_display<const int>);
 	display(arr1, 5);
+	iter(arr1, 5, add3);
+	display(arr1, 5);
+	iter(carr1, 3, funny_display<const int>);
+	iter(carr1, 3, funny_display2);
 
 
 	cout << endl;

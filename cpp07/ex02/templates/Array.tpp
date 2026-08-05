@@ -20,7 +20,7 @@ Array<Type>::Array(void):
 	_size(0) {}
 
 template <typename Type>
-Array<Type>::Array(const unsigned int &n):
+Array<Type>::Array(const unsigned int n):
 	_array(new Type[n]),
 	_size(n) {}
 	
@@ -62,18 +62,18 @@ Array<Type>		&Array<Type>::operator=(const Array<Type> &assign)
 }
 
 template	<typename Type>
-Type		&Array<Type>::operator[](const unsigned int &i)
+Type		&Array<Type>::operator[](const unsigned int i)
 {
 	if (i >= this->_size)
-		throw (std::exception());
+		throw (std::out_of_range("Index out of bounds."));
 	return (this->_array[i]);
 }
 
 template	<typename Type>
-const Type		&Array<Type>::operator[](const unsigned int &i) const
+const Type		&Array<Type>::operator[](const unsigned int i) const
 {
 	if (i >= this->_size)
-		throw (std::exception());
+		throw (std::out_of_range("Index out of bounds."));
 	return (this->_array[i]);
 }
 

@@ -21,14 +21,14 @@ int main(int, char**)
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
+    for (unsigned int i = 0; i < MAX_VAL; i++)
     {
-        const int value = rand();
+        const int value = rand() % 15;
         numbers[i] = value;
         mirror[i] = value;
     }
 	std::cout << numbers << std::endl;
-    //SCOPE
+ 
     {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
@@ -38,11 +38,13 @@ int main(int, char**)
 
 	a = numbers;
 
-	const Array<int>  b;
+	const Array<int>  b(a);
 
-	std::cout << a[2] << std::endl;
 
-    for (int i = 0; i < MAX_VAL; i++)
+	std::cout << "a[2]: " << a[2] << std::endl;
+	std::cout << "b[2]: " << b[2] << std::endl;
+
+    for (unsigned int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
         {
@@ -54,7 +56,7 @@ int main(int, char**)
     {
         numbers[-2] = 0;
     }
-    catch(const std::exception& e)
+    catch(const std::out_of_range& e)
     {
         std::cerr << e.what() << '\n';
     }
@@ -62,15 +64,11 @@ int main(int, char**)
     {
         numbers[MAX_VAL] = 0;
     }
-    catch(const std::exception& e)
+    catch(const std::out_of_range& e)
     {
         std::cerr << e.what() << '\n';
     }
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
-    }
     delete [] mirror;
     return 0;
 }
