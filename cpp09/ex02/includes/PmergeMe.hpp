@@ -23,9 +23,9 @@ class	PmergeMe
 {
 	public:
 		template	<typename T>
-		static T			buildCtn(const int ac, char * const * av);
-		static void			sort(std::vector<uint32_t> &base);
-		// static void					sort(std::deque<uint32_t> &base);
+		static T			buildCtn(const int ac, const char * const * av);
+		static void			sort(std::deque<uint32_t> &base);
+		// static void			sort(std::vector<uint32_t> &base);
 
 	private:
 		PmergeMe(void);
@@ -35,6 +35,9 @@ class	PmergeMe
 
 		static bool	_isOnlyNum(const std::string &str);
 };
+
+std::ostream	&operator<<(std::ostream &out, const std::vector<uint32_t> &vec);
+std::ostream	&operator<<(std::ostream &out, const std::deque<uint32_t> &deq);
 
 # include "PmergeMe.tpp"
 

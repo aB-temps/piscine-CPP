@@ -24,12 +24,13 @@ int	main(int ac, char **av)
 		return (2);
 	}
 
+	std::deque<uint32_t>	deq;
+	std::vector<uint32_t>	vec;
+
 	try
 	{
-		std::deque<uint32_t>	deq
-			= PmergeMe::buildCtn<std::deque<uint32_t> >(ac, av);
-		// std::vector<uint32_t>	vec
-		//	 = PmergeMe::buildCtn<std::vector<uint32_t> >(ac, av);
+		deq = PmergeMe::buildCtn<std::deque<uint32_t> >(ac, av);
+		vec = PmergeMe::buildCtn<std::vector<uint32_t> >(ac, av);
 	}
 	catch (const std::invalid_argument &e)
 	{
@@ -41,6 +42,17 @@ int	main(int ac, char **av)
 		cerr << e.what() << endl;
 		return (1);
 	}
+
+	// TODO: 
+	// - time
+	// - style
+
+	cout << "[Before]\nDeque: " << deq << "\nVector: " << vec << endl;
+
+	PmergeMe::sort(deq);
+	// PmergeMe.sort(vec);
+
+	cout << "\n[AFTER]\nDeque: " << deq << "\nVector: " << vec << endl;
 
 	return (0);
 }

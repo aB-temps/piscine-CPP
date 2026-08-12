@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 
 # include <algorithm>
-# include "PmergeMe.hpp"
 # include <cctype>
+# include "PmergeMe.hpp"
 
-//debug
-#include <iostream>
-// debug
+using	std::cout;
+using	std::cerr;
+using	std::endl;
 
 // private cannonical form members =============================================
 PmergeMe::PmergeMe(void) {}
@@ -38,10 +38,32 @@ bool	PmergeMe::_isOnlyNum(const std::string &str)
 	return (true);
 }
 
-// Ford-Johnsonn  ==============================================================
+std::ostream	&operator<<(std::ostream &out, const std::vector<uint32_t> &vec)
+{
+	for (size_t i = 0; i < vec.size(); ++i)
+	{
+		out << vec[i] << (i < vec.size() - 1 ? " " : "");
+	}
+	return (out);
+}
 
-void	PmergeMe::sort(std::vector<uint32_t> &base)
+std::ostream	&operator<<(std::ostream &out, const std::deque<uint32_t> &deq)
+{
+	for (std::deque<uint32_t>::const_iterator it = deq.begin(); it < deq.end(); ++it)
+	{
+		out << *it << (it < deq.end() - 1 ? " " : "");
+	}
+	return (out);
+}
+
+// Ford-Johnsonn  ==============================================================
+void	PmergeMe::sort(std::deque<uint32_t> &base)
 {
 	(void) base;
 }
+
+// void	PmergeMe::sort(std::vector<uint32_t> &base)
+// {
+// 	(void) base;
+// }
 
