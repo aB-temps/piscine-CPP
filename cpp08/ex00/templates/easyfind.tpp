@@ -13,10 +13,10 @@
 #ifndef		__EASYFIND_TPP__
 # define	__EASYFIND_TPP__
 
-template 					<typename C>
-typename C::const_iterator	easyfind(const C &ctn, const int &v)
+template 					<typename T>
+typename T::const_iterator	easyfind(const T &ctn, const int v)
 {
-	typename C::const_iterator	i;
+	typename T::const_iterator	i;
 	for (i = ctn.begin(); i != ctn.end(); ++i)	
 	{
 		if (*i == v)

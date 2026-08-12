@@ -20,7 +20,7 @@
 
 #include "easyfind.hpp"
 
-#define VAL_RANGE	25
+#define VAL_RANGE	20
 #define NB_ELEM		5
 
 using	std::cout;
@@ -30,14 +30,12 @@ template		<typename T>
 static void		print_ctn(const T &ctn)
 {
 	cout	<< "for container of size " << ctn.size()
-			<< " at address " << &ctn
+			<< " stored at address " << &ctn
 			<< ":" << endl;
 	for (typename T::const_iterator i = ctn.begin(); i != ctn.end(); ++i)
-		cout	<< &i
-				<< ":\n- [" << &i 
-				<< "] " << *i
-				<< '\n'
-				<< endl;
+		cout	<< "- [" << &(*i)
+				<< "]: " << *i
+				<< '\n';
 	cout << endl;
 }
 
@@ -48,7 +46,7 @@ int	main(void)
 	std::vector<int>	v;
 	std::list<int>		l;
 
-	for (int i = 0; i < NB_ELEM; ++i)
+	for (unsigned int i = 0; i < NB_ELEM; ++i)
 	{
 		v.push_back(rand() % VAL_RANGE);
 		l.push_back(rand() % VAL_RANGE);

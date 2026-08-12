@@ -19,8 +19,6 @@
 
 #include "Span.hpp"
 
-#define MAX_VAL	256
-
 #define ADD_NUM		0
 #define ADD_RANGE	1
 #define ACCESS		2
@@ -55,17 +53,23 @@ Span	&Span::operator=(const Span &assign)
 	return (*this);
 }
 
-int			&Span::operator[](const unsigned int &i)
+int			&Span::operator[](const int64_t i)
 {
-	if (i >= this->_capacity || i >= this->_array.size())
+	if (i < 0)
 		outOfRange(i, ACCESS);
+	unsigned int castedI = i;
+	if (castedI >= this->_capacity || castedI >= this->_array.size())
+		outOfRange(castedI, ACCESS);
 	return (this->_array[i]);
 }
 
-const int	&Span::operator[](const unsigned int &i) const
+const int	&Span::operator[](const int64_t i) const
 {
-	if (i >= this->_capacity || i >= this->_array.size())
+	if (i < 0)
 		outOfRange(i, ACCESS);
+	unsigned int castedI = i;
+	if (castedI >= this->_capacity || castedI >= this->_array.size())
+		outOfRange(castedI, ACCESS);
 	return (this->_array[i]);
 }
 
@@ -87,7 +91,7 @@ std::ostream	&operator<<(std::ostream &out, const Span &sp)
 
 }
 
-void		Span::outOfRange(const unsigned int &i, const unsigned char mode) const
+void		Span::outOfRange(const int64_t i, const unsigned char mode) const
 {
 	std::stringstream	i_ss;
 	std::string			i_str;
@@ -98,22 +102,17 @@ void		Span::outOfRange(const unsigned int &i, const unsigned char mode) const
 	{
 		case(ADD_RANGE):
 			throw (std::out_of_range("Out of range error trying to store " + i_str + " new elements."));
-			break;
 		case(ADD_NUM):
 			throw (std::out_of_range("Out of range error trying to store " + i_str));
-			break;
 		case(ACCESS):
 			throw (std::out_of_range("Out of range error trying to access array at index " + i_str));
-			break;
 	}
 }
 
-void	Span::addRange(const unsigned int &r)
+void	Span::addRange(const unsigned int r)
 {
 	if (this->_array.size() + r <= this->_capacity)
-	{
 		this->_array.insert(this->_array.end(), r, rand());
-	}
 	else
 		outOfRange(r, ADD_RANGE);
 }
@@ -122,19 +121,15 @@ void	Span::addRange(const std::vector<int>::iterator &begin, const std::vector<i
 {
 	const unsigned int dist = std::distance(begin, end);
 	if (this->_array.size() + dist <= this->_capacity)
-	{
 		this->_array.insert(this->_array.end(), begin, end);
-	}
 	else
 		outOfRange(dist, ADD_RANGE);
 }
 
-void	Span::addNumber(const int &n)
+void	Span::addNumber(const int n)
 {
 	if (this->_array.size() < this->_capacity)
-	{
 		this->_array.push_back(n);
-	}
 	else
 		outOfRange(n, ADD_NUM);
 }
@@ -152,7 +147,7 @@ int	Span::longestSpan(void) const
 
 int	Span::shortestSpan(void) const
 {
-	std::vector<int> tmp = this->_array;
+	std::vector<int> tmp(this->_array);
 
 	std::sort(tmp.begin(), tmp.end());
 

@@ -13,6 +13,8 @@
 #ifndef		__SPAN_HPP__
 # define	__SPAN_HPP__
 
+# define 	MAX_VAL 256
+
 # include <iostream>
 # include <vector>
 
@@ -25,16 +27,16 @@ class	Span
 		~Span(void);
 
 		Span			&operator=(const Span &assign);
-		int				&operator[](const unsigned int &i);
-		const int		&operator[](const unsigned int &i) const;
+		int				&operator[](const int64_t i);
+		const int		&operator[](const int64_t i) const;
 	            		
-		void			addNumber(const int &n);
-		void			addRange(const unsigned int &r);
+		void			addNumber(const int n);
+		void			addRange(const unsigned int r);
 		void			addRange(const std::vector<int>::iterator &begin, const std::vector<int>::iterator &end);
 		int				longestSpan(void) const;
 		int				shortestSpan(void) const;
 
-		void			outOfRange(const unsigned int &i, const unsigned char mode) const;
+		void			outOfRange(const int64_t i, const unsigned char mode) const;
 
 		unsigned int	getSize(void) const;
 

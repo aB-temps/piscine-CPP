@@ -13,10 +13,11 @@
 #include <cstdlib>
 #include <ctime>
 #include <stack>
+#include <limits.h>
 
 #include "Span.hpp"
 
-#define SIZE 1000000
+#define SIZE 1000
 
 using	std::cout;
 using	std::endl;
@@ -26,14 +27,14 @@ int main(void)
 	srand(time(0));
 
 	const Span			c_sp(5);
-	Span				sp(SIZE);
+	Span				sp(UINT_MAX);
 
 	std::vector<int>	filler;
 	
 	try
 	{
-		for (int i = 0; i < SIZE; ++i)
-			filler.push_back(rand() % SIZE);
+		for (unsigned int i = 0; i < UINT_MAX; ++i)
+			filler.push_back(rand() % MAX_VAL);
 
 		sp.addRange(filler.begin(), filler.end());
 		// sp.addNumber(4);	// ADD_RANGE out of range
@@ -43,8 +44,8 @@ int main(void)
 
 		Span sp2(sp);
 
-		// cout << sp[-1]; // ACCESS out of range
-		// cout << sp ; //<< endl << sp2 << endl;
+		cout << sp[INT_MAX]; // ACCESS out of range
+		// cout << sp << endl;
 	}
 	catch (const std::out_of_range &e)
 	{
