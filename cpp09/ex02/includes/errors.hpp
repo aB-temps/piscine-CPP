@@ -21,6 +21,7 @@
 
 # define	ERR			RED BOLD "Error: " RST BOLD
 # define	BAD_ARG		RED "invalid arguments" RST
+# define	BAD_ARG_DUP	RED "found duplicate" RST
 # define	BAD_ARG_QTY	RED "wrong number of arguments" RST
 
 #endif

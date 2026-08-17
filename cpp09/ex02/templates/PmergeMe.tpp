@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+# include <algorithm>
 # include <sstream>
 
 template	<typename T>
@@ -25,7 +26,12 @@ T	PmergeMe::buildCtn(const int ac, const char * const * av)
 		std::stringstream	ss(av[i]);
 		int64_t				number;
 		while (ss >> number)
+		{
+			typename T::iterator it = std::find(container.begin(), container.end(), number);
+			if (it != container.end())
+				throw (std::invalid_argument(ERR BAD_ARG_DUP));
 			container.push_back(number);
+		}
 	}
 	return (container);
 }
