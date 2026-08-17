@@ -52,9 +52,9 @@ void				BitcoinExchange::displayWalletHistory(const char *wallet_db_filename)
 	for (size_t i = 1; walletIt != walletMap.end(); ++i,  ++walletIt)
 	{
 		if (walletIt->second < 0)
-			cerr << "Error: value '" << walletIt->second << "': not a positive number. [" << wallet_db_filename << ":line " << i << "]" << endl;
+			cerr << "Error: value '" << walletIt->second << "': not a positive number. [" << wallet_db_filename << ":" << i << "]" << endl;
 		else if (walletIt->second > 1000)
-			cerr << "Error: value '" << walletIt->second << "': too large number. [" << wallet_db_filename << ":line "<< i << "]" << endl;
+			cerr << "Error: value '" << walletIt->second << "': too large number. [" << wallet_db_filename << ":" << i << "]" << endl;
 		else
 		{
 			char	tmp_date[11];

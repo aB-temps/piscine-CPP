@@ -15,8 +15,6 @@
 
 # include <iostream>
 
-# define OPS "+-*/"
-
 class	RPN
 {
 	public:
