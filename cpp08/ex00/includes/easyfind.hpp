@@ -13,6 +13,8 @@
 #ifndef		__EASYFIND_HPP__
 # define	__EASYFIND_HPP__
 
+# include <algorithm>
+
 template					<typename T>
 typename T::const_iterator	easyfind(const T &ctn, const int v);
 

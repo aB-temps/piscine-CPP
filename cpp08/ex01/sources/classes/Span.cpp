@@ -12,7 +12,6 @@
 
 #include <cstdlib>
 #include <algorithm>
-#include <iterator>
 #include <numeric>
 #include <stdexcept>
 #include <sstream>

@@ -16,13 +16,7 @@
 template 					<typename T>
 typename T::const_iterator	easyfind(const T &ctn, const int v)
 {
-	typename T::const_iterator	i;
-	for (i = ctn.begin(); i != ctn.end(); ++i)	
-	{
-		if (*i == v)
-			return (i);
-	}
-	return (i);
+	return (std::find(ctn.begin(), ctn.end(), v));
 }
 
 #endif

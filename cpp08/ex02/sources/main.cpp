@@ -22,7 +22,6 @@ int	main(void)
 	cout << "STACK >>>>>>>>>>>>" << endl;
 	MutantStack<int> mstack;
 
-	mstack.pop();
 	cout << "SIZE(before pushes): " << mstack.size() << endl;
 	mstack.push(5);
 	mstack.push(17);
