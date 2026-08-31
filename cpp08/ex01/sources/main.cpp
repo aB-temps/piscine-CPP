@@ -17,7 +17,7 @@
 
 #include "Span.hpp"
 
-#define SIZE 10
+#define SIZE 3
 
 using	std::cout;
 using	std::endl;
@@ -36,7 +36,7 @@ int main(void)
 		for (unsigned int i = 0; i < SIZE; ++i)
 			filler.push_back(rand() % MAX_VAL);
 
-		// sp.addRange(filler.begin(), filler.end());
+		sp.addRange(filler.begin(), filler.end());
 
 		// sp.addNumber(4);	// ADD_RANGE out of range
 		// sp.addRange(999999);	// ADD_RANGE out of range

@@ -43,6 +43,8 @@ class	Span
 	private:
 		std::vector<int>	_array;
 		unsigned int		_capacity;
+
+		int					_twoElemsSpan(void) const;
 		
 
 };

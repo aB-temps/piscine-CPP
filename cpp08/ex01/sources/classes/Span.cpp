@@ -138,8 +138,12 @@ void	Span::addNumber(const int n)
 
 int	Span::longestSpan(void) const
 {
-	if (this->getSize() < 2)
+	const unsigned int	size = this->getSize();
+	if (size < 2)
 		outOfRange(0, INVALID_DIST);
+	else if (size == 2)
+		return (this->_twoElemsSpan());
+
 	const std::vector<int>::const_iterator	begin = this->_array.begin();
 	const std::vector<int>::const_iterator	end = this->_array.end();
 
@@ -151,8 +155,12 @@ int	Span::longestSpan(void) const
 
 int	Span::shortestSpan(void) const
 {
-	if (this->getSize() < 2)
+	const unsigned int	size = this->getSize();
+	if (size < 2)
 		outOfRange(0, INVALID_DIST);
+	else if (size == 2)
+		return (this->_twoElemsSpan());
+
 	std::vector<int> tmp(this->_array);
 
 	std::sort(tmp.begin(), tmp.end());
@@ -160,4 +168,9 @@ int	Span::shortestSpan(void) const
 	std::adjacent_difference(tmp.begin(), tmp.end(), tmp.begin());
 
 	return (*std::min_element(tmp.begin(), tmp.end()));
+}
+
+int	Span::_twoElemsSpan(void) const
+{
+	return (std::abs(this->_array[0] - this->_array[1]));
 }
