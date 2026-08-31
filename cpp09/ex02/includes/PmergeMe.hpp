@@ -24,6 +24,7 @@ class	PmergeMe
 	public:
 		template	<typename T>
 		static T			buildCtn(const int ac, const char * const * av);
+
 		static void			sort(std::deque<uint32_t> &base);
 		// static void			sort(std::vector<uint32_t> &base);
 
@@ -33,6 +34,10 @@ class	PmergeMe
 		~PmergeMe(void);
 		PmergeMe	&operator=(const PmergeMe &assign);
 
+		// repeat for vector or use Template ????
+		static void	_binaryInsert(std::deque<uint32_t> &base, uint32_t element);
+
+		static void	_swap(uint32_t &x, uint32_t &y);
 		static bool	_isOnlyNum(const std::string &str);
 };
 

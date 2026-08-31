@@ -44,15 +44,15 @@ int	main(int ac, char **av)
 	}
 
 	// TODO: 
+	// - benchmark()
 	// - time
-	// - style
 
-	cout << "[Before]\nDeque: " << deq << "\nVector: " << vec << endl;
+	cout << BLUE BOLD "[BEFORE]\n" RST GREEN "Deque: " RST BOLD << deq << RST GREEN"\nVector: " RST BOLD << vec << RST << endl;
 
 	PmergeMe::sort(deq);
 	// PmergeMe.sort(vec);
 
-	cout << "\n[AFTER]\nDeque: " << deq << "\nVector: " << vec << endl;
+	cout << BLUE BOLD "[AFTER]\n" RST GREEN "Deque: " RST BOLD << deq << RST GREEN"\nVector: " RST BOLD << vec << RST << endl;
 
 	return (0);
 }
