@@ -18,9 +18,10 @@
 
 #include "Span.hpp"
 
-#define ADD_NUM		0
-#define ADD_RANGE	1
-#define ACCESS		2
+#define ADD_NUM			0
+#define ADD_RANGE		1
+#define ACCESS			2
+#define INVALID_DIST	3
 
 // Using =======================================================================
 using	std::cout;
@@ -105,6 +106,8 @@ void		Span::outOfRange(const int64_t i, const unsigned char mode) const
 			throw (std::out_of_range("Out of range error trying to store " + i_str));
 		case(ACCESS):
 			throw (std::out_of_range("Out of range error trying to access array at index " + i_str));
+		case(INVALID_DIST):
+			throw (std::out_of_range("Out of range error trying to find a distance for a Span storing less than 2 elements."));
 	}
 }
 
@@ -135,6 +138,8 @@ void	Span::addNumber(const int n)
 
 int	Span::longestSpan(void) const
 {
+	if (this->getSize() < 2)
+		outOfRange(0, INVALID_DIST);
 	const std::vector<int>::const_iterator	begin = this->_array.begin();
 	const std::vector<int>::const_iterator	end = this->_array.end();
 
@@ -146,6 +151,8 @@ int	Span::longestSpan(void) const
 
 int	Span::shortestSpan(void) const
 {
+	if (this->getSize() < 2)
+		outOfRange(0, INVALID_DIST);
 	std::vector<int> tmp(this->_array);
 
 	std::sort(tmp.begin(), tmp.end());
