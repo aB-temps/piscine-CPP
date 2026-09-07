@@ -70,17 +70,22 @@ void	PmergeMe::_binaryInsert(std::deque<uint32_t> &base, uint32_t element)
 	unsigned int minI = 0;
 	unsigned int maxI = base.size() - 1;
 	unsigned int midI;
+	// cout << "\nminI: " <<  minI << endl;
+	// cout << "maxI: " <<  maxI << endl << endl;
 
 	while (minI < maxI)
 	{
-		midI = minI + (maxI / 2);
 
+		midI = minI + ((maxI - minI) >> 1);
+		// cout << "- midI: " <<  midI << " ==> " << element << " > " << base[midI] << " - " << (element > base[midI] ? "true" : "false");
 		if (element > base[midI])
 			minI = midI + 1;
 		else
-			maxI = midI - 1;
-
+			maxI = midI;
+		// cout << "\nminI: " <<  minI << endl;
+		// cout << "maxI: " <<  maxI << endl << endl;
 	}
+	// cout << "-> index: " << minI << endl;
 	base.insert(base.begin() + minI, element);
 }
 
@@ -104,6 +109,8 @@ void	PmergeMe::sort(std::deque<uint32_t> &base)
 
 		cout << "[" << *it << " " << *(it + 1) << "]\n";
 	}
+	if (it != base.end()) 
+		pend.push_back(*it);
 	cout << "\nBase: " <<  base << endl;
 	cout << "Main: " <<  main << endl;
 	cout << "Pend: " <<  pend << endl;
@@ -111,9 +118,21 @@ void	PmergeMe::sort(std::deque<uint32_t> &base)
 	cout << "-----------------\n";
 	if (main.size() > 1)
 		PmergeMe::sort(main);
-	PmergeMe::_binaryInsert(main, pend[0]);
-	cout << main << endl;
 
+	cout << "\n=================\n";
+	cout << "*Base: " <<  base << endl;
+	cout << "*Main: " <<  main << endl;
+	cout << "*Pend: " <<  pend << endl << endl;
+	for (unsigned int i = 0; i < pend.size(); ++i)
+	{
+		cout << "inserting: " << pend[i] << endl;
+		// pend[i] = the element to binary insert, has to be the JacobStahl'th value in the pend chain
+		PmergeMe::_binaryInsert(main, pend[i]);
+		cout << "new main: " <<  main << endl;
+		cout << "--------------\n";
+	}
+
+	cout << "-> Main: " << main << endl;
 	base = main;
 }
 

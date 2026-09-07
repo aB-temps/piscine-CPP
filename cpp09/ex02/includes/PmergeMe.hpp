@@ -23,10 +23,10 @@ class	PmergeMe
 {
 	public:
 		template	<typename T>
-		static T			buildCtn(const int ac, const char * const * av);
+		static T	buildCtn(const int ac, const char * const * av);
 
-		static void			sort(std::deque<uint32_t> &base);
-		// static void			sort(std::vector<uint32_t> &base);
+		static void	sort(std::deque<uint32_t> &base);
+		//static void	sort(std::vector<uint32_t> &base);
 
 	private:
 		PmergeMe(void);
