@@ -205,11 +205,19 @@ void	PmergeMe::_recursivePairSorting(std::deque<uint32_t> &base)
 	std::deque<uint32_t>::iterator it = base.begin();
 
 	uint32_t groupSize = std::pow(2, u);
-	cout << "Element groups of size: " BOLD YELLOW <<  groupSize << RST << endl;
+	uint32_t elemSize = groupSize >> 1;
+	cout << "Element of size " BOLD YELLOW << elemSize << RST " grouped by: " BOLD YELLOW <<  groupSize << RST << endl;
 	for (it = base.begin(); it <= base.end() - groupSize; it += groupSize)
 	{
 		displayElem(it, groupSize);
-		// if (*it + groupSize)
+		cout << "Comparing: " BOLD << *(it + elemSize - 1) << RST " against " BOLD << *(it + groupSize - 1) << RST "\n";
+		if (*(it + elemSize - 1) > *(it + groupSize - 1))
+		{
+			std::swap_ranges(it, it + elemSize, it + elemSize);
+
+			displayElem(it, groupSize);
+			cout << BOLD RED "- SWAPPING\n" RST;
+		}
 	}
 	for (; it < base.end(); ++it)
 		cout << RED << *it << " ";
