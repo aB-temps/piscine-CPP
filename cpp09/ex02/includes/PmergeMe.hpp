@@ -34,11 +34,14 @@ class	PmergeMe
 		~PmergeMe(void);
 		PmergeMe	&operator=(const PmergeMe &assign);
 
-		// repeat for vector or use Template ????
-		static void	_binaryInsert(std::deque<uint32_t> &base, uint32_t element);
+		static void							_recursivePairSorting(std::deque<uint32_t> &base);
 
-		static void	_swap(uint32_t &x, uint32_t &y);
-		static bool	_isOnlyNum(const std::string &str);
+		// repeat for vector or use Template ????
+		static void							_binaryInsert(std::deque<uint32_t> &base, const uint32_t element, uint32_t maxI);
+
+		static const std::vector<uint32_t>	_buildJSSeq(const uint32_t max);
+		static void							_swap(uint32_t &x, uint32_t &y);
+		static bool							_isOnlyNum(const std::string &str);
 };
 
 std::ostream	&operator<<(std::ostream &out, const std::vector<uint32_t> &vec);
