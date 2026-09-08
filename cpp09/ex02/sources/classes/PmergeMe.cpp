@@ -268,7 +268,7 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 		main.insert(main.end(), it + elemSize, it + groupSize);
 	// adding other b's to pend
 	for (it = base.begin() + groupSize; it <= base.end() - elemSize; it += groupSize)
-		pend.insert(pend.begin(), it, it + elemSize);
+		pend.insert(pend.end(), it, it + elemSize);
 
 
 
