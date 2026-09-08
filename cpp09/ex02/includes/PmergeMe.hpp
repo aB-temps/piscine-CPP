@@ -35,6 +35,7 @@ class	PmergeMe
 		PmergeMe	&operator=(const PmergeMe &assign);
 
 		static void							_recursivePairSorting(std::deque<uint32_t> &base);
+		static void							_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth);
 
 		// repeat for vector or use Template ????
 		static void							_binaryInsert(std::deque<uint32_t> &base, const uint32_t element, uint32_t maxI);

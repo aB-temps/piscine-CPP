@@ -224,9 +224,64 @@ void	PmergeMe::_recursivePairSorting(std::deque<uint32_t> &base)
 	cout << RST << endl;
 
 
-	if (u < 4)
+	if (groupSize << 1 < base.size())
 		PmergeMe::_recursivePairSorting(base);
 
+	static bool ok = true;
+	if (ok)
+	{
+		cout << endl << endl;
+		cout << BOLD UNDL BLUE "Step 2:\n" RST;
+		ok = false;
+	}
+	if (u > 1)
+		PmergeMe::_unrollingInsertion(base, u);
+}
+
+void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
+{
+	cout	<< "Entering via depth: " BOLD GREEN << depth << RST "\nwith base: ";
+
+	std::deque<uint32_t>::iterator	it = base.begin();
+	// static std::deque<uint32_t>			main;
+	// static std::deque<uint32_t> 		pend;
+
+	std::deque<uint32_t>		main;
+	std::deque<uint32_t> 		pend;
+
+	uint32_t groupSize = std::pow(2, depth);
+	uint32_t elemSize = groupSize >> 1;
+
+
+	for (; it <= base.end() - elemSize; it += elemSize)
+		displayElem(it, elemSize);
+	for (; it < base.end(); ++it)
+		cout << RED << *it << " ";
+	cout << RST << endl;
+
+	// adding {b1, a1} to main
+	it = base.begin();
+	main.insert(main.begin(), it, it + groupSize);
+
+	// adding other a's to main
+	for (it = base.begin() + groupSize; it <= base.end() - groupSize; it += groupSize)
+		main.insert(main.end(), it + elemSize, it + groupSize);
+	// adding other b's to pend
+	for (it = base.begin() + groupSize; it <= base.end() - elemSize; it += groupSize)
+		pend.insert(pend.begin(), it, it + elemSize);
+
+
+
+	cout << "Main: ";
+	for (it = main.begin(); it <= main.end() - elemSize; it += elemSize)
+		displayElem(it, elemSize);
+	cout << endl;
+	cout << "Pend: ";
+	for (it = pend.begin(); it <= pend.end() - elemSize; it += elemSize)
+		displayElem(it, elemSize);
+
+	--depth;
+	cout << endl << endl;
 }
 
 void	PmergeMe::sort(std::deque<uint32_t> &base)
@@ -234,8 +289,9 @@ void	PmergeMe::sort(std::deque<uint32_t> &base)
 	cout << endl << endl;
 	cout << BOLD UNDL BLUE "Step 1:\n" RST;
 	PmergeMe::_recursivePairSorting(base);
-	cout << endl << endl;
-	cout << BOLD UNDL BLUE "Step 2:\n" RST;
+	// cout << endl << endl;
+	// cout << BOLD UNDL BLUE "Step 2:\n" RST;
+	// PmergeMe::_unrollingInsertion(base, recursionDepth);
 	cout << endl << endl;
 }
 
