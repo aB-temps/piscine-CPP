@@ -38,9 +38,12 @@ class	PmergeMe
 		static void							_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth);
 
 		// repeat for vector or use Template ????
-		static void							_binaryInsert(std::deque<uint32_t> &base, const uint32_t element, uint32_t maxI);
+		// static void							_binaryInsert(std::deque<uint32_t> &base, const uint32_t element, uint32_t maxI);
+		static void							_binaryInsert(	std::deque<uint32_t> &dest, std::deque<uint32_t>::const_iterator src,
+															std::deque<uint32_t>::iterator maxI, const uint32_t elemSize);
 
 		static const std::vector<uint32_t>	_buildJSSeq(const uint32_t max);
+		static uint32_t						_getNthJS(const uint32_t n);
 		static void							_swap(uint32_t &x, uint32_t &y);
 		static bool							_isOnlyNum(const std::string &str);
 };
