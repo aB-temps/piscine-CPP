@@ -81,7 +81,7 @@ void	PmergeMe::_binaryInsert(std::deque<uint32_t> &dest, std::deque<uint32_t>::c
 	const uint32_t	element = *(src + elemSize - 1);
 	std::deque<uint32_t>::iterator minI = dest.begin() + elemSize - 1;
 	std::deque<uint32_t>::iterator midI;
-	while (minI < maxI)
+	while (minI <= maxI)
 	{
 		midI = minI + roundToNextElemSize(((maxI - minI) >> 1), elemSize);
 		cout << "- midI: " <<  *midI << " ==> " << element << " > " << *midI << " - " << (element > *midI ? "true" : "false") << endl;
