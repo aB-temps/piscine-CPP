@@ -183,7 +183,7 @@ void	PmergeMe::_recursivePairSorting(std::deque<uint32_t> &base)
 		cout << BOLD UNDL BLUE "Step 2:\n" RST;
 		ok = false;
 	}
-	if (u > 1)
+	if (u > 0)
 		PmergeMe::_unrollingInsertion(base, u);
 }
 
@@ -243,11 +243,14 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 		uint32_t	jsVal = PmergeMe::_getNthJS(jsCounter);
 		uint32_t	lastJsVal = PmergeMe::_getNthJS(jsCounter - 1) ;
 
-		// uint32_t	elemQty = pend.size() / elemSize;
+		uint32_t	elemQty = pend.size() / elemSize;
 		uint32_t	insertionQty = jsVal - lastJsVal;
 		uint32_t	insertI = jsVal;
 
-		while (pend.size())
+		uint32_t	inserted = 0;
+		cout << "Elem Quantity: " << elemQty;
+
+		while (inserted < pend.size() / elemSize)
 		{
 			cout << BOLD "\njsVal: " BLUE << jsVal << RST << endl;
 			cout << BOLD "lastJsVal: " BLUE << lastJsVal << RST << endl;
@@ -256,24 +259,26 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 			while (insertI > lastJsVal)
 			{
 				cout << BOLD "InsertI: " BLUE << insertI << RST << endl;
+
 				// defining which element to insert
-				if (insertionQty > pend.size() / elemSize)
+				while (insertionQty > (pend.size() / elemSize) - inserted)
 				{
-					cout << RED "Not enough elements to insert, going in order." RST << endl;
-					it = pend.begin();
+					cout << RED "Not enough elements to insert according to JS sequence, skipping." RST << endl;
+					--insertI;
+					--insertionQty;
+					cout << BOLD "Trying to insert " BLUE << insertionQty << " new elements while remains " << (pend.size() / elemSize) - inserted << " elements to insert." RST << endl;
+					cout << BOLD "InsertI: " BLUE << insertI << RST << endl << endl;
 				}
-				else
-				{
-					cout << GREEN "Inserting element no " BOLD << insertI - 1 << RST ": [";
-					for (it = pend.begin() + (elemSize * (insertI - 2)); it < pend.begin() + (elemSize * (insertI - 2)) + elemSize; ++it)
-						cout << *it << " ";
-					cout << "\b]" << endl;
-					it = pend.begin() + (elemSize * (insertI - 2));
-				}
+				cout << GREEN "Inserting element no " BOLD << insertI - 1 << RST ": [";
+				const uint32_t	offset = elemSize * (insertI - 2);
+				for (it = pend.begin() + offset; it < pend.begin() + offset + elemSize; ++it)
+					cout << *it << " ";
+				cout << "\b]" << endl;
+				it = pend.begin() + offset;
 
 				// defining maxBound
 				std::deque<uint32_t>::iterator	maxBoundIt = main.end() - 1;
-				const uint32_t	winnerPos = (((elemSize * 2) * insertI) - 1) - 1;
+				const uint32_t	winnerPos = (((elemSize << 1) * insertI) - 1);
 				if (winnerPos < base.size())
 				{
 					const uint32_t	winnerVal = base[winnerPos];
@@ -288,9 +293,10 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 
 				// insert into main, erasing into pend
 				PmergeMe::_binaryInsert(main, it, maxBoundIt, elemSize);
-				pend.erase(it, it + elemSize);
+				// pend.erase(it, it + elemSize);
 				--insertionQty;
 				--insertI;
+				++inserted;
 
 				// display main & pend after insert
 				cout << "Main: ";
