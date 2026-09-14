@@ -84,49 +84,20 @@ void	PmergeMe::_binaryInsert(std::deque<uint32_t> &dest, std::deque<uint32_t>::c
 	while (minI <= maxI)
 	{
 		midI = minI + roundToNextElemSize(((maxI - minI) >> 1), elemSize);
+#ifdef DEBUG
 		cout << "- midI: " <<  *midI << " ==> " << element << " > " << *midI << " - " << (element > *midI ? "true" : "false") << endl;
+#endif
 		if (element > *midI)
 			minI = midI + elemSize;
 		else
 			maxI = midI - elemSize;
 	}
-	cout << "-> nearest sup: " << *minI << endl;
 	dest.insert(minI - elemSize + 1, src, src + elemSize);
 }
 
 uint32_t	PmergeMe::_getNthJS(const uint32_t n)
 {
 	return ((std::pow(2, n + 1) + std::pow(-1, n)) / 3);
-}
-
-const std::vector<uint32_t>	PmergeMe::_buildJSSeq(const uint32_t max)
-{
-	std::vector<uint32_t> initalSeq;
-	std::vector<uint32_t> computedSeq;
-
-	uint32_t	prev = 0;
-	uint32_t	val = 1;
-	uint32_t	tmp;
-
-	while(val <= max)
-	{
-		tmp = prev << 1;
-		prev = val;
-		val += tmp;
-		if (val > 1)
-			initalSeq.push_back(val);
-	}
-	cout << "[init] Sequence is: " << initalSeq << endl;
-
-	for (uint32_t i = 0; i < initalSeq.size(); ++i)
-	{
-		computedSeq.push_back(initalSeq[i]);
-		for (unsigned j = computedSeq[i] - 1; j >= 1; --j)
-			computedSeq.push_back(j);
-	}
-
-	cout << "[final] Sequence is: " << computedSeq << endl;
-	return (computedSeq);
 }
 
 void	displayElem(std::deque<uint32_t>::iterator it, const uint32_t size)
@@ -150,39 +121,45 @@ void	displayElemFull(std::deque<uint32_t> &deq, const uint32_t elemSize)
 void	PmergeMe::_recursivePairSorting(std::deque<uint32_t> &base)
 {
 	static uint32_t u = 0;
-	cout << "-----------------\nTurn no " BLUE BOLD << u++ + 1 << RST ":\n";
+#ifdef DEBUG
+	cout << "-----------------\nTurn no " BLUE BOLD << u + 1 << RST ":\n";
+#endif
 	std::deque<uint32_t>::iterator it = base.begin();
 
-	uint32_t groupSize = std::pow(2, u);
+	uint32_t groupSize = std::pow(2, ++u);
 	uint32_t elemSize = groupSize >> 1;
+#ifdef DEBUG
 	cout << "Element of size " BOLD YELLOW << elemSize << RST " grouped by: " BOLD YELLOW <<  groupSize << RST << endl;
+#endif
 	for (it = base.begin(); it <= base.end() - groupSize; it += groupSize)
 	{
+#ifdef DEBUG
 		displayElem(it, groupSize);
 		cout << "Comparing: " BOLD << *(it + elemSize - 1) << RST " against " BOLD << *(it + groupSize - 1) << RST "\n";
+#endif
 		if (*(it + elemSize - 1) > *(it + groupSize - 1))
 		{
-			std::swap_ranges(it, it + elemSize, it + elemSize);
+			if (elemSize > 1)
+				std::swap_ranges(it, it + elemSize, it + elemSize);
+			else
+				PmergeMe::_swap(*it, *(it + 1));
 
+#ifdef DEBUG
 			displayElem(it, groupSize);
 			cout << BOLD RED "- SWAPPING\n" RST;
+#endif
 		}
 	}
+#ifdef DEBUG
 	for (; it < base.end(); ++it)
 		cout << RED << *it << " ";
 	cout << RST << endl;
+#endif
 
 
-	if (groupSize << 1 < base.size())
+	if (groupSize << 1 <= base.size())
 		PmergeMe::_recursivePairSorting(base);
 
-	static bool ok = true;
-	if (ok)
-	{
-		cout << endl << endl;
-		cout << BOLD UNDL BLUE "Step 2:\n" RST;
-		ok = false;
-	}
 	if (u > 0)
 		PmergeMe::_unrollingInsertion(base, u);
 }
@@ -194,7 +171,9 @@ std::deque<uint32_t>::iterator	determineBinInsertBound(std::deque<uint32_t> &deq
 
 void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 {
+#ifdef DEBUG
 	cout	<< "==> Entering via depth: " BOLD GREEN << depth << RST "\nwith base: ";
+#endif
 
 	std::deque<uint32_t>::iterator	it = base.begin();
 	// static std::deque<uint32_t>			main;
@@ -209,13 +188,21 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 
 
 	for (; it <= base.end() - elemSize; it += elemSize)
+	{
+#ifdef DEBUG
 		displayElem(it, elemSize);
+#endif
+	}
 	for (; it < base.end(); ++it)
 	{
 		rest.push_back(*it);
+#ifdef DEBUG
 		cout << RED << *it << " ";
+#endif
 	}
-	cout << "\n"RST << endl;
+#ifdef DEBUG
+	cout << "\n"RST;
+#endif
 
 	// adding {b1, a1} to main
 	it = base.begin();
@@ -230,11 +217,13 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 
 
 
+#ifdef DEBUG
 	cout << "Main: ";
 	displayElemFull(main, elemSize);
 	cout << "\nPend: ";
 	displayElemFull(pend, elemSize);
 	cout << endl;
+#endif
 
 	if (pend.size())
 	{
@@ -243,37 +232,49 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 		uint32_t	jsVal = PmergeMe::_getNthJS(jsCounter);
 		uint32_t	lastJsVal = PmergeMe::_getNthJS(jsCounter - 1) ;
 
+#ifdef DEBUG
 		uint32_t	elemQty = pend.size() / elemSize;
+		cout << "Elem Quantity: " << elemQty;
+#endif
 		uint32_t	insertionQty = jsVal - lastJsVal;
 		uint32_t	insertI = jsVal;
 
 		uint32_t	inserted = 0;
-		cout << "Elem Quantity: " << elemQty;
 
 		while (inserted < pend.size() / elemSize)
 		{
+#ifdef DEBUG
 			cout << BOLD "\njsVal: " BLUE << jsVal << RST << endl;
 			cout << BOLD "lastJsVal: " BLUE << lastJsVal << RST << endl;
 			cout << BOLD "Trying to insert " BLUE << insertionQty << " new elements\n" RST << endl;
+#endif
 
 			while (insertI > lastJsVal)
 			{
+#ifdef DEBUG
 				cout << BOLD "InsertI: " BLUE << insertI << RST << endl;
+#endif
 
 				// defining which element to insert
 				while (insertionQty > (pend.size() / elemSize) - inserted)
 				{
-					cout << RED "Not enough elements to insert according to JS sequence, skipping." RST << endl;
 					--insertI;
 					--insertionQty;
+#ifdef DEBUG
+					cout << RED "Not enough elements to insert according to JS sequence, skipping." RST << endl;
 					cout << BOLD "Trying to insert " BLUE << insertionQty << " new elements while remains " << (pend.size() / elemSize) - inserted << " elements to insert." RST << endl;
 					cout << BOLD "InsertI: " BLUE << insertI << RST << endl << endl;
+#endif
 				}
+#ifdef DEBUG
 				cout << GREEN "Inserting element no " BOLD << insertI - 1 << RST ": [";
+#endif
 				const uint32_t	offset = elemSize * (insertI - 2);
+#ifdef DEBUG
 				for (it = pend.begin() + offset; it < pend.begin() + offset + elemSize; ++it)
 					cout << *it << " ";
 				cout << "\b]" << endl;
+#endif
 				it = pend.begin() + offset;
 
 				// defining maxBound
@@ -282,14 +283,20 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 				if (winnerPos < base.size())
 				{
 					const uint32_t	winnerVal = base[winnerPos];
+#ifdef DEBUG
 					cout << "Winner Value: " << winnerVal << " for pair no " BOLD YELLOW << insertI << RST << endl;
+#endif
 					maxBoundIt = determineBinInsertBound(main, winnerVal);
 					if (maxBoundIt == main.end())
 						maxBoundIt = main.end() - 1;
+#ifdef DEBUG
 					cout << "maxBoundIt: " << *maxBoundIt << endl;
+#endif
 				}
+#ifdef DEBUG
 				else
 					cout << RED "not paired (odd)" RST << endl;
+#endif
 
 				// insert into main, erasing into pend
 				PmergeMe::_binaryInsert(main, it, maxBoundIt, elemSize);
@@ -298,12 +305,14 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 				--insertI;
 				++inserted;
 
+#ifdef DEBUG
 				// display main & pend after insert
 				cout << "Main: ";
 				displayElemFull(main, elemSize);
 				cout << "\nPend: ";
 				displayElemFull(pend, elemSize);
 				cout << endl << endl;
+#endif
 			}
 			lastJsVal = jsVal;
 			jsVal = PmergeMe::_getNthJS(++jsCounter);
@@ -315,18 +324,11 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 	main.insert(main.end(), rest.begin(), rest.end());
 	base = main;
 	--depth;
-	cout << endl << endl;
 }
 
 void	PmergeMe::sort(std::deque<uint32_t> &base)
 {
-	cout << endl << endl;
-	cout << BOLD UNDL BLUE "Step 1:\n" RST;
 	PmergeMe::_recursivePairSorting(base);
-	// cout << endl << endl;
-	// cout << BOLD UNDL BLUE "Step 2:\n" RST;
-	// PmergeMe::_unrollingInsertion(base, recursionDepth);
-	cout << endl << endl;
 }
 
 // void	PmergeMe::sort(std::vector<uint32_t> &base)

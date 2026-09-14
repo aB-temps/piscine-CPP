@@ -16,12 +16,13 @@
 # include	<exception>
 # include	"text_formatting.hpp"
 
-# define	USAGE		YELLOW "Usage: ./PmergeMe <positive.s integer.s> <...>\n" \
+# define	USAGE		YELLOW "Usage: ./PmergeMe <32 bits unsigned integer.s> <...>\n" \
 						DIM "example: ./PmergeMe \"24 211 12\" 69 9 \"26 47\"" RST
 
-# define	ERR			RED BOLD "Error: " RST BOLD
-# define	BAD_ARG		RED "invalid arguments" RST
-# define	BAD_ARG_DUP	RED "found duplicate" RST
-# define	BAD_ARG_QTY	RED "wrong number of arguments" RST
+# define	ERR				RED BOLD "Error: " RST BOLD
+# define	BAD_ARG			RED "invalid arguments" RST
+# define	BAD_ARG_UINT	RED "argument is not a 32 bits unsigned integer" RST
+# define	BAD_ARG_DUP		RED "found duplicate" RST
+# define	BAD_ARG_QTY		RED "wrong number of arguments" RST
 
 #endif

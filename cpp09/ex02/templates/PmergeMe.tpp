@@ -21,10 +21,10 @@ T	PmergeMe::buildCtn(const int ac, const char * const * av)
 	for (int i = 1; i < ac; ++i)
 	{
 		if (!PmergeMe::_isOnlyNum(av[i]))
-			throw (std::invalid_argument(ERR BAD_ARG));
+			throw (std::invalid_argument(ERR BAD_ARG_UINT));
 
 		std::stringstream	ss(av[i]);
-		int64_t				number;
+		uint32_t			number;
 		while (ss >> number)
 		{
 			typename T::iterator it = std::find(container.begin(), container.end(), number);
@@ -32,6 +32,8 @@ T	PmergeMe::buildCtn(const int ac, const char * const * av)
 				throw (std::invalid_argument(ERR BAD_ARG_DUP));
 			container.push_back(number);
 		}
+		if (!ss.eof() && ss.fail())
+			throw (std::invalid_argument(ERR BAD_ARG_UINT));
 	}
 	return (container);
 }

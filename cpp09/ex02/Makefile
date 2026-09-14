@@ -23,7 +23,7 @@ DIR_BUILD	:= .build/
 CXX			:= c++
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra
-CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98 -g3
+CXX_FLAGS	:= $(WARN_FLAGS) $(DEPS_FLAGS) -std=c++98
 INC_FLAGS 	:= -I$(DIR_INC) -I$(DIR_TEMPL)
 
 COMP 		:= $(CXX) $(CXX_FLAGS) $(INC_FLAGS)
@@ -83,7 +83,11 @@ $(DIR_BUILD)%.o : $(DIR_SRC)%.cpp $(ANTI_RELINK) | $(DIR_BUILD)
 
 # RULES ===============================================================================
 # build -------------------------------------------------------------------------------
-all : $(NAME)
+all: $(NAME)
+
+debug:
+	rm -rf $(NAME)
+	$(MAKE) $(NAME) CXX_FLAGS="$(CXX_FLAGS) -g3 -D DEBUG"
 
 # clean -------------------------------------------------------------------------------
 clean:

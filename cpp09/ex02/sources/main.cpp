@@ -44,8 +44,12 @@ int	main(int ac, char **av)
 	}
 
 	// TODO: 
+	// OK! - und/over flow
+	// - leaks & crashes
 	// - benchmark()
 	// - time
+	// - ifndef DEBUG
+	// - vector
 
 	cout << BLUE BOLD "[BEFORE]\n" RST GREEN "Deque: " RST BOLD << deq << RST GREEN"\nVector: " RST BOLD << vec << RST << endl;
 
