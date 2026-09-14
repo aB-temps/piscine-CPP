@@ -18,7 +18,7 @@
 class	RPN
 {
 	public:
-		static float	computeExpr(const char *input);
+		static int	computeExpr(const char *input);
 
 	private:
 		RPN(void);
@@ -27,7 +27,7 @@ class	RPN
 		RPN	&operator=(const RPN &assign);
 
 		static bool		_isOperator(const char c);
-		static float	_compute(const float o1, const float o2, const char op);
+		static int		_compute(int o1, int o2, char op);
 };
 
 #endif

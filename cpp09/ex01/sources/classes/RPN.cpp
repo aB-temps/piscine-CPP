@@ -18,28 +18,8 @@ using	std::cout;
 using	std::cerr;
 using	std::endl;
 
-// Constructors/Destructor -----------------------------------------------------
-RPN::RPN(void)
-{}
-
-RPN::RPN(const RPN &cpy)
-{
-	(void) cpy;
-}
-
-RPN::~RPN(void)
-{}
-
-// Ops overloading -------------------------------------------------------------
-RPN	&RPN::operator=(const RPN &assign)
-{
-	(void) assign;
-
-	return (*this);
-}
-
 // Member Function -------------------------------------------------------------
-float	RPN::computeExpr(const char *input)
+int	RPN::computeExpr(const char *input)
 {
 	std::stack<int>	operands;
 
@@ -54,10 +34,10 @@ float	RPN::computeExpr(const char *input)
 			if (operands.size() < 2)
 				throw (std::runtime_error("invalid expression"));
 
-			const float	o2 = operands.top();
+			const int	o2 = operands.top();
 			operands.pop();
 
-			const float	o1 = operands.top();
+			const int	o1 = operands.top();
 			operands.pop();
 
 			operands.push(RPN::_compute(o1, o2, input[i]));
@@ -65,11 +45,12 @@ float	RPN::computeExpr(const char *input)
 		else
 			throw (std::runtime_error("invalid expression"));
 	}
-	
+	if (operands.size() != 1)
+		throw (std::runtime_error("invalid expression"));
 	return (operands.top());
 }
 
-float	RPN::_compute(const float o1, const float o2, const char op)
+int	RPN::_compute(int o1, int o2, char op)
 {
 	switch (op)
 	{
