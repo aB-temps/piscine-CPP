@@ -11,6 +11,14 @@
 /* ************************************************************************** */
 
 # include "PmergeMe.hpp"
+# include <sys/time.h>
+# include <unistd.h>
+
+# define DEQ 0
+# define VEC 1
+
+# define PARS 0
+# define ALGO 1
 
 using	std::cout;
 using	std::cerr;
@@ -29,7 +37,28 @@ int	main(int ac, char **av)
 
 	try
 	{
+	// - benchmark()
+	// - time
+	// - vector
+
+		struct timeval start; 
+		struct timeval ts[2][2];
+
+
+		gettimeofday(&start, NULL);
 		deq = PmergeMe::buildCtn<std::deque<uint32_t> >(ac, av);
+		gettimeofday(&ts[DEQ][PARS], NULL);
+		cout	<< BOLD BLUE "[DEQUE]" RST ": " BOLD << deq
+				<< RST DIM " [" << (ts[DEQ][PARS].tv_sec / 1000000 + ts[DEQ][PARS].tv_usec) - (start.tv_sec / 1000000 + start.tv_usec) << " us]\n" RST;
+
+		gettimeofday(&start, NULL);
+		sleep(1);
+		PmergeMe::sort(deq);
+		gettimeofday(&ts[DEQ][ALGO], NULL);
+		cout	<< BOLD BLUE "[DEQUE]" RST ": " BOLD << deq
+				<< RST DIM " [" << ( ts[DEQ][ALGO].tv_sec / 1000000 + ts[DEQ][ALGO].tv_usec ) - (start.tv_sec / 1000000 + start.tv_usec) << " us]\n" RST;
+
+
 		vec = PmergeMe::buildCtn<std::vector<uint32_t> >(ac, av);
 	}
 	catch (const std::invalid_argument &e)
@@ -43,20 +72,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 
-	// TODO: 
-	// OK! - und/over flow
-	// - leaks & crashes
-	// - benchmark()
-	// - time
-	// - ifndef DEBUG
-	// - vector
-
-	cout << BLUE BOLD "[BEFORE]\n" RST GREEN "Deque: " RST BOLD << deq << RST GREEN"\nVector: " RST BOLD << vec << RST << endl;
-
-	PmergeMe::sort(deq);
 	// PmergeMe.sort(vec);
 
-	cout << BLUE BOLD "[AFTER]\n" RST GREEN "Deque: " RST BOLD << deq << RST GREEN"\nVector: " RST BOLD << vec << RST << endl;
 
 	return (0);
 }
