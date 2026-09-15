@@ -126,8 +126,8 @@ void	PmergeMe::_recursivePairSorting(std::deque<uint32_t> &base)
 #endif
 	std::deque<uint32_t>::iterator it = base.begin();
 
-	uint32_t groupSize = std::pow(2, ++u);
-	uint32_t elemSize = groupSize >> 1;
+	const uint32_t groupSize = std::pow(2, ++u);
+	const uint32_t elemSize = groupSize >> 1;
 #ifdef DEBUG
 	cout << "Element of size " BOLD YELLOW << elemSize << RST " grouped by: " BOLD YELLOW <<  groupSize << RST << endl;
 #endif
@@ -176,15 +176,12 @@ void	PmergeMe::_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth)
 #endif
 
 	std::deque<uint32_t>::iterator	it = base.begin();
-	// static std::deque<uint32_t>			main;
-	// static std::deque<uint32_t> 		pend;
-
 	std::deque<uint32_t>		main;
 	std::deque<uint32_t> 		pend;
 	std::deque<uint32_t>		rest;
 
-	uint32_t groupSize = std::pow(2, depth);
-	uint32_t elemSize = groupSize >> 1;
+	const uint32_t groupSize = std::pow(2, depth);
+	const uint32_t elemSize = groupSize >> 1;
 
 
 	for (; it <= base.end() - elemSize; it += elemSize)
