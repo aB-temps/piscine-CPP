@@ -157,7 +157,7 @@ void	PmergeMe::_recursivePairSorting(std::deque<uint32_t> &base)
 #endif
 
 
-	if (elemSize <= base.size())
+	if (groupSize << 1 <= base.size())
 		PmergeMe::_recursivePairSorting(base);
 
 	if (u > 0)

@@ -48,14 +48,13 @@ int	main(int ac, char **av)
 		gettimeofday(&start, NULL);
 		deq = PmergeMe::buildCtn<std::deque<uint32_t> >(ac, av);
 		gettimeofday(&ts[DEQ][PARS], NULL);
-		cout	<< BOLD BLUE "[DEQUE]" RST ": " BOLD << deq
+		cout	<< BOLD BLUE "[DEQUE]\n" RST UNDL "- Parsing:" RST " " BOLD << deq
 				<< RST DIM " [" << (ts[DEQ][PARS].tv_sec / 1000000 + ts[DEQ][PARS].tv_usec) - (start.tv_sec / 1000000 + start.tv_usec) << " us]\n" RST;
 
 		gettimeofday(&start, NULL);
-		sleep(1);
 		PmergeMe::sort(deq);
 		gettimeofday(&ts[DEQ][ALGO], NULL);
-		cout	<< BOLD BLUE "[DEQUE]" RST ": " BOLD << deq
+		cout	<< UNDL "- Sorting:" RST " " BOLD << deq
 				<< RST DIM " [" << ( ts[DEQ][ALGO].tv_sec / 1000000 + ts[DEQ][ALGO].tv_usec ) - (start.tv_sec / 1000000 + start.tv_usec) << " us]\n" RST;
 
 
