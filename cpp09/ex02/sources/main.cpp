@@ -14,12 +14,6 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define DEQ 0
-# define VEC 1
-
-# define PARS 0
-# define ALGO 1
-
 using	std::cout;
 using	std::cerr;
 using	std::endl;
@@ -64,7 +58,21 @@ int	main(int ac, char **av)
 				<< RST DIM " [" << chrono[DEQ][ALGO] << " us]\n" BOLD GREEN "=> Total: " RST BOLD << chrono[DEQ][PARS] + chrono[DEQ][ALGO] << " us\n" RST;
 
 
+		gettimeofday(&start, NULL);
 		vec = PmergeMe::buildCtn<std::vector<uint32_t> >(ac, av);
+		gettimeofday(&now, NULL);
+
+		chrono[VEC][PARS] = (now.tv_usec - start.tv_usec) + ((now.tv_sec - start.tv_sec) * 1000000);
+		cout	<< BOLD YELLOW "[VECTOR]\n" BLUE "- Parsed:" RST " " BOLD << vec
+				<< RST DIM " [" << chrono[VEC][PARS] << " us]\n" RST;
+
+		gettimeofday(&start, NULL);
+		PmergeMe::sort(vec);
+		gettimeofday(&now, NULL);
+
+		chrono[VEC][ALGO] = (now.tv_usec - start.tv_usec) + ((now.tv_sec - start.tv_sec) * 1000000);
+		cout	<< BOLD BLUE "- Sorted:" RST " " BOLD << vec
+				<< RST DIM " [" << chrono[VEC][ALGO] << " us]\n" BOLD GREEN "=> Total: " RST BOLD << chrono[VEC][PARS] + chrono[VEC][ALGO] << " us\n" RST;
 	}
 	catch (const std::invalid_argument &e)
 	{
@@ -76,9 +84,5 @@ int	main(int ac, char **av)
 		cerr << e.what() << endl;
 		return (1);
 	}
-
-	// PmergeMe.sort(vec);
-
-
 	return (0);
 }

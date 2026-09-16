@@ -13,6 +13,12 @@
 #ifndef		__PMERGEME_HPP__
 # define	__PMERGEME_HPP__
 
+# define DEQ 0
+# define VEC 1
+
+# define PARS 0
+# define ALGO 1
+
 # include <stdint.h>
 # include <iostream>
 # include <deque>
@@ -26,7 +32,7 @@ class	PmergeMe
 		static T	buildCtn(const int ac, const char * const * av);
 
 		static void	sort(std::deque<uint32_t> &base);
-		//static void	sort(std::vector<uint32_t> &base);
+		static void	sort(std::vector<uint32_t> &base);
 
 	private:
 		PmergeMe(void);
@@ -34,18 +40,19 @@ class	PmergeMe
 		~PmergeMe(void);
 		PmergeMe	&operator=(const PmergeMe &assign);
 
+		static bool							_isOnlyNum(const std::string &str);
+		static uint32_t						_getNthJS(const uint32_t n);
+		static void							_swap(uint32_t &x, uint32_t &y);
+
 		static void							_recursivePairSorting(std::deque<uint32_t> &base);
 		static void							_unrollingInsertion(std::deque<uint32_t> &base, uint32_t &depth);
-
-		// repeat for vector or use Template ????
-		// static void							_binaryInsert(std::deque<uint32_t> &base, const uint32_t element, uint32_t maxI);
 		static void							_binaryInsert(	std::deque<uint32_t> &dest, std::deque<uint32_t>::const_iterator src,
 															std::deque<uint32_t>::iterator maxI, const uint32_t elemSize);
 
-		static const std::vector<uint32_t>	_buildJSSeq(const uint32_t max);
-		static uint32_t						_getNthJS(const uint32_t n);
-		static void							_swap(uint32_t &x, uint32_t &y);
-		static bool							_isOnlyNum(const std::string &str);
+		static void							_recursivePairSorting(std::vector<uint32_t> &base);
+		static void							_unrollingInsertion(std::vector<uint32_t> &base, uint32_t &depth);
+		static void							_binaryInsert(	std::vector<uint32_t> &dest, std::vector<uint32_t>::const_iterator src,
+															std::vector<uint32_t>::iterator maxI, const uint32_t elemSize);
 };
 
 std::ostream	&operator<<(std::ostream &out, const std::vector<uint32_t> &vec);
