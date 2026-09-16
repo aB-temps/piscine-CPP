@@ -31,11 +31,6 @@ int	main(int ac, char **av)
 
 	try
 	{
-
-	// - benchmark()
-	// - time
-	// - vector
-
 		struct timeval	start; 
 		struct timeval	now;
 		uint32_t		chrono[2][2];
@@ -63,7 +58,7 @@ int	main(int ac, char **av)
 		gettimeofday(&now, NULL);
 
 		chrono[VEC][PARS] = (now.tv_usec - start.tv_usec) + ((now.tv_sec - start.tv_sec) * 1000000);
-		cout	<< BOLD YELLOW "[VECTOR]\n" BLUE "- Parsed:" RST " " BOLD << vec
+		cout	<< BOLD YELLOW "\n[VECTOR]\n" BLUE "- Parsed:" RST " " BOLD << vec
 				<< RST DIM " [" << chrono[VEC][PARS] << " us]\n" RST;
 
 		gettimeofday(&start, NULL);

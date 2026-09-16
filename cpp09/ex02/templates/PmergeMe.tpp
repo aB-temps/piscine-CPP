@@ -12,6 +12,7 @@
 
 # include <algorithm>
 # include <sstream>
+# include <limits>
 
 template	<typename T>
 T	PmergeMe::buildCtn(const int ac, const char * const * av)
@@ -23,8 +24,8 @@ T	PmergeMe::buildCtn(const int ac, const char * const * av)
 		if (!PmergeMe::_isOnlyNum(av[i]))
 			throw (std::invalid_argument(ERR BAD_ARG_UINT));
 
-		std::stringstream	ss(av[i]);
-		uint32_t			number;
+		std::istringstream	ss(av[i]);
+		uint32_t				number;
 		while (ss >> number)
 		{
 			typename T::iterator it = std::find(container.begin(), container.end(), number);
@@ -37,4 +38,3 @@ T	PmergeMe::buildCtn(const int ac, const char * const * av)
 	}
 	return (container);
 }
-

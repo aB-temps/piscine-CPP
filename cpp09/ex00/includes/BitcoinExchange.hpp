@@ -17,7 +17,7 @@
 # include <stdexcept>
 # include <map>
 
-# define PRICES_DB	"data2.csv"
+# define PRICES_DB	"data.csv"
 
 class BitcoinExchange
 {

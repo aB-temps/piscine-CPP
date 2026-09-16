@@ -71,7 +71,6 @@ BitcoinExchange::valuesMap			BitcoinExchange::_parseDb(const char *db_filename)
 		throw (std::runtime_error(db_filename));
 	db.exceptions(std::ios::badbit);
 
-
 	valuesMap	vmap;
 	std::string	line;
 
@@ -100,7 +99,7 @@ BitcoinExchange::valuesMap			BitcoinExchange::_parseDb(const char *db_filename)
 
 			if (!strptime(line.substr(0, sep_pos).c_str(), "%04Y-%02m-%02d", &tm) || 
 					(tm.tm_mon == 1 && (tm.tm_mday > 29 || 
-										(tm.tm_mday == 29 && !_isLeapYear(tm.tm_year)))))
+										(tm.tm_mday == 29 && !_isLeapYear(1900 + tm.tm_year)))))
 			{
 				cerr << "Error: bad input => '" << line.substr(0, sep_pos) << "' [" << db_filename << ":line "<< i << "]" << endl;
 				continue;
@@ -139,7 +138,7 @@ char	BitcoinExchange::_parseDbSettings(std::string line)
 	const char	*allowedSeparator = ",|";
 	size_t		sep_pos = std::string::npos;
 
-	for (int i = 0; i < 3 && sep_pos == std::string::npos; ++i)
+	for (int i = 0; i < 2 && sep_pos == std::string::npos; ++i)
 		sep_pos = line.find(allowedSeparator[i]);
 	if (sep_pos == std::string::npos)
 		throw (std::invalid_argument("separator not found"));
@@ -171,5 +170,5 @@ float				BitcoinExchange::_computeValueAtTime(valuesMap::iterator &walletEntry, 
 
 bool			BitcoinExchange::_isLeapYear(int year)
 {
-	return (year % 4 == 0 || year % 400 == 0);
+	return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
 }
